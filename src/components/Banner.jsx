@@ -6,9 +6,7 @@ export default function Banner() {
     <div
       className="image-cover hero-banner"
       style={{
-        background:
-          // eslint-disable-next-line no-useless-concat
-          "url(" + "https://via.placeholder.com/1920x1000" + ") no-repeat",
+        background: "url(https://via.placeholder.com/1920x1000) no-repeat",
       }}
       data-overlay="6"
     >

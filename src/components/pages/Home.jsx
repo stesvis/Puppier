@@ -18,9 +18,6 @@ export default function Home() {
 
   return (
     <React.Fragment>
-
-      <div className="clearfix"></div>
-
       {/* Hero Banner  Start */}
       <Banner />
       {/* Hero Banner End */}

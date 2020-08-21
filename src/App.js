@@ -1,17 +1,13 @@
 import "./App.css";
 
-import Home from "./components/Home";
+import HeadNavbar from "./components/HeadNavbar";
 import React from "react";
 
 function App() {
   return (
-    <Home />
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <h2>Puppier.ca</h2>
-    //   </header>
-    // </div>
+    // Top header  Start
+    <HeadNavbar />
+    // Top header  End
   );
 }
 

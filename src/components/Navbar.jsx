@@ -1,79 +1,64 @@
-import { Link, NavLink } from "react-router-dom";
-import React, { useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
-export default function HeadNavbar() {
-  const [navbarClass, setNavbarClass] = useState("header");
-  const [logoImageSrc, setLogoImageSrc] = useState(
-    "assets/img/g-logo-light.png"
-  );
+import React from "react";
+
+export default function NavBar() {
+  let navbarClass = "header";
+  let logoImageSrc = "assets/img/g-logo.png";
+
+  const location = useLocation();
+  console.log(location);
+  if (location.pathname === "/") {
+    navbarClass = "header header-dark-transparent";
+    logoImageSrc = "assets/img/g-logo-light.png";
+  }
 
   return (
     // <!-- Start Navigation -->
-    <div className={navbarClass}>
-      <nav className="headnavbar">
-        <div className="nav-header">
-          <Link to="/" className="brand normal-logo">
-            <img src={logoImageSrc} alt="" />
-          </Link>
-          <Link to="/" className="brand brand-overlay">
-            <img src="assets/img/g-logo.png" alt="" />
-          </Link>
-          <button className="toggle-bar">
-            <span className="ti-align-justify"></span>
-          </button>
-        </div>
-        <ul className="menu">
-          <li>
-            <NavLink
-              exact
-              to="/"
-              activeClassName="active"
-              isActive={(match, location) => {
-                if (!match) {
-                  return false;
-                }
-
-                setNavbarClass("header header-dark-transparent");
-                setLogoImageSrc("assets/img/g-logo-light.png");
-              }}
-            >
-              Home
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              exact
-              to="/explore"
-              activeClassName="active"
-              isActive={(match, location) => {
-                if (!match) {
-                  return false;
-                }
-
-                setNavbarClass("header");
-                setLogoImageSrc("assets/img/g-logo.png");
-              }}
-            >
-              Explore
-            </NavLink>
-          </li>
-
-          <li>
-            <Link to="#" data-toggle="modal" data-target="#signup">
-              Sign Up
+    <React.Fragment>
+      <div className={navbarClass}>
+        <nav className="headnavbar">
+          <div className="nav-header">
+            <Link to="/" className="brand normal-logo">
+              <img src={logoImageSrc} alt="" />
             </Link>
-          </li>
-        </ul>
-
-        <ul className="attributes">
-          <li className="login-attri">
-            <Link to="#" data-toggle="modal" data-target="#login">
-              Log In
+            <Link to="/" className="brand brand-overlay">
+              <img src="assets/img/g-logo.png" alt="" />
             </Link>
-          </li>
-        </ul>
-      </nav>
-    </div>
+            <button className="toggle-bar">
+              <span className="ti-align-justify"></span>
+            </button>
+          </div>
+          <ul className="menu">
+            <li>
+              <NavLink exact to="/">
+                Home
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink exact to="/explore">
+                Explore
+              </NavLink>
+            </li>
+
+            <li>
+              <Link to="#" data-toggle="modal" data-target="#signup">
+                Sign Up
+              </Link>
+            </li>
+          </ul>
+
+          <ul className="attributes">
+            <li className="login-attri">
+              <Link to="#" data-toggle="modal" data-target="#login">
+                Log In
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div className="clearfix"></div>
+    </React.Fragment>
   );
 }

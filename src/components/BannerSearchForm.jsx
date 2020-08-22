@@ -2,6 +2,7 @@ import React from "react";
 
 export default function BannerSearchForm() {
   return (
+    // <!-- ---------- Search Form -->
     <div className="full-search-2 italian-search hero-search-radius">
       <div className="hero-search-content">
         <div className="row">
@@ -56,5 +57,6 @@ export default function BannerSearchForm() {
         </div>
       </div>
     </div>
+    // ---------- Search Form
   );
 }

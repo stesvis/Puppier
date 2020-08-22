@@ -7,7 +7,7 @@ export default function NavBar() {
   let logoImageSrc = "assets/img/g-logo.png";
 
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   if (location.pathname === "/") {
     navbarClass = "header header-dark-transparent";
     logoImageSrc = "assets/img/g-logo-light.png";
@@ -60,5 +60,6 @@ export default function NavBar() {
       </div>
       <div className="clearfix"></div>
     </React.Fragment>
+    // <!-- End Navigation -->
   );
 }

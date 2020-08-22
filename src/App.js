@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { Route, Switch } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import Explore from "./components/pages/Explore";
 import Home from "./components/pages/Home";
@@ -10,16 +10,19 @@ import React from "react";
 function App() {
   return (
     <React.Fragment>
-      <NavBar />
+      <Router>
+        <NavBar />
+        <div className="clearfix"></div>
 
-      <Switch>
-        <Route path="/explore">
-          <Explore />
-        </Route>
-        <Route exact path="/">
-          <Home />
-        </Route>
-      </Switch>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/explore">
+            <Explore />
+          </Route>
+        </Switch>
+      </Router>
     </React.Fragment>
   );
 }

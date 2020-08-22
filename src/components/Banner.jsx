@@ -3,6 +3,7 @@ import React from "react";
 
 export default function Banner() {
   return (
+    // Banner Start
     <div
       className="image-cover hero-banner"
       style={{
@@ -12,7 +13,9 @@ export default function Banner() {
     >
       <div className="container">
         <h1 className="big-header-capt">Find Your Best Friend!</h1>
+
         <BannerSearchForm />
+
         <div className="popular-cat-list">
           <ul>
             <li>
@@ -25,5 +28,6 @@ export default function Banner() {
         </div>
       </div>
     </div>
+    // Banner end
   );
 }

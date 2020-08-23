@@ -1,16 +1,31 @@
 import "./App.css";
 
+import React, { useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import Explore from "./components/pages/Explore";
 import Home from "./components/pages/Home";
+import LogIn from "./components/modals/LogIn";
 import NavBar from "./components/NavBar";
-import React from "react";
 
 function App() {
+  const [isLoginVisible, setIsLoginVisible] = useState(false);
+
+  const openModal = (modalId) => {
+    console.log(modalId);
+    switch (modalId) {
+      case "login":
+        setIsLoginVisible(true);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <React.Fragment>
-      <Router>
+      <div id="main-wrapper">
         <NavBar />
         <div className="clearfix"></div>
 
@@ -22,7 +37,9 @@ function App() {
             <Explore />
           </Route>
         </Switch>
-      </Router>
+
+        <LogIn isVisible={isLoginVisible} />
+      </div>
     </React.Fragment>
   );
 }

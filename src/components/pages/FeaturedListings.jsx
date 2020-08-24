@@ -8,9 +8,16 @@ export default class FeaturedListings extends PureComponent {
   };
 
   componentDidMount() {
-    // fetch featured listings from API
-    this.setState({ listings: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] });
     console.log("ComponentDidMount");
+    // fetch featured listings from API
+    const featuredListings = this.fetchData();
+
+    this.setState({ listings: featuredListings });
+  }
+
+  fetchData() {
+    const featuredListings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    return featuredListings;
   }
 
   render() {
@@ -42,28 +49,24 @@ export default class FeaturedListings extends PureComponent {
 
 //****************************** FUNCTION ******************************/
 
-// import React, { useEffect, useState } from "react";
+// import React, { memo, useEffect, useState } from "react";
 
 // import ListingCard from "../ListingCard";
 
-// export default function FeaturedListings() {
-//   // const featuredListings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-//   // const listItems = featuredListings.map(() => <ListingCard />);
-//   const [featuredListings, setFeaturedListings] = useState([]);
-//   const [listItems, setListItems] = useState(null);
+// function FeaturedListings() {
+//   const [listings, setListings] = useState([]);
 
-//   // Similar to componentDidMount and componentDidUpdate:
+//   // Simulates componentDidMount and componentDidUpdate:
 //   useEffect(() => {
 //     // fetch featured listings from API
-//     // const featuredListings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-//     setFeaturedListings([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-//     console.log("featuredListings", featuredListings);
-//     setListItems(
-//       featuredListings.map((listing) => <ListingCard key={listing} />)
-//     );
+//     const featuredListings = fetchData();
+//     setListings(featuredListings);
+//   }, []);
 
-//     return () => listItems;
-//   }, [featuredListings, listItems]);
+//   function fetchData() {
+//     const featuredListings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+//     return featuredListings;
+//   }
 
 //   return (
 //     <section>
@@ -80,10 +83,14 @@ export default class FeaturedListings extends PureComponent {
 //         <div className="row">
 //           <div className="owl-carousel owl-theme" id="lists-slide">
 //             {/* Single listings */}
-//             {listItems}
+//             {listings.map((listing) => (
+//               <ListingCard key={listing} />
+//             ))}
 //           </div>
 //         </div>
 //       </div>
 //     </section>
 //   );
 // }
+
+// export default memo(FeaturedListings);

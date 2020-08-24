@@ -4,9 +4,10 @@ import Banner from "../Banner";
 import FeaturedListings from "./FeaturedListings";
 
 export default function Home() {
-  const $ = window.$;
-
   useEffect(() => {
+    console.log("Home -> useEffect");
+
+    const $ = window.$;
     // Update the document title using the browser API
     $(".hero-banner").circleMagic({
       elem: ".hero-banner",
@@ -15,8 +16,7 @@ export default function Home() {
       densety: 0.3,
       clearOffset: 0.2,
     });
-    console.log("useEffect");
-  });
+  }, []);
 
   return (
     <React.Fragment>

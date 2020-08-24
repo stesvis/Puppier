@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 
 export default function SignUp() {
@@ -120,23 +121,23 @@ export default function SignUp() {
             <div className="social-login mb-3">
               <ul>
                 <li>
-                  <a href="#" className="btn connect-fb">
+                  <Link to="#" className="btn connect-fb">
                     <i className="ti-facebook"></i>Facebook
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="btn connect-twitter">
+                  <Link to="#" className="btn connect-twitter">
                     <i className="ti-twitter"></i>Twitter
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
             <div className="text-center">
               <p className="mt-5">
                 <i className="ti-user mr-1"></i>Already Have An Account?{" "}
-                <a href="#" className="link">
+                <Link to="#" className="link">
                   Go For LogIn
-                </a>
+                </Link>
               </p>
             </div>
           </div>

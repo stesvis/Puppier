@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 
 export default function BannerSearchForm() {
@@ -48,9 +49,9 @@ export default function BannerSearchForm() {
           <div className="col-lg-2 col-md-2 col-sm-12 small-padd">
             <div className="form-group">
               <div className="form-group">
-                <a href="#" className="btn search-btn">
+                <Link to="#" className="btn search-btn">
                   Search
-                </a>
+                </Link>
               </div>
             </div>
           </div>

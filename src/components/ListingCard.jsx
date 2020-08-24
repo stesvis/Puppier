@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 
 export default function ListingCard() {
@@ -23,21 +24,21 @@ export default function ListingCard() {
               <i className="ti-star filled"></i>
               <i className="ti-star filled"></i>
               <i className="ti-star"></i>
-              <a href="#" className="tl-review">
+              <Link to="#" className="tl-review">
                 (24 Reviews)
-              </a>
+              </Link>
             </div>
             <h4 className="lst-title">
-              <a href="listing-detail.html">Castle Palace</a>
+              <Link to="listing-detail.html">Castle Palace</Link>
               <span className="veryfied-author"></span>
             </h4>
           </div>
         </div>
         <div className="modern-list-content">
           <div className="listing-cat">
-            <a href="search-listing.html" className="cat-icon cl-1">
+            <Link to="search-listing.html" className="cat-icon cl-1">
               <i className="ti-briefcase bg-a"></i>Services
-            </a>
+            </Link>
             <span className="more-cat">+3</span>
           </div>
           <div className="author-avater">

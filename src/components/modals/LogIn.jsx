@@ -1,17 +1,11 @@
 import React from "react";
 
 export default function LogIn(props) {
-  console.log(props);
-  const modalClass =
-    props.isVisible === "true" ? "modal fade show" : "modal fade";
-  const modalStyle =
-    props.isVisible === "true" ? { display: "block" } : { display: "none" };
-
   return (
     // <!-- Log In Modal -->
     <div
-      className={modalClass}
-      style={modalStyle}
+      className="modal fade"
+      style={{ display: "none" }}
       id="login"
       tabIndex="-1"
       role="dialog"

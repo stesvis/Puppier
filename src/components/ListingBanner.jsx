@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
-export default function PageBanner() {
+export default function ListingBanner(props) {
+  const { listing } = props;
+
   return (
     <section
       className="page-title-banner"
-      style={{ backgroundImage: "url(https://via.placeholder.com/1920x1000)" }}
+      style={{ backgroundImage: `url(${listing.image})` }}
     >
       <div className="container">
         <div className="row m-0 align-items-end detail-swap">
@@ -13,14 +15,14 @@ export default function PageBanner() {
             <div className="tr-list-detail">
               <div className="tr-list-thumb">
                 <img
-                  src="https://via.placeholder.com/400x400"
+                  src={listing.author.avatarImage}
                   className="img-responsive"
                   alt=""
                 />
               </div>
               <div className="tr-list-info">
-                <h4 className="veryfied-list">Sweet Restaurant</h4>
-                <p>Blick Market, USA</p>
+                <h4 className="veryfied-list">{listing.title}</h4>
+                <p>{listing.location}</p>
               </div>
             </div>
             <div className="listing-detail_right">

@@ -2,9 +2,9 @@ import "./App.css";
 
 import { Route, Switch } from "react-router-dom";
 
-import Explore from "./components/pages/Explore";
 import Home from "./components/pages/Home";
 import ListingDetails from "./components/pages/ListingDetails";
+import Listings from "./components/pages/Listings";
 import LogIn from "./components/modals/LogIn";
 import NavBar from "./components/NavBar";
 import React from "react";
@@ -18,15 +18,9 @@ function App() {
         <div className="clearfix"></div>
 
         <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/explore">
-            <Explore />
-          </Route>
-          <Route exact path="/listing-details/:id">
-            <ListingDetails />
-          </Route>
+          <Route exact path="/" component={Home} />
+          <Route path="/explore" component={Listings} />
+          <Route exact path="/listings/:id" component={ListingDetails} />
         </Switch>
 
         <LogIn />

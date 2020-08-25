@@ -9,9 +9,13 @@ export default function ListingCard(props) {
       <div className="modern-list ml-2">
         <div className="grid-category-thumb">
           <Link
-            to={`/listing-details/${props.listing.id}`}
+            to={{
+              pathname: `/listings/${props.listing.id}`,
+              state: {
+                listing: props.listing,
+              },
+            }}
             className="overlay-cate"
-            children={<ListingDetails />}
           >
             <img src={props.listing.image} className="img-responsive" alt="" />
           </Link>
@@ -30,16 +34,26 @@ export default function ListingCard(props) {
               </Link>
             </div>
             <h4 className="lst-title">
-              <Link to={`/listing-details/${props.listing.id}`}>
+              <Link
+                to={{
+                  pathname: `/listings/${props.listing.id}`,
+                  state: {
+                    listing: props.listing,
+                  },
+                }}
+              >
                 {props.listing.title}
               </Link>
               <span className="veryfied-author"></span>
             </h4>
+            <span className="font-10 font-italic bg-info-light">
+              {props.listing.location}
+            </span>
           </div>
         </div>
         <div className="modern-list-content">
           <div className="listing-cat">
-            <Link to="search-listing.html" className="cat-icon cl-1">
+            <Link to="#" className="cat-icon cl-1">
               <i className="ti-briefcase bg-a"></i>
               {props.listing.category.name}
             </Link>

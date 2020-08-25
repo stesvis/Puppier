@@ -46,10 +46,12 @@
 // }
 
 //****************************** CLASS ******************************/
+
 import React, { Component } from "react";
 
 import FeaturedListings from "./FeaturedListings";
 import HomeBanner from "../HomeBanner";
+import { getFeaturedListings } from "../../services/dataService";
 
 export default class Home extends Component {
   state = {
@@ -57,72 +59,8 @@ export default class Home extends Component {
   };
 
   fetchData() {
-    console.log("Home -> fetchData()");
-    // fetch FeaturedListings API
-    const featuredListings = {
-      data: [
-        {
-          id: 1,
-          image: "https://picsum.photos/id/1025/1200/850",
-          price: "$1,500",
-          reviewsCount: 15,
-          title: "Cute pug puppy!",
-          category: {
-            id: 1,
-            name: "Dog",
-          },
-          author: {
-            id: 1,
-            avatarImage: "https://picsum.photos/400/400",
-          },
-        },
-        {
-          id: 2,
-          image: "https://picsum.photos/id/237/1200/850",
-          price: "$250",
-          reviewsCount: 3,
-          title: "Just a mutt",
-          category: {
-            id: 1,
-            name: "Dog",
-          },
-          author: {
-            id: 2,
-            avatarImage: "https://picsum.photos/400/400",
-          },
-        },
-        {
-          id: 3,
-          image: "https://picsum.photos/id/1074/1200/850",
-          price: "Free",
-          reviewsCount: 0,
-          title: "Lovely tubby",
-          category: {
-            id: 2,
-            name: "Cat",
-          },
-          author: {
-            id: 3,
-            avatarImage: "https://picsum.photos/400/400",
-          },
-        },
-        {
-          id: 4,
-          image: "https://picsum.photos/id/219/1200/850",
-          price: "$50",
-          reviewsCount: 3,
-          title: "Siamese cat",
-          category: {
-            id: 2,
-            name: "Cat",
-          },
-          author: {
-            id: 4,
-            avatarImage: "https://picsum.photos/400/400",
-          },
-        },
-      ],
-    };
+    // fetch FeaturedListings API (coming from dataService for now)
+    const featuredListings = getFeaturedListings();
     return featuredListings;
   }
 

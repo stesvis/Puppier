@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ListingDetails from "./pages/ListingDetails";
 import React from "react";
 
 export default function ListingCard(props) {
@@ -7,9 +8,13 @@ export default function ListingCard(props) {
     <div className="list-slide-box">
       <div className="modern-list ml-2">
         <div className="grid-category-thumb">
-          <a href="search-listing.html" className="overlay-cate">
+          <Link
+            to={`/listing-details/${props.listing.id}`}
+            className="overlay-cate"
+            children={<ListingDetails />}
+          >
             <img src={props.listing.image} className="img-responsive" alt="" />
-          </a>
+          </Link>
           <div className="listing-price-info">
             <span className="pricetag">{props.listing.price}</span>
           </div>
@@ -25,7 +30,9 @@ export default function ListingCard(props) {
               </Link>
             </div>
             <h4 className="lst-title">
-              <Link to="listing-detail.html">{props.listing.title}</Link>
+              <Link to={`/listing-details/${props.listing.id}`}>
+                {props.listing.title}
+              </Link>
               <span className="veryfied-author"></span>
             </h4>
           </div>

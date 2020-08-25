@@ -1,7 +1,7 @@
 import BannerSearchForm from "./BannerSearchForm";
 import React from "react";
 
-export default function Banner() {
+export default function HomeBanner() {
   return (
     // Banner Start
     <div

@@ -48,8 +48,8 @@
 //****************************** CLASS ******************************/
 import React, { Component } from "react";
 
-import Banner from "../Banner";
 import FeaturedListings from "./FeaturedListings";
+import HomeBanner from "../HomeBanner";
 
 export default class Home extends Component {
   state = {
@@ -145,7 +145,7 @@ export default class Home extends Component {
     return (
       <React.Fragment>
         {/* Hero Banner  Start */}
-        <Banner />
+        <HomeBanner />
         {/* Hero Banner End */}
 
         <FeaturedListings listings={this.state.featuredListings} />

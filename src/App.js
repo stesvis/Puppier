@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 
 import Explore from "./components/pages/Explore";
 import Home from "./components/pages/Home";
+import ListingDetails from "./components/pages/ListingDetails";
 import LogIn from "./components/modals/LogIn";
 import NavBar from "./components/NavBar";
 import React from "react";
@@ -22,6 +23,9 @@ function App() {
           </Route>
           <Route path="/explore">
             <Explore />
+          </Route>
+          <Route exact path="/listing-details/:id">
+            <ListingDetails />
           </Route>
         </Switch>
 

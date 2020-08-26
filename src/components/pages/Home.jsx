@@ -47,13 +47,16 @@
 
 //****************************** CLASS ******************************/
 
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 import FeaturedListings from "./FeaturedListings";
 import HomeBanner from "../HomeBanner";
+import LoadingContext from "../../context/loadingContext";
 import { getFeaturedListings } from "../../services/dataService";
 
 export default class Home extends Component {
+  static loadingContext = LoadingContext;
+
   state = {
     featuredListings: [],
   };
@@ -65,29 +68,35 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    const $ = window.$;
-    // Update the document title using the browser API
-    $(".hero-banner").circleMagic({
-      elem: ".hero-banner",
-      color: "rgba(255,255,255,.5)",
-      radius: 10,
-      densety: 0.3,
-      clearOffset: 0.2,
-    });
+    // const $ = window.$;
+    // // Update the document title using the browser API
+    // $(".hero-banner").circleMagic({
+    //   elem: ".hero-banner",
+    //   color: "rgba(255,255,255,.5)",
+    //   radius: 10,
+    //   densety: 0.3,
+    //   clearOffset: 0.2,
+    // });
 
+    // this.context.onStartedLoading();
     const featuredListings = this.fetchData();
-    this.setState({ featuredListings: featuredListings.data });
+    this.setState({ featuredListings: featuredListings });
+    // this.context.onFinishedLoading();
   }
 
   render() {
     return (
-      <React.Fragment>
-        {/* Hero Banner  Start */}
-        <HomeBanner />
-        {/* Hero Banner End */}
+      <LoadingContext.Consumer>
+        {(LoadingContext) => (
+          <Fragment>
+            {/* Hero Banner  Start */}
+            <HomeBanner />
+            {/* Hero Banner End */}
 
-        <FeaturedListings listings={this.state.featuredListings} />
-      </React.Fragment>
+            <FeaturedListings listings={this.state.featuredListings} />
+          </Fragment>
+        )}
+      </LoadingContext.Consumer>
     );
   }
 }

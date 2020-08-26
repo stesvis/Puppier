@@ -1,6 +1,6 @@
 // import React, { PureComponent } from "react";
 
-// import ListingCard from "../ListingCard";
+// import ListingCard from "../listings/ListingCard";
 
 // export default class FeaturedListings extends PureComponent {
 //   constructor(props) {
@@ -40,11 +40,9 @@
 
 import React, { memo } from "react";
 
-import ListingCard from "../ListingCard";
+import ListingCard from "../listings/ListingCard";
 
 const FeaturedListings = memo(function FeaturedListings(props) {
-  console.log("FeaturedListings props", props.listings);
-
   return (
     <section>
       <div className="container">

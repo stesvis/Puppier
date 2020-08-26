@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import ListingDetails from "./pages/ListingDetails";
 import React from "react";
 
 export default function ListingCard(props) {
+  const {listing} = props;
+  
   return (
     // <!-- Single List -->
     <div className="list-slide-box">
@@ -10,17 +11,17 @@ export default function ListingCard(props) {
         <div className="grid-category-thumb">
           <Link
             to={{
-              pathname: `/listings/${props.listing.id}`,
+              pathname: `/listings/${listing.id}`,
               state: {
-                listing: props.listing,
+                listing: listing,
               },
             }}
             className="overlay-cate"
           >
-            <img src={props.listing.image} className="img-responsive" alt="" />
+            <img src={listing.image} className="img-responsive" alt="" />
           </Link>
           <div className="listing-price-info">
-            <span className="pricetag">{props.listing.price}</span>
+            <span className="pricetag">{listing.price}</span>
           </div>
           <div className="property_meta">
             <div className="list-rates">
@@ -30,24 +31,24 @@ export default function ListingCard(props) {
               <i className="ti-star filled"></i>
               <i className="ti-star"></i>
               <Link to="#" className="tl-review">
-                ({props.listing.reviewsCount} Reviews)
+                ({listing.reviewsCount} Reviews)
               </Link>
             </div>
             <h4 className="lst-title">
               <Link
                 to={{
-                  pathname: `/listings/${props.listing.id}`,
+                  pathname: `/listings/${listing.id}`,
                   state: {
-                    listing: props.listing,
+                    listing: listing,
                   },
                 }}
               >
-                {props.listing.title}
+                {listing.title}
               </Link>
               <span className="veryfied-author"></span>
             </h4>
             <span className="font-10 font-italic bg-info-light">
-              {props.listing.location}
+              {listing.location}
             </span>
           </div>
         </div>
@@ -55,13 +56,13 @@ export default function ListingCard(props) {
           <div className="listing-cat">
             <Link to="#" className="cat-icon cl-1">
               <i className="ti-briefcase bg-a"></i>
-              {props.listing.category.name}
+              {listing.category.name}
             </Link>
             <span className="more-cat">+3</span>
           </div>
           <div className="author-avatar">
             <img
-              src={props.listing.author.avatarImage}
+              src={listing.author.avatarImage}
               className="author-avatar-img"
               alt=""
             />

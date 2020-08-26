@@ -15,7 +15,9 @@ const listings = {
       },
       author: {
         id: 1,
-        avatarImage: "https://picsum.photos/400/400",
+        avatarImage: "http://lorempixel.com/400/400/people/1",
+        phone: "555-000-0001",
+        email: "user_1@email.com",
       },
     },
     {
@@ -33,12 +35,14 @@ const listings = {
       },
       author: {
         id: 2,
-        avatarImage: "https://picsum.photos/400/400",
+        avatarImage: "http://lorempixel.com/400/400/people/2",
+        phone: "555-000-0002",
+        email: "user_2@email.com",
       },
     },
     {
       id: 3,
-      image: "https://picsum.photos/id/1074/1200/850",
+      image: "http://lorempixel.com/1200/850/cats/3",
       title: "Lovely tubby",
       description:
         "Anim nostrud minim in eu et non sint elit elit occaecat aliquip occaecat do dolore. Veniam sint exercitation eiusmod ex minim aliquip voluptate cupidatat. Consequat consequat est minim minim et qui exercitation sunt id nisi esse.",
@@ -51,12 +55,14 @@ const listings = {
       },
       author: {
         id: 3,
-        avatarImage: "https://picsum.photos/400/400",
+        avatarImage: "http://lorempixel.com/400/400/people/3",
+        phone: "555-000-0003",
+        email: "user_3@email.com",
       },
     },
     {
       id: 4,
-      image: "https://picsum.photos/id/219/1200/850",
+      image: "http://lorempixel.com/1200/850/cats/5",
       title: "Siamese cat",
       description:
         "Fugiat veniam ad reprehenderit aliquip do irure nisi consequat ex incididunt ut. Cillum anim deserunt anim sit incididunt mollit veniam irure adipisicing excepteur. Sunt veniam duis eu nisi nulla cupidatat qui do fugiat sunt eiusmod minim officia. Velit aliqua ex ullamco eu ea. Eiusmod deserunt quis cupidatat proident cillum esse sint minim pariatur. Duis dolore qui laboris consectetur ex sunt cillum aliquip adipisicing. Consequat eiusmod elit occaecat ut.",
@@ -69,22 +75,70 @@ const listings = {
       },
       author: {
         id: 4,
-        avatarImage: "https://picsum.photos/400/400",
+        avatarImage: "http://lorempixel.com/400/400/people/4",
+        phone: "555-000-0004",
+        email: "user_4@email.com",
+      },
+    },
+    {
+      id: 5,
+      image: "http://place-puppy.com/1200x850",
+      title: "Energetic pup looking for a home",
+      description:
+        "Laboris est aute tempor occaecat qui aliqua laborum proident. Officia pariatur magna mollit minim ut non et est amet elit nisi tempor sunt deserunt. Excepteur pariatur laboris labore in sint quis mollit non voluptate quis irure laborum proident. Labore non adipisicing ut laboris incididunt ullamco elit ex velit et consequat excepteur. Incididunt Lorem aliqua quis sunt laboris nisi.",
+      location: "Coaldale, AB",
+      price: "$800",
+      reviewsCount: 8,
+      category: {
+        id: 1,
+        name: "Dog",
+      },
+      author: {
+        id: 1,
+        avatarImage: "http://lorempixel.com/400/400/people/1",
+        phone: "555-000-0001",
+        email: "user_1@email.com",
+      },
+    },
+    {
+      id: 6,
+      image: "http://lorempixel.com/1200/850/cats/7",
+      title: "Mini lynx anyone?",
+      description:
+        "Anim amet elit id in excepteur sunt ullamco elit ad mollit nulla deserunt cillum. Amet sunt mollit tempor anim Lorem esse enim id veniam. Aliquip esse commodo eiusmod irure occaecat ipsum amet labore. Qui velit aliquip aliquip magna laboris excepteur mollit aliqua.",
+      location: "Lethbridge, AB",
+      price: "Free",
+      reviewsCount: 0,
+      category: {
+        id: 2,
+        name: "Cat",
+      },
+      author: {
+        id: 5,
+        avatarImage: "http://lorempixel.com/400/400/people/5",
+        phone: "555-000-0005",
+        email: "user_5@email.com",
       },
     },
   ],
 };
 
 export function getFeaturedListings() {
-  return listings;
+  // Shuffle array
+  const shuffled = listings.data.sort(() => 0.5 - Math.random());
+
+  // Get sub-array of first n elements after shuffled
+  const featured = shuffled.slice(0, 4);
+  return featured;
 }
 
 export function getListing(id) {
-  return listings.find((l) => l.id === id);
+  const listing = listings.data.find((l) => l.id === id);
+  return listing;
 }
 
 export function saveListing(listing) {
-  let dbListing = listing.find((l) => l.id === listing.id) || {};
+  let dbListing = listing.data.find((l) => l.id === listing.id) || {};
   dbListing.title = listing.title;
   dbListing.description = listing.description;
   dbListing.location = listing.location;
@@ -93,7 +147,7 @@ export function saveListing(listing) {
   if (!dbListing.id) {
     const maxListingId = Math.max.apply(
       Math,
-      listings.map((listing) => {
+      listings.data.map((listing) => {
         return listing.id;
       })
     );

@@ -1,10 +1,18 @@
-import PageTitle from "../PageTitle";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
-export default function Listings() {
+import LoadingContext from "../../context/loadingContext";
+import PageTitle from "../PageTitle";
+
+export default function Listings(props) {
+  // static contextType = LoadingContext;
+  const loadingContext = useContext(LoadingContext);
+  console.log("isLoading", loadingContext);
+
   return (
-    <React.Fragment>
-      <PageTitle title="Explore" subtitle="Find your new best friend" />
-    </React.Fragment>
+    <LoadingContext.Consumer>
+      {(LoadingContext) => (
+        <PageTitle title="Explore" subtitle="Find your new best friend" />
+      )}
+    </LoadingContext.Consumer>
   );
 }

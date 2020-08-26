@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 export default function ListingCard(props) {
-  const {listing} = props;
-  
+  const { listing } = props;
+
   return (
     // <!-- Single List -->
     <div className="list-slide-box">
@@ -18,7 +18,7 @@ export default function ListingCard(props) {
             }}
             className="overlay-cate"
           >
-            <img src={listing.image} className="img-responsive" alt="" />
+            <img src={listing.images[0]} className="img-responsive" alt="" />
           </Link>
           <div className="listing-price-info">
             <span className="pricetag">{listing.price}</span>

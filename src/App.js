@@ -1,7 +1,7 @@
 import "./App.css";
 
+import { Link, Route, Switch } from "react-router-dom";
 import React, { useState } from "react";
-import { Route, Switch } from "react-router-dom";
 
 import Home from "./components/pages/Home";
 import ListingDetails from "./components/pages/ListingDetails";
@@ -52,6 +52,10 @@ function App() {
 
         <LogIn />
         <SignUp />
+
+        <Link id="back2Top" className="top-scroll" title="Back to top" to="#">
+          <i className="ti-arrow-up"></i>
+        </Link>
       </div>
     </LoadingContext.Provider>
   );

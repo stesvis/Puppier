@@ -2,7 +2,12 @@ const listings = {
   data: [
     {
       id: 1,
-      image: "https://picsum.photos/id/1025/1200/850",
+      images: [
+        "https://picsum.photos/id/1025/1200/850",
+        "https://via.placeholder.com/1200/850",
+        "https://via.placeholder.com/1200/850",
+        "https://via.placeholder.com/1200/850",
+      ],
       title: "Cute pug puppy!",
       description:
         "Duis culpa voluptate proident labore nulla proident magna. Sit adipisicing Lorem in qui tempor elit commodo ex fugiat. Culpa commodo est tempor irure ipsum et Lorem sunt esse duis consectetur qui exercitation. Proident nulla sunt proident ea. Eiusmod veniam aute magna irure aliquip commodo qui est sint in non cillum consequat.",
@@ -22,7 +27,10 @@ const listings = {
     },
     {
       id: 2,
-      image: "https://picsum.photos/id/237/1200/850",
+      images: [
+        "https://picsum.photos/id/237/1200/850",
+        "https://via.placeholder.com/1200/850",
+      ],
       title: "Just a mutt",
       description:
         "Pariatur deserunt minim velit ex ipsum aliquip incididunt ullamco sunt dolore sunt. Minim dolore excepteur non tempor id sit culpa tempor velit. Tempor eu minim aliquip est deserunt excepteur tempor veniam ex occaecat qui.",
@@ -42,7 +50,7 @@ const listings = {
     },
     {
       id: 3,
-      image: "http://lorempixel.com/1200/850/cats/3",
+      images: ["http://lorempixel.com/1200/850/cats/3"],
       title: "Lovely tubby",
       description:
         "Anim nostrud minim in eu et non sint elit elit occaecat aliquip occaecat do dolore. Veniam sint exercitation eiusmod ex minim aliquip voluptate cupidatat. Consequat consequat est minim minim et qui exercitation sunt id nisi esse.",
@@ -62,7 +70,14 @@ const listings = {
     },
     {
       id: 4,
-      image: "http://lorempixel.com/1200/850/cats/5",
+      images: [
+        "http://lorempixel.com/1200/850/cats/5",
+        "https://via.placeholder.com/1200/850",
+        "https://via.placeholder.com/1200/850",
+        "https://via.placeholder.com/1200/850",
+        "https://via.placeholder.com/1200/850",
+        "https://via.placeholder.com/1200/850",
+      ],
       title: "Siamese cat",
       description:
         "Fugiat veniam ad reprehenderit aliquip do irure nisi consequat ex incididunt ut. Cillum anim deserunt anim sit incididunt mollit veniam irure adipisicing excepteur. Sunt veniam duis eu nisi nulla cupidatat qui do fugiat sunt eiusmod minim officia. Velit aliqua ex ullamco eu ea. Eiusmod deserunt quis cupidatat proident cillum esse sint minim pariatur. Duis dolore qui laboris consectetur ex sunt cillum aliquip adipisicing. Consequat eiusmod elit occaecat ut.",
@@ -82,7 +97,10 @@ const listings = {
     },
     {
       id: 5,
-      image: "http://place-puppy.com/1200x850",
+      images: [
+        "http://place-puppy.com/1200x850",
+        "https://via.placeholder.com/1200/850",
+      ],
       title: "Energetic pup looking for a home",
       description:
         "Laboris est aute tempor occaecat qui aliqua laborum proident. Officia pariatur magna mollit minim ut non et est amet elit nisi tempor sunt deserunt. Excepteur pariatur laboris labore in sint quis mollit non voluptate quis irure laborum proident. Labore non adipisicing ut laboris incididunt ullamco elit ex velit et consequat excepteur. Incididunt Lorem aliqua quis sunt laboris nisi.",
@@ -102,7 +120,10 @@ const listings = {
     },
     {
       id: 6,
-      image: "http://lorempixel.com/1200/850/cats/7",
+      images: [
+        "http://lorempixel.com/1200/850/cats/7",
+        "https://via.placeholder.com/1200/850",
+      ],
       title: "Mini lynx anyone?",
       description:
         "Anim amet elit id in excepteur sunt ullamco elit ad mollit nulla deserunt cillum. Amet sunt mollit tempor anim Lorem esse enim id veniam. Aliquip esse commodo eiusmod irure occaecat ipsum amet labore. Qui velit aliquip aliquip magna laboris excepteur mollit aliqua.",

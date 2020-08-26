@@ -1,11 +1,12 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 
 import { Listing } from "../../models/Listing";
-import ListingMainDetails from "../listings/ListingMainDetails";
+import ListingBanner from "../listings/ListingBanner";
+import ListingOverview from "../listings/ListingOverview";
 import LoadingContext from "../../context/loadingContext";
 import { getListing } from "../../services/dataService";
 
-export default function ListingDetails(props) {
+export default function ListingDetails2(props) {
   const loadingContext = useContext(LoadingContext);
 
   const { id } = props.match.params;
@@ -28,13 +29,8 @@ export default function ListingDetails(props) {
 
   return (
     <Fragment>
-      <section className="gray">
-        <div className="container">
-          <div className="row">
-            <ListingMainDetails listing={listing} />
-          </div>
-        </div>
-      </section>
+      <ListingBanner listing={listing} />
+      <ListingOverview />
     </Fragment>
   );
 }

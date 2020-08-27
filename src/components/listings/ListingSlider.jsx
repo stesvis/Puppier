@@ -5,13 +5,6 @@ import { Link } from "react-router-dom";
 export default function ListingSlider(props) {
   const { listing } = props;
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "http://maps.google.com/maps/api/js?key=";
-    script.id = "googleMaps";
-    document.body.appendChild(script);
-  }, []);
-
   return (
     <div className="property3-slide single-advance-property mb-4">
       <div className="slider-for">

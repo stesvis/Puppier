@@ -1,7 +1,7 @@
 import "./App.css";
 
 import { Link, Route, Switch } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Home from "./components/pages/Home";
 import ListingDetails from "./components/pages/ListingDetails";
@@ -23,6 +23,26 @@ function App() {
     console.log("finished loading");
     setIsLoading(false);
   };
+
+  // useEffect((callback) => {
+  //   const existingScript = document.getElementById("customJS");
+  //   console.log(existingScript);
+
+  //   if (!existingScript) {
+  //     const script = document.createElement("script");
+  //     script.src = "./assets/js/custom.js";
+  //     script.id = "customJS";
+
+  //     document.body.appendChild(script);
+  //     console.log("added");
+
+  //     script.onload = () => {
+  //       if (callback) callback();
+  //     };
+  //   }
+
+  //   if (existingScript && callback) callback();
+  // });
 
   return (
     <LoadingContext.Provider

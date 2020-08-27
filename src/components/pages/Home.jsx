@@ -1,21 +1,23 @@
-// TODO: class and function behave differently:
-//  - function renders the featured listings in a vertical list (wrong)
-//  - class renders featured listings in a carousel (correct)
+// // TODO: class and function behave differently:
+// //  - function renders the featured listings in a vertical list (wrong)
+// //  - class renders featured listings in a carousel (correct)
 
-// import React, { useEffect, useState } from "react";
+// import React, { useContext, useEffect, useState } from "react";
 
-// import Banner from "../Banner";
 // import FeaturedListings from "./FeaturedListings";
+// import HomeBanner from "../HomeBanner";
+// import LoadingContext from "../../context/loadingContext";
+// import { getFeaturedListings } from "../../services/dataService";
 
 // export default function Home() {
 //   const [featuredListings, setFeaturedListings] = useState([]);
+//   const loadingContext = useContext(LoadingContext);
 
-//   function fetchData() {
-//     console.log("Home -> fetchData()");
-//     // fetch FeaturedListings API
-//     const featuredListings = [1, 2, 3, 4, 5];
+//   const fetchData = () => {
+//     // fetch FeaturedListings API (coming from dataService for now)
+//     const featuredListings = getFeaturedListings();
 //     return featuredListings;
-//   }
+//   };
 
 //   useEffect(() => {
 //     console.log("Home -> useEffect()");
@@ -30,14 +32,21 @@
 //       clearOffset: 0.2,
 //     });
 
-//     const featuredListings = fetchData();
-//     setFeaturedListings(featuredListings);
+//     loadingContext.onStartedLoading();
+//     // Fetch single listing by id
+//     setTimeout(function () {
+//       const featuredListings = fetchData();
+//       setFeaturedListings(featuredListings);
+//       loadingContext.onFinishedLoading();
+//     }, 1000); //wait 2 seconds
+
+//     //---------------
 //   }, []);
 
 //   return (
 //     <React.Fragment>
 //       {/* Hero Banner  Start */}
-//       <Banner />
+//       <HomeBanner />
 //       {/* Hero Banner End */}
 
 //       <FeaturedListings listings={featuredListings} />
@@ -66,6 +75,15 @@ export default class Home extends Component {
     const featuredListings = getFeaturedListings();
     return featuredListings;
   }
+
+  loadScript = function (src) {
+    var tag = document.createElement("script");
+    tag.id = "custom_js";
+    tag.async = false;
+    tag.src = src;
+    console.log(tag);
+    document.body.appendChild(tag);
+  };
 
   componentDidMount() {
     const $ = window.$;

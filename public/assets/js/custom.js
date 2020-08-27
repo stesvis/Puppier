@@ -1,5 +1,3 @@
-const $ = window.$;
-
 $(function () {
   "use strict";
 
@@ -30,7 +28,7 @@ $(function () {
   });
 
   // Extra Service Show
-  $("#extra-services").click(function () {
+  $("#extra-services").on("click", function () {
     $("#showing").slideToggle("slow");
   });
 
@@ -47,36 +45,36 @@ $(function () {
   });
 
   // Filter Search Option
-  $("#guest").click(function () {
+  $("#guest").on("click", function () {
     $("#g-showing").slideToggle("slow");
   });
 
   // Filter Search Option
-  $("#hotel-guest").click(function () {
+  $("#hotel-guest").on("click", function () {
     $("#hotelg-showing").slideToggle("slow");
   });
 
-  $("#worktrip").click(function () {
+  $("#worktrip").on("click", function () {
     $("#w-showing").slideToggle("slow");
   });
 
-  $("#placetype").click(function () {
+  $("#placetype").on("click", function () {
     $("#p-showing").slideToggle("slow");
   });
 
-  $("#prices").click(function () {
+  $("#prices").on("click", function () {
     $("#pr-showing").slideToggle("slow");
   });
 
-  $("#instantbook").click(function () {
+  $("#instantbook").on("click", function () {
     $("#in-showing").slideToggle("slow");
   });
 
-  $("#tripduration").click(function () {
+  $("#tripduration").on("click", function () {
     $("#tr-showing").slideToggle("slow");
   });
 
-  $("#activitylevel").click(function () {
+  $("#activitylevel").on("click", function () {
     $("#sac-howing").slideToggle("slow");
   });
 

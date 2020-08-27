@@ -1,3 +1,5 @@
+const $ = window.$;
+
 $(function () {
   "use strict";
 

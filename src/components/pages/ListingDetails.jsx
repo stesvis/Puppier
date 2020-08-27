@@ -22,9 +22,9 @@ export default function ListingDetails(props) {
     }, 2000); //wait 2 seconds
   }, [id]);
 
-  useEffect(() => {
-    console.log("loadingContext changed");
-  }, [loadingContext]);
+  // useEffect(() => {
+  //   console.log("loadingContext changed");
+  // }, [loadingContext]);
 
   return (
     <Fragment>

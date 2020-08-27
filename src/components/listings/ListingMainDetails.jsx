@@ -11,7 +11,7 @@ export default function ListingMainDetails(props) {
         <div className="listname-into">
           <h2>
             {listing.title}{" "}
-            <span className="prt-type rent">Hotel & Resort</span>
+            <span className="prt-type rent">{listing.category.name}</span>
           </h2>
           <span>
             <i className="lni-map-marker"></i> {listing.location}

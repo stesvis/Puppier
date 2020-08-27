@@ -7,8 +7,7 @@ export default function ListingSlider(props) {
 
   useEffect(() => {
     const script = document.createElement("script");
-    script.src =
-      '<script src="http://maps.google.com/maps/api/js?key="></script>';
+    script.src = "http://maps.google.com/maps/api/js?key=";
     script.id = "googleMaps";
     document.body.appendChild(script);
   }, []);

@@ -1,6 +1,10 @@
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
+
 import React, { useEffect } from "react";
 
 import { Link } from "react-router-dom";
+import OwlCarousel from "react-owl-carousel";
 
 export default function ListingSlider(props) {
   const { listing } = props;
@@ -10,20 +14,40 @@ export default function ListingSlider(props) {
       <div className="slider-for">
         {listing.images.map((image, index) => {
           return (
-            <Link to="#" key={index} className="item-slick">
+            <a href={image} key={index} className="item-slick">
               <img src={image} alt="Alt" />
-            </Link>
+            </a>
           );
         })}
       </div>
 
       <div className="slider-nav">
-        <div className="item-slick">
-          {listing.images.map((image, index) => {
-            return <img key={index} src={image} alt="Alt" />;
-          })}
-        </div>
+        {listing.images.map((image, index) => {
+          return (
+            <div key={index} className="item-slick">
+              <img src={image} alt="Alt" />
+            </div>
+          );
+        })}
       </div>
     </div>
+    // <div>
+    //   <div class="container-fluid">
+    //     <OwlCarousel
+    //       items={listing.images.length}
+    //       className="owl-theme"
+    //       loop
+    //       autoplay
+    //       nav
+    //       margin={5}
+    //     >
+    //       {listing.images.map((image, index) => {
+    //         return (
+    //             <img className="img" key={index} src={image} alt="Alt" />
+    //         );
+    //       })}
+    //     </OwlCarousel>
+    //   </div>
+    // </div>
   );
 }

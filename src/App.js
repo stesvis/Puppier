@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Redirect, Route, Switch } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 import Home from "./components/pages/Home";
@@ -66,8 +66,9 @@ function App() {
 
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/explore" component={Listings} />
           <Route exact path="/listings/:id" component={ListingDetails} />
+          <Route exact path="/listings" component={Listings} />
+          <Redirect to="/404" />
         </Switch>
 
         <LogIn />

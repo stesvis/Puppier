@@ -3,13 +3,13 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import React from "react";
 
 export default function NavBar() {
-  let navbarClass = "header";
-  let logoImageSrc = "assets/img/g-logo.png";
+  let navbarClass = "header nav-left-side";
+  let logoImageSrc = "../assets/img/g-logo.png";
 
   const location = useLocation();
   // console.log(location);
   if (location.pathname === "/") {
-    navbarClass = "header header-dark-transparent";
+    navbarClass = "header header-dark-transparent nav-left-side";
     logoImageSrc = "assets/img/g-logo-light.png";
   }
 
@@ -22,13 +22,14 @@ export default function NavBar() {
             <Link to="/" className="brand normal-logo">
               <img src={logoImageSrc} alt="" />
             </Link>
-            <Link to="/" className="brand brand-overlay">
+            {/* <Link to="/" className="brand brand-overlay">
               <img src="assets/img/g-logo.png" alt="" />
-            </Link>
+            </Link> */}
             <button className="toggle-bar">
               <span className="ti-align-justify"></span>
             </button>
           </div>
+
           <ul className="menu">
             <li>
               <NavLink exact to="/">
@@ -37,25 +38,41 @@ export default function NavBar() {
             </li>
 
             <li>
-              <NavLink exact to="/explore">
+              <NavLink exact to="/listings">
                 Explore
               </NavLink>
             </li>
 
-            <li>
+            {/* <li>
+              <Link to="#" data-toggle="modal" data-target="#signup">
+                Sign Up
+              </Link>
+            </li> */}
+          </ul>
+
+          <ul className="attributes attributes-desk">
+            <li className="log-icon log-seprate">
+              <Link to="#" data-toggle="modal" data-target="#login">
+                Log In
+              </Link>
+            </li>
+            <li className="log-icon">
               <Link to="#" data-toggle="modal" data-target="#signup">
                 Sign Up
               </Link>
             </li>
+            <li className="submit-attri theme-log">
+              <Link to="/listings/add">Add Listing</Link>
+            </li>
           </ul>
 
-          <ul className="attributes">
+          {/* <ul className="attributes">
             <li className="login-attri">
               <Link to="#" data-toggle="modal" data-target="#login">
                 Log In
               </Link>
             </li>
-          </ul>
+          </ul> */}
         </nav>
       </div>
       <div className="clearfix"></div>

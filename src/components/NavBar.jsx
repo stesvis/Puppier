@@ -1,16 +1,18 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 import React from "react";
+import useScript from "react-script-hook";
 
 export default function NavBar() {
-  let navbarClass = "header nav-left-side";
-  let logoImageSrc = "../assets/img/g-logo.png";
+  let navbarClass = "header header-light nav-left-side";
+  let logoImageSrc = `${process.env.PUBLIC_URL}/assets/img/g-logo.png`;
 
   const location = useLocation();
   // console.log(location);
   if (location.pathname === "/") {
+    // home page
     navbarClass = "header header-dark-transparent nav-left-side";
-    logoImageSrc = "assets/img/g-logo-light.png";
+    logoImageSrc = `${process.env.PUBLIC_URL}/assets/img/g-logo-light.png`;
   }
 
   return (

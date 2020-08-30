@@ -1,47 +1,64 @@
-import React, { useEffect } from "react";
+import { Image, Modal } from "react-bootstrap";
+import React, { Fragment } from "react";
+
+import Carousel from "react-bootstrap/Carousel";
+import { useState } from "react";
 
 export default function ListingSlider(props) {
   const { listing } = props;
+  const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleSelect = (index, e) => {
+    setActiveCarouselIndex(index);
+    console.log(index);
+  };
+
+  const handleImageClicked = (e) => {
+    setImageIndex(activeCarouselIndex);
+    setShowModal(true);
+  };
 
   return (
-    <div className="property3-slide single-advance-property mb-4">
-      <div className="slider-for">
-        {listing.images.map((image, index) => {
+    <Fragment>
+      <Carousel
+        activeIndex={activeCarouselIndex}
+        onSelect={handleSelect}
+        interval={3000}
+        pauseOnHover={true}
+      >
+        {listing.images.map((image) => {
           return (
-            <a href={image} key={index} className="item-slick">
-              <img src={image} alt="Alt" />
-            </a>
+            <Carousel.Item key={image.id}>
+              <Image
+                id={imageIndex}
+                className="d-block w-100 pointer"
+                src={image}
+                alt="First slide"
+                onClick={handleImageClicked}
+              />
+              {/* <Carousel.Caption>
+              <h3>First slide label</h3>
+              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            </Carousel.Caption> */}
+            </Carousel.Item>
           );
         })}
-      </div>
+      </Carousel>
 
-      <div className="slider-nav">
-        {listing.images.map((image, index) => {
-          return (
-            <div key={index} className="item-slick">
-              <img src={image} alt="Alt" />
-            </div>
-          );
-        })}
-      </div>
-    </div>
-    // <div>
-    //   <div class="container-fluid">
-    //     <OwlCarousel
-    //       items={listing.images.length}
-    //       className="owl-theme"
-    //       loop
-    //       autoplay
-    //       nav
-    //       margin={5}
-    //     >
-    //       {listing.images.map((image, index) => {
-    //         return (
-    //             <img className="img" key={index} src={image} alt="Alt" />
-    //         );
-    //       })}
-    //     </OwlCarousel>
-    //   </div>
-    // </div>
+      <Modal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        dialogClassName="modal-90w"
+        centered
+        size="xl"
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <Image centered src={listing.images[imageIndex]} />
+        </Modal.Body>
+      </Modal>
+    </Fragment>
   );
 }

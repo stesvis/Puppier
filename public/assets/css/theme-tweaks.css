@@ -1,0 +1,29 @@
+.pointer {
+  cursor: pointer;
+}
+
+.list-slide-box {
+  width: 400px;
+}
+
+/* react-bootstrap: Carousel */
+
+.w-100 {
+  object-fit: cover;
+  /* height: auto; */
+  max-height: 400px;
+}
+
+.modal-90w {
+  max-width: 90% !important;
+}
+
+.modal-dialog img {
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .w-100 {
+    max-height: 200px;
+  }
+}

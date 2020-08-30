@@ -28,11 +28,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 // import "./assets/css/plugins.css";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router forceRefresh>
-      <App />
-    </Router>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <Router forceRefresh>
+    <App />
+  </Router>,
+  // </React.StrictMode>,
   document.getElementById("core-content")
 );
 

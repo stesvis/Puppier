@@ -1,7 +1,6 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 import React from "react";
-import useScript from "react-script-hook";
 
 export default function NavBar() {
   let navbarClass = "header header-light nav-left-side"; // header-fixed
@@ -22,9 +21,6 @@ export default function NavBar() {
         <nav className="headnavbar core-nav">
           <div className="nav-container">
             <div className="nav-header right">
-              {/* <Link to="/" className="brand normal-logo">
-                <img src={logoImageSrc} alt="" />
-              </Link> */}
               <Link to="/" className="brand">
                 <img src={logoImageSrc} alt="" />
               </Link>
@@ -70,13 +66,6 @@ export default function NavBar() {
             </li> */}
               </ul>
             </div>
-            {/* <ul className="attributes">
-            <li className="login-attri">
-              <Link to="#" data-toggle="modal" data-target="#login">
-                Log In
-              </Link>
-            </li>
-          </ul> */}
           </div>
         </nav>
       </div>

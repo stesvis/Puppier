@@ -3294,49 +3294,49 @@ a.btn-outline-success:focus {
   display: none !important;
 }
 
-@media (max-width: 575px) {
+@media screen and (max-width: 575px) {
   .hidden-xs-down {
     display: none !important;
   }
 }
 
-@media (min-width: 576px) {
+@media screen and (min-width: 576px) {
   .hidden-sm-up {
     display: none !important;
   }
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .hidden-sm-down {
     display: none !important;
   }
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .hidden-md-up {
     display: none !important;
   }
 }
 
-@media (max-width: 991px) {
+@media screen and (max-width: 991px) {
   .hidden-md-down {
     display: none !important;
   }
 }
 
-@media (min-width: 992px) {
+@media screen and (min-width: 992px) {
   .hidden-lg-up {
     display: none !important;
   }
 }
 
-@media (max-width: 1199px) {
+@media screen and (max-width: 1199px) {
   .hidden-lg-down {
     display: none !important;
   }
 }
 
-@media (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
   .hidden-xl-up {
     display: none !important;
   }
@@ -7064,7 +7064,7 @@ span.real-price {
   display: flex;
   flex-direction: column;
 }
-@media (max-width: 1366px) {
+@media screen and (max-width: 1366px) {
   .rating-bars-item {
     width: calc(50% - 30px);
   }
@@ -12223,7 +12223,7 @@ textarea.form-control::placeholder {
     height: 100vh;
   }
 }
-@media (max-height: 600px) {
+@media screen and (max-height: 600px) {
   .pos-vertical-center {
     top: 0;
     transform: none;
@@ -12231,7 +12231,7 @@ textarea.form-control::placeholder {
   }
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   form.search-big-form.search-shadow .form-group,
   form.search-form.search-shadow .form-group {
     margin-bottom: 0;
@@ -12268,7 +12268,7 @@ textarea.form-control::placeholder {
   }
 }
 
-@media (min-width: 992px) {
+@media screen and (min-width: 992px) {
   .hero-search h1 {
     font-size: 50px;
   }
@@ -12364,7 +12364,7 @@ textarea.form-control::placeholder {
     margin-bottom: 12px;
   }
 }
-@media (min-width: 993px) {
+@media screen and (min-width: 993px) {
   .nav-left-side .core-nav .nav-header {
     position: relative;
     float: left;
@@ -12375,7 +12375,7 @@ textarea.form-control::placeholder {
   }
 }
 
-@media (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
   .hero-content h1 {
     font-size: 80px;
   }
@@ -12383,7 +12383,7 @@ textarea.form-control::placeholder {
     width: 700px !important;
   }
 }
-@media (max-width: 1199px) {
+@media screen and (max-width: 1199px) {
   .job-new-list .btn.btn-outline-info.float-right {
     float: none !important;
     margin: 0;
@@ -12410,7 +12410,7 @@ textarea.form-control::placeholder {
   }
 }
 
-@media (max-width: 1023px) {
+@media screen and (max-width: 1023px) {
   .half-map .fs-inner-container {
     width: 100%;
   }
@@ -12430,7 +12430,7 @@ textarea.form-control::placeholder {
   }
 }
 
-@media (max-width: 992px) {
+@media screen and (max-width: 992px) {
   .header.nav-left-side .core-nav .wrap-core-nav-list .core-nav-list {
     float: none;
   }
@@ -12448,7 +12448,7 @@ textarea.form-control::placeholder {
     width: 100% !important;
   }
 }
-@media (max-width: 991px) {
+@media screen and (max-width: 991px) {
   .main-banner.image-banner,
   .hero-header,
   .hero-banner {
@@ -12566,7 +12566,7 @@ textarea.form-control::placeholder {
   }
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .dropdown-submenu > .dropdown-menu.show {
     display: block;
   }
@@ -12725,7 +12725,7 @@ textarea.form-control::placeholder {
   }
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
   .hero-header {
     min-height: 400px;
   }

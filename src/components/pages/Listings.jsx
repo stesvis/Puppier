@@ -2,17 +2,23 @@ import React, { useContext, useEffect } from "react";
 
 import LoadingContext from "../../context/loadingContext";
 import PageTitle from "../PageTitle";
+import { all } from "../../services/dataService";
+import { useState } from "react";
 
 export default function Listings(props) {
   // static contextType = LoadingContext;
   const loadingContext = useContext(LoadingContext);
-  console.log("isLoading", loadingContext);
+  const[listings, setListings] = useState({});
 
-  return (
-    <LoadingContext.Consumer>
-      {(LoadingContext) => (
-        <PageTitle title="Explore" subtitle="Find your new best friend" />
-      )}
-    </LoadingContext.Consumer>
-  );
+  useEffect(() => {
+    loadingContext.onStartedLoading();
+    // Fetch single listing by id
+    setTimeout(function () {
+      const listings = all();
+      setListings(listings);
+      loadingContext.onFinishedLoading();
+    }, 1000); //wait 1 seconds
+  }, []);
+
+  return <PageTitle title="Explore" subtitle="Find your new best friend" />;
 }

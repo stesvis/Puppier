@@ -86,15 +86,15 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
-    const $ = window.$;
-    // Update the document title using the browser API
-    $(".hero-banner").circleMagic({
-      elem: ".hero-banner",
-      color: "rgba(255,255,255,.5)",
-      radius: 10,
-      densety: 0.3,
-      clearOffset: 0.2,
-    });
+    // const $ = window.$;
+    // // Update the document title using the browser API
+    // $(".hero-banner").circleMagic({
+    //   elem: ".hero-banner",
+    //   color: "rgba(255,255,255,.5)",
+    //   radius: 10,
+    //   densety: 0.3,
+    //   clearOffset: 0.2,
+    // });
 
     // this.context.onStartedLoading();
     const featuredListings = this.fetchData();

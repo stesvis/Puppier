@@ -19,7 +19,7 @@ export default function ListingDetails(props) {
       const listing = getListing(parseInt(id));
       setListing(listing);
       loadingContext.onFinishedLoading();
-    }, 2000); //wait 2 seconds
+    }, 1000); //wait 1 seconds
   }, [id]);
 
   // useEffect(() => {

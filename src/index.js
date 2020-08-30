@@ -33,7 +33,7 @@ ReactDOM.render(
       <App />
     </Router>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById("core-content")
 );
 
 // If you want your app to work offline and load faster, you can change

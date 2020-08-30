@@ -24,6 +24,10 @@ function App() {
     setIsLoading(false);
   };
 
+  const handleToggleModal=(modalId, show)=>{
+
+  };
+
   // useEffect((callback) => {
   //   const existingScript = document.getElementById("customJS");
   //   console.log(existingScript);
@@ -52,15 +56,14 @@ function App() {
         onFinishedLoading: hideLoading,
       }}
     >
-      <div id="main-wrapper">
-        {/* <!-- Preloader - style you can find in spinners.css --> */}
-        <div id="preloader" style={isLoading ? {} : { display: "none" }}>
-          <div className="preloader">
-            <span></span>
-            <span></span>
-          </div>
+      {/* <!-- Preloader - style you can find in spinners.css --> */}
+      <div id="preloader" style={isLoading ? {} : { display: "none" }}>
+        <div className="preloader">
+          <span></span>
+          <span></span>
         </div>
-
+      </div>
+      <div id="main-wrapper">
         <NavBar />
         <div className="clearfix"></div>
 

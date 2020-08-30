@@ -144,6 +144,10 @@ const listings = {
   ],
 };
 
+export function all() {
+  return listings;
+}
+
 export function getFeaturedListings() {
   // Shuffle array
   const shuffled = listings.data.sort(() => 0.5 - Math.random());

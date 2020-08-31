@@ -1,7 +1,9 @@
+import { Container, Row } from "react-bootstrap";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 
 import { Listing } from "../../models/Listing";
 import ListingMainDetails from "../listings/ListingMainDetails";
+import ListingSideBar from "../listings/ListingSideBar";
 import LoadingContext from "../../context/loadingContext";
 import { getListing } from "../../services/dataService";
 
@@ -19,7 +21,7 @@ export default function ListingDetails(props) {
       const listing = getListing(parseInt(id));
       setListing(listing);
       loadingContext.onFinishedLoading();
-    }, 1000); //wait 1 seconds
+    }, process.env.FAKE_API_DELAY); //wait 1 seconds
   }, [id]);
 
   // useEffect(() => {
@@ -29,11 +31,12 @@ export default function ListingDetails(props) {
   return (
     <Fragment>
       <section className="gray">
-        <div className="container">
-          <div className="row">
+        <Container>
+          <Row>
             <ListingMainDetails listing={listing} />
-          </div>
-        </div>
+            <ListingSideBar listing={listing} />
+          </Row>
+        </Container>
       </section>
     </Fragment>
   );

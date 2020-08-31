@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import React from "react";
+import { Row } from "react-bootstrap";
 
 export default function BannerSearchForm() {
   return (
     // <!-- ---------- Search Form -->
     <div className="full-search-2 italian-search hero-search-radius">
       <div className="hero-search-content">
-        <div className="row">
+        <Row>
           <div className="col-lg-4 col-md-4 col-sm-12 small-padd">
             <div className="form-group">
               <div className="input-with-icon">
@@ -55,7 +56,7 @@ export default function BannerSearchForm() {
               </div>
             </div>
           </div>
-        </div>
+        </Row>
       </div>
     </div>
     // ---------- Search Form

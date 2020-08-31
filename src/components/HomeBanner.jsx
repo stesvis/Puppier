@@ -1,4 +1,5 @@
 import BannerSearchForm from "./BannerSearchForm";
+import { Container } from "react-bootstrap";
 import React from "react";
 
 export default function HomeBanner() {
@@ -11,7 +12,7 @@ export default function HomeBanner() {
       }}
       data-overlay="6"
     >
-      <div className="container">
+      <Container>
         <h1 className="big-header-capt">Find Your Best Friend!</h1>
 
         <BannerSearchForm />
@@ -26,7 +27,7 @@ export default function HomeBanner() {
             </li>
           </ul>
         </div>
-      </div>
+      </Container>
     </div>
     // Banner end
   );

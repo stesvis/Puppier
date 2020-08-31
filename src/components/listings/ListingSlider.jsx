@@ -1,14 +1,15 @@
-import { Image, Modal } from "react-bootstrap";
 import React, { Fragment } from "react";
 
 import Carousel from "react-bootstrap/Carousel";
+import { Image } from "react-bootstrap";
+import Lightbox from "react-image-lightbox";
 import { useState } from "react";
 
 export default function ListingSlider(props) {
   const { listing } = props;
   const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
-  const [showModal, setShowModal] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const handleSelect = (index, e) => {
     setActiveCarouselIndex(index);
@@ -17,7 +18,7 @@ export default function ListingSlider(props) {
 
   const handleImageClicked = (e) => {
     setImageIndex(activeCarouselIndex);
-    setShowModal(true);
+    setIsLightboxOpen(true);
   };
 
   return (
@@ -46,6 +47,27 @@ export default function ListingSlider(props) {
           );
         })}
       </Carousel>
+
+      {isLightboxOpen && (
+        <Lightbox
+          mainSrc={listing.images[imageIndex]}
+          nextSrc={listing.images[(imageIndex + 1) % listing.images.length]}
+          prevSrc={
+            listing.images[
+              (imageIndex + listing.images.length - 1) % listing.images.length
+            ]
+          }
+          onCloseRequest={() => setIsLightboxOpen(false)}
+          onMovePrevRequest={() =>
+            setImageIndex(
+              (imageIndex + listing.images.length - 1) % listing.images.length
+            )
+          }
+          onMoveNextRequest={() =>
+            setImageIndex((imageIndex + 1) % listing.images.length)
+          }
+        />
+      )}
     </Fragment>
   );
 }

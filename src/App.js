@@ -1,4 +1,5 @@
 import "./App.css";
+import "react-image-lightbox/style.css";
 
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 import React, { useEffect, useState } from "react";
@@ -24,9 +25,7 @@ function App() {
     setIsLoading(false);
   };
 
-  const handleToggleModal=(modalId, show)=>{
-
-  };
+  const handleToggleModal = (modalId, show) => {};
 
   // useEffect((callback) => {
   //   const existingScript = document.getElementById("customJS");

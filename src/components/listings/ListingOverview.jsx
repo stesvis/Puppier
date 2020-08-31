@@ -1,10 +1,11 @@
+import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import React from "react";
 
 export default function ListingOverview() {
   return (
     <section className="p-0">
-      <div className="container">
+      <Container>
         <div className="row align-items-center">
           <div className="col-lg-12 col-md-12 col-sm-12">
             <div className="rixel-bar">
@@ -57,7 +58,7 @@ export default function ListingOverview() {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

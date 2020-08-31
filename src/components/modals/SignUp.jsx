@@ -1,3 +1,5 @@
+import { Col, Row } from "react-bootstrap";
+
 import { Link } from "react-router-dom";
 import React from "react";
 
@@ -25,8 +27,8 @@ export default function SignUp() {
             </h4>
             <div className="login-form">
               <form>
-                <div className="row">
-                  <div className="col-lg-6 col-md-6">
+                <Row>
+                  <Col lg={6} md={6}>
                     <div className="form-group">
                       <div className="input-with-icon">
                         <input
@@ -37,9 +39,9 @@ export default function SignUp() {
                         <i className="ti-user"></i>
                       </div>
                     </div>
-                  </div>
+                  </Col>
 
-                  <div className="col-lg-6 col-md-6">
+                  <Col lg={6} md={6}>
                     <div className="form-group">
                       <div className="input-with-icon">
                         <input
@@ -50,9 +52,9 @@ export default function SignUp() {
                         <i className="ti-user"></i>
                       </div>
                     </div>
-                  </div>
+                  </Col>
 
-                  <div className="col-lg-6 col-md-6">
+                  <Col lg={6} md={6}>
                     <div className="form-group">
                       <div className="input-with-icon">
                         <input
@@ -63,9 +65,9 @@ export default function SignUp() {
                         <i className="ti-user"></i>
                       </div>
                     </div>
-                  </div>
+                  </Col>
 
-                  <div className="col-lg-6 col-md-6">
+                  <Col lg={6} md={6}>
                     <div className="form-group">
                       <div className="input-with-icon">
                         <input
@@ -76,9 +78,9 @@ export default function SignUp() {
                         <i className="ti-email"></i>
                       </div>
                     </div>
-                  </div>
+                  </Col>
 
-                  <div className="col-lg-6 col-md-6">
+                  <Col lg={6} md={6}>
                     <div className="form-group">
                       <div className="input-with-icon">
                         <input
@@ -89,9 +91,9 @@ export default function SignUp() {
                         <i className="ti-unlock"></i>
                       </div>
                     </div>
-                  </div>
+                  </Col>
 
-                  <div className="col-lg-6 col-md-6">
+                  <Col lg={6} md={6}>
                     <div className="form-group">
                       <div className="input-with-icon">
                         <input
@@ -102,8 +104,8 @@ export default function SignUp() {
                         <i className="ti-unlock"></i>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </Col>
+                </Row>
 
                 <div className="form-group">
                   <button

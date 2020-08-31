@@ -20,6 +20,7 @@ const listings = {
       },
       author: {
         id: 1,
+        name: "Rosa Diaz",
         avatarImage: "http://lorempixel.com/400/400/people/1",
         phone: "555-000-0001",
         email: "user_1@email.com",
@@ -43,6 +44,7 @@ const listings = {
       },
       author: {
         id: 2,
+        name: "Jay Pritchett",
         avatarImage: "http://lorempixel.com/400/400/people/2",
         phone: "555-000-0002",
         email: "user_2@email.com",
@@ -63,6 +65,7 @@ const listings = {
       },
       author: {
         id: 3,
+        name: "Phil Dunphy",
         avatarImage: "http://lorempixel.com/400/400/people/3",
         phone: "555-000-0003",
         email: "user_3@email.com",
@@ -90,6 +93,7 @@ const listings = {
       },
       author: {
         id: 4,
+        name: "Gloria Delgado",
         avatarImage: "http://lorempixel.com/400/400/people/4",
         phone: "555-000-0004",
         email: "user_4@email.com",
@@ -113,6 +117,7 @@ const listings = {
       },
       author: {
         id: 1,
+        name: "Rosa Diaz",
         avatarImage: "http://lorempixel.com/400/400/people/1",
         phone: "555-000-0001",
         email: "user_1@email.com",
@@ -136,6 +141,7 @@ const listings = {
       },
       author: {
         id: 5,
+        name: "Raymond Hold",
         avatarImage: "http://lorempixel.com/400/400/people/5",
         phone: "555-000-0005",
         email: "user_5@email.com",

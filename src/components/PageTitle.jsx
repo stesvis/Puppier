@@ -1,3 +1,5 @@
+import { Col, Container, Row } from "react-bootstrap";
+
 import React from "react";
 
 export default function PageTitle(props) {
@@ -9,14 +11,14 @@ export default function PageTitle(props) {
       }}
       data-overlay="6"
     >
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12 col-md-12">
+      <Container>
+        <Row>
+          <Col lg={12} md={12} sm={12}>
             <h2 className="ipt-title">{props.title}</h2>
             <span className="ipn-subtitle text-light">{props.subtitle}</span>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }

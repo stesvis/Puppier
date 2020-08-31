@@ -17,7 +17,7 @@ export default function Listings(props) {
       const listings = all();
       setListings(listings);
       loadingContext.onFinishedLoading();
-    }, 1000); //wait 1 seconds
+    }, process.env.FAKE_API_DELAY); //wait 1 seconds
   }, []);
 
   return <PageTitle title="Explore" subtitle="Find your new best friend" />;

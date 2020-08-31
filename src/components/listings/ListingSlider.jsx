@@ -35,7 +35,7 @@ export default function ListingSlider(props) {
                 id={imageIndex}
                 className="d-block w-100 pointer"
                 src={image}
-                alt="First slide"
+                alt="Listing photos"
                 onClick={handleImageClicked}
               />
               {/* <Carousel.Caption>
@@ -46,19 +46,6 @@ export default function ListingSlider(props) {
           );
         })}
       </Carousel>
-
-      <Modal
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        dialogClassName="modal-90w"
-        centered
-        size="xl"
-      >
-        <Modal.Header closeButton></Modal.Header>
-        <Modal.Body>
-          <Image centered src={listing.images[imageIndex]} />
-        </Modal.Body>
-      </Modal>
     </Fragment>
   );
 }

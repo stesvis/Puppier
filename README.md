@@ -3,6 +3,8 @@ Puppier is a listing website to help you find your next furry best friend.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+**Demo**: https://puppier.levitica.ca/
+
 ## Available Scripts
 
 In the project directory, you can run:

@@ -21,7 +21,7 @@ export default function ListingDetails(props) {
       const listing = getListing(parseInt(id));
       setListing(listing);
       loadingContext.onFinishedLoading();
-    }, process.env.FAKE_API_DELAY); //wait 1 seconds
+    }, process.env.REACT_APP_FAKE_API_DELAY); //wait 1 seconds
   }, [id]);
 
   // useEffect(() => {

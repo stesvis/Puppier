@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function Listings(props) {
   // static contextType = LoadingContext;
   const loadingContext = useContext(LoadingContext);
-  const[listings, setListings] = useState({});
+  const [listings, setListings] = useState({});
 
   useEffect(() => {
     loadingContext.onStartedLoading();
@@ -17,7 +17,7 @@ export default function Listings(props) {
       const listings = all();
       setListings(listings);
       loadingContext.onFinishedLoading();
-    }, process.env.FAKE_API_DELAY); //wait 1 seconds
+    }, process.env.REACT_APP_FAKE_API_DELAY); //wait 1 seconds
   }, []);
 
   return <PageTitle title="Explore" subtitle="Find your new best friend" />;

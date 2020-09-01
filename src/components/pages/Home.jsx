@@ -9,6 +9,8 @@ export default function Home() {
   const [featuredListings, setFeaturedListings] = useState([]);
   const loadingContext = useContext(LoadingContext);
 
+  // console.log(process.env);
+
   const fetchData = () => {
     // fetch FeaturedListings API (coming from dataService for now)
     const featuredListings = getFeaturedListings();
@@ -23,7 +25,7 @@ export default function Home() {
       const featuredListings = fetchData();
       setFeaturedListings(featuredListings);
       loadingContext.onFinishedLoading();
-    }, process.env.FAKE_API_DELAY); //wait 2 seconds
+    }, process.env.REACT_APP_FAKE_API_DELAY); //wait 2 seconds
 
     //---------------
   }, []);

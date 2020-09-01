@@ -2,7 +2,7 @@ import "./App.css";
 import "react-image-lightbox/style.css";
 
 import { Link, Redirect, Route, Switch } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Home from "./components/pages/Home";
 import ListingDetails from "./components/pages/ListingDetails";
@@ -26,26 +26,6 @@ function App() {
   };
 
   const handleToggleModal = (modalId, show) => {};
-
-  // useEffect((callback) => {
-  //   const existingScript = document.getElementById("customJS");
-  //   console.log(existingScript);
-
-  //   if (!existingScript) {
-  //     const script = document.createElement("script");
-  //     script.src = "./assets/js/custom.js";
-  //     script.id = "customJS";
-
-  //     document.body.appendChild(script);
-  //     console.log("added");
-
-  //     script.onload = () => {
-  //       if (callback) callback();
-  //     };
-  //   }
-
-  //   if (existingScript && callback) callback();
-  // });
 
   return (
     <LoadingContext.Provider

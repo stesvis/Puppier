@@ -36,7 +36,7 @@ const FeaturedListings = memo(function FeaturedListings(props) {
     <section>
       <Container>
         <Row>
-          <Col lg="12" md="12">
+          <Col lg={12} md={12}>
             <div className="sec-heading center">
               <h2>Most Popular Listings</h2>
               <p>Find new & featured listings for you.</p>

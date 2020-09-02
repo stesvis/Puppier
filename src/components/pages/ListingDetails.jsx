@@ -1,4 +1,4 @@
-import { Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 
 import { Listing } from "../../models/Listing";
@@ -29,15 +29,17 @@ export default function ListingDetails(props) {
   // }, [loadingContext]);
 
   return (
-    <Fragment>
-      <section className="gray">
-        <Container>
-          <Row>
+    <section className="gray">
+      <Container>
+        <Row>
+          <Col lg={8} md={12} sm={12}>
             <ListingMainDetails listing={listing} />
+          </Col>
+          <Col lg={4} md={12} sm={12}>
             <ListingSideBar listing={listing} />
-          </Row>
-        </Container>
-      </section>
-    </Fragment>
+          </Col>
+        </Row>
+      </Container>
+    </section>
   );
 }

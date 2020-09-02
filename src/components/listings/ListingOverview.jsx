@@ -1,4 +1,5 @@
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+
 import { Link } from "react-router-dom";
 import React from "react";
 
@@ -6,8 +7,8 @@ export default function ListingOverview() {
   return (
     <section className="p-0">
       <Container>
-        <div className="row align-items-center">
-          <div className="col-lg-12 col-md-12 col-sm-12">
+        <Row className="align-items-center">
+          <Col lg={12} md={12} sm={12}>
             <div className="rixel-bar">
               <div className="rixel-bar-left">
                 <div className="rate-overall rate-high">
@@ -56,8 +57,8 @@ export default function ListingOverview() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </Container>
     </section>
   );

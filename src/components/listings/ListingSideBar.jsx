@@ -1,4 +1,5 @@
 import { Col } from "react-bootstrap";
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import React from "react";
 
@@ -6,7 +7,7 @@ export default function ListingSideBar(props) {
   const { listing } = props;
 
   return (
-    <Col lg={4} md={12} sm={12}>
+    <Fragment>
       <div className="verified-list mb-4">
         <i className="ti-check"></i>Verified Listing
       </div>
@@ -122,6 +123,6 @@ export default function ListingSideBar(props) {
           </div>
         </div>
       </div>
-    </Col>
+    </Fragment>
   );
 }

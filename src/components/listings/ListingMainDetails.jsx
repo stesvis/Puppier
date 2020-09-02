@@ -1,4 +1,5 @@
 import { Col } from "react-bootstrap";
+import { Fragment } from "react";
 import ListingDescription from "./ListingDescription";
 import ListingSlider from "./ListingSlider";
 import React from "react";
@@ -7,7 +8,7 @@ export default function ListingMainDetails(props) {
   const { listing } = props;
 
   return (
-    <Col lg={8} md={12} sm={12}>
+    <Fragment>
       <div className="slide-property-first mb-4">
         <div className="listname-into">
           <h2>
@@ -21,6 +22,6 @@ export default function ListingMainDetails(props) {
       </div>
       <ListingSlider listing={listing} />
       <ListingDescription description={listing.description} />
-    </Col>
+    </Fragment>
   );
 }

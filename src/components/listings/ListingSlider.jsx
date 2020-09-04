@@ -23,51 +23,54 @@ export default function ListingSlider(props) {
 
   return (
     <Fragment>
-      <Carousel
-        activeIndex={activeCarouselIndex}
-        onSelect={handleSelect}
-        interval={3000}
-        pauseOnHover={true}
-      >
-        {listing.images.map((image) => {
-          return (
-            <Carousel.Item key={image.id}>
-              <Image
-                id={imageIndex}
-                className="d-block w-100 pointer"
-                src={image}
-                alt="Listing photos"
-                onClick={handleImageClicked}
-              />
-              {/* <Carousel.Caption>
+      <div className="property3-slide single-advance-property mb-4">
+        <Carousel
+          activeIndex={activeCarouselIndex}
+          onSelect={handleSelect}
+          interval={3000}
+          pauseOnHover={true}
+        >
+          {listing.images.map((image) => {
+            return (
+              <Carousel.Item key={image.id}>
+                <Image
+                  id={imageIndex}
+                  className="d-block w-100 pointer"
+                  src={image}
+                  alt="Listing photos"
+                  onClick={handleImageClicked}
+                />
+
+                {/* <Carousel.Caption>
               <h3>First slide label</h3>
               <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </Carousel.Caption> */}
-            </Carousel.Item>
-          );
-        })}
-      </Carousel>
+              </Carousel.Item>
+            );
+          })}
+        </Carousel>
 
-      {isLightboxOpen && (
-        <Lightbox
-          mainSrc={listing.images[imageIndex]}
-          nextSrc={listing.images[(imageIndex + 1) % listing.images.length]}
-          prevSrc={
-            listing.images[
-              (imageIndex + listing.images.length - 1) % listing.images.length
-            ]
-          }
-          onCloseRequest={() => setIsLightboxOpen(false)}
-          onMovePrevRequest={() =>
-            setImageIndex(
-              (imageIndex + listing.images.length - 1) % listing.images.length
-            )
-          }
-          onMoveNextRequest={() =>
-            setImageIndex((imageIndex + 1) % listing.images.length)
-          }
-        />
-      )}
+        {isLightboxOpen && (
+          <Lightbox
+            mainSrc={listing.images[imageIndex]}
+            nextSrc={listing.images[(imageIndex + 1) % listing.images.length]}
+            prevSrc={
+              listing.images[
+                (imageIndex + listing.images.length - 1) % listing.images.length
+              ]
+            }
+            onCloseRequest={() => setIsLightboxOpen(false)}
+            onMovePrevRequest={() =>
+              setImageIndex(
+                (imageIndex + listing.images.length - 1) % listing.images.length
+              )
+            }
+            onMoveNextRequest={() =>
+              setImageIndex((imageIndex + 1) % listing.images.length)
+            }
+          />
+        )}
+      </div>
     </Fragment>
   );
 }

@@ -11,5 +11,6 @@ export class Listing {
     this.location = "";
     this.author = new User();
     this.category = new Category();
+    this.tags = [];
   }
 }

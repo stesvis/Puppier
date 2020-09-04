@@ -6,6 +6,7 @@ import React, { useState } from "react";
 
 import Home from "./components/pages/Home";
 import ListingDetails from "./components/pages/ListingDetails";
+import ListingForm from "./components/ListingForm";
 import Listings from "./components/pages/Listings";
 import LoadingContext from "./context/loadingContext";
 import LogIn from "./components/modals/LogIn";
@@ -48,7 +49,9 @@ function App() {
 
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/listings/create" component={ListingForm} />
           <Route exact path="/listings/:id" component={ListingDetails} />
+          <Route exact path="/listings/:id/edit" component={ListingForm} />
           <Route exact path="/listings" component={Listings} />
           <Redirect to="/404" />
         </Switch>

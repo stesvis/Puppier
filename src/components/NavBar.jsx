@@ -42,7 +42,7 @@ export default function NavBar() {
                   </Link>
                 </li>
                 <li className="submit-attri theme-log">
-                  <Link to="/listings/add">Add Listing</Link>
+                  <Link to="/listings/create">Add Listing</Link>
                 </li>
               </ul>
 

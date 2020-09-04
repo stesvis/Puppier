@@ -1,6 +1,7 @@
 import { Col } from "react-bootstrap";
 import { Fragment } from "react";
 import ListingDescription from "./ListingDescription";
+import ListingOverviewBar from "./ListingOverviewBar";
 import ListingSlider from "./ListingSlider";
 import React from "react";
 
@@ -20,6 +21,7 @@ export default function ListingMainDetails(props) {
           </span>
         </div>
       </div>
+      <ListingOverviewBar listing={listing} />
       <ListingSlider listing={listing} />
       <ListingDescription description={listing.description} />
     </Fragment>

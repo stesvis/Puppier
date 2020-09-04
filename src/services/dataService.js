@@ -14,6 +14,7 @@ const listings = {
       location: "Lethbridge, AB",
       price: "$1,500",
       reviewsCount: 15,
+      tags: ["pug", "puppy"],
       category: {
         id: 1,
         name: "Dog",
@@ -38,6 +39,7 @@ const listings = {
       location: "Magrath, AB",
       price: "$250",
       reviewsCount: 3,
+      tags: ["black", "puppy"],
       category: {
         id: 1,
         name: "Dog",
@@ -59,6 +61,7 @@ const listings = {
       location: "Lethbridge, AB",
       price: "Free",
       reviewsCount: 0,
+      tags: ["tubby", "adult", "male"],
       category: {
         id: 2,
         name: "Cat",
@@ -87,6 +90,7 @@ const listings = {
       location: "Raymond, AB",
       price: "$50",
       reviewsCount: 3,
+      tags: ["siamese"],
       category: {
         id: 2,
         name: "Cat",
@@ -111,6 +115,7 @@ const listings = {
       location: "Coaldale, AB",
       price: "$800",
       reviewsCount: 8,
+      tags: ["high energy", "small"],
       category: {
         id: 1,
         name: "Dog",
@@ -135,6 +140,7 @@ const listings = {
       location: "Lethbridge, AB",
       price: "Free",
       reviewsCount: 0,
+      tags: ["gray", "kitten"],
       category: {
         id: 2,
         name: "Cat",

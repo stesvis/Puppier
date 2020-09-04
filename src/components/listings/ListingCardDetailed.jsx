@@ -15,7 +15,7 @@ export default function ListingCardDetailed(props) {
           />
         </Link>
         <div className="listing-price-info">
-          <span className="pricetag">$20 - $55</span>
+          <span className="pricetag">{listing.price}</span>
         </div>
         <Link to="#" className="tag_t">
           <i className="ti-heart"></i>Save
@@ -33,7 +33,7 @@ export default function ListingCardDetailed(props) {
         </div>
         <div className="proerty_text">
           <h3 className="captlize">
-            <Link to="listing-detail.html">
+            <Link to={`/listings/${listing.id}`}>
               {listing.title.length > 27
                 ? `${listing.title.slice(0, 27)} ...`
                 : listing.title}
@@ -60,11 +60,17 @@ export default function ListingCardDetailed(props) {
 
       <div className="listing-footer-info">
         <div className="listing-cat">
-          <Link to="search-listing.html" className="cat-icon cl-1">
-            <i className="ti-shopping-cart-full bg-b"></i>
+          <Link to="#" className="cat-icon cl-1">
+            <i
+              className={
+                listing.category.name.toLowerCase() === "dog"
+                  ? "fas fa-dog"
+                  : "fas fa-cat"
+              }
+            ></i>
             {listing.category.name}
           </Link>
-          <span className="more-cat">+2</span>
+          <span className="more-cat">+{Math.round(Math.random() * 10)}</span>
         </div>
         <span className="place-status">Available</span>
       </div>

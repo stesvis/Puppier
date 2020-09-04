@@ -6,6 +6,18 @@
   width: 400px;
 }
 
+.goodgreen-skin .btn.btn-theme-light,
+.goodgreen-skin .tag {
+  font-size: 13px;
+  color: #19b521;
+  font-weight: 500;
+  background: rgba(25, 181, 33, 0.1);
+  padding: 3px 16px 6px 16px;
+  border-radius: 50px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
 /* react-bootstrap: Carousel */
 
 .w-100 {

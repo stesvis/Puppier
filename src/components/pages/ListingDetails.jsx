@@ -1,5 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Listing } from "../../models/Listing";
 import ListingMainDetails from "../listings/ListingMainDetails";

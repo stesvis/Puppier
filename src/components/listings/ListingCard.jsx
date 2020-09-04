@@ -55,7 +55,13 @@ export default function ListingCard(props) {
         <div className="modern-list-content">
           <div className="listing-cat">
             <Link to="#" className="cat-icon cl-1">
-              <i className="ti-briefcase bg-a"></i>
+              <i
+                className={
+                  listing.category.name.toLowerCase() === "dog"
+                    ? "fas fa-dog"
+                    : "fas fa-cat"
+                }
+              ></i>
               {listing.category.name}
             </Link>
             <span className="more-cat">+3</span>

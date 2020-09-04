@@ -7,7 +7,7 @@ export default function ListingDescription(props) {
     // <!-- Single Block Wrap -->
     <div className="block-wrap">
       <div className="block-header">
-        <h4 className="block-title">Description</h4>
+        <h4 className="block-title">Details</h4>
       </div>
 
       <div className="block-body">

@@ -2,6 +2,7 @@ import "./App.css";
 import "react-image-lightbox/style.css";
 
 import { Link, Redirect, Route, Switch } from "react-router-dom";
+import { Modal, ModalBody } from "react-bootstrap";
 import React, { useState } from "react";
 
 import Home from "./components/pages/Home";
@@ -9,12 +10,15 @@ import ListingDetails from "./components/pages/ListingDetails";
 import ListingForm from "./components/ListingForm";
 import Listings from "./components/pages/Listings";
 import LoadingContext from "./context/loadingContext";
-import LogIn from "./components/modals/LogIn";
+import LogInForm from "./components/modals/LogInForm";
+import ModalContext from "./context/modalContext";
 import NavBar from "./components/NavBar";
-import SignUp from "./components/modals/SignUp";
+import SignUpForm from "./components/modals/SignUpForm";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
 
   const showLoading = () => {
     console.log("started loading");
@@ -26,7 +30,21 @@ function App() {
     setIsLoading(false);
   };
 
-  const handleToggleModal = (modalId, show) => {};
+  const handleToggleModal = (e, modalId, show) => {
+    e && e.preventDefault();
+
+    switch (modalId) {
+      case "login":
+        setShowLogin(show);
+        break;
+      case "signup":
+        setShowSignUp(show);
+        break;
+
+      default:
+        break;
+    }
+  };
 
   return (
     <LoadingContext.Provider
@@ -44,24 +62,39 @@ function App() {
         </div>
       </div>
       <div id="main-wrapper">
-        <NavBar />
-        <div className="clearfix"></div>
+        <ModalContext.Provider
+          value={{
+            onModalToggled: handleToggleModal,
+          }}
+        >
+          <NavBar />
+          <div className="clearfix"></div>
 
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/listings/create" component={ListingForm} />
-          <Route exact path="/listings/:id" component={ListingDetails} />
-          <Route exact path="/listings/:id/edit" component={ListingForm} />
-          <Route exact path="/listings" component={Listings} />
-          <Redirect to="/404" />
-        </Switch>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/listings/create" component={ListingForm} />
+            <Route exact path="/listings/:id" component={ListingDetails} />
+            <Route exact path="/listings/:id/edit" component={ListingForm} />
+            <Route exact path="/listings" component={Listings} />
+            <Redirect to="/404" />
+          </Switch>
 
-        <LogIn />
-        <SignUp />
+          <Modal show={showLogin}>
+            <ModalBody>
+              <LogInForm />
+            </ModalBody>
+          </Modal>
 
-        <Link id="back2Top" className="top-scroll" title="Back to top" to="#">
-          <i className="ti-arrow-up"></i>
-        </Link>
+          <Modal show={showSignUp}>
+            <ModalBody>
+              <SignUpForm />
+            </ModalBody>
+          </Modal>
+
+          <Link id="back2Top" className="top-scroll" title="Back to top" to="#">
+            <i className="ti-arrow-up"></i>
+          </Link>
+        </ModalContext.Provider>
       </div>
     </LoadingContext.Provider>
   );

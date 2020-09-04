@@ -1,17 +1,19 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
+import React, { useContext } from "react";
 
-import React from "react";
+import ModalContext from "../context/modalContext";
 
 export default function NavBar() {
   let navbarClass = "header header-light nav-left-side"; // header-fixed
-  let logoImageSrc = `${process.env.PUBLIC_URL}/assets/img/g-logo.png`;
+  let logoImageSrc = `${process.env.PUBLIC_URL}/assets/img/y-logo.png`;
 
+  const modalContext = useContext(ModalContext);
   const location = useLocation();
   // console.log(location);
   if (location.pathname === "/") {
     // home page
     navbarClass = "header header-dark-transparent nav-left-side"; // header-fixed
-    logoImageSrc = `${process.env.PUBLIC_URL}/assets/img/g-logo-light.png`;
+    logoImageSrc = `${process.env.PUBLIC_URL}/assets/img/y-logo-light.png`;
   }
 
   return (
@@ -32,12 +34,28 @@ export default function NavBar() {
             <div className="wrap-core-nav-list right">
               <ul className="attributes attributes-desk">
                 <li className="log-icon log-seprate">
-                  <Link to="#" data-toggle="modal" data-target="#login">
+                  <Link
+                    to="#"
+                    data-toggle="modal"
+                    data-target="#login"
+                    aria-controls="login"
+                    onClick={(e) =>
+                      modalContext.onModalToggled(e, "login", true)
+                    }
+                  >
                     Log In
                   </Link>
                 </li>
                 <li className="log-icon">
-                  <Link to="#" data-toggle="modal" data-target="#signup">
+                  <Link
+                    to="#"
+                    data-toggle="modal"
+                    data-target="#signup"
+                    aria-controls="signup"
+                    onClick={(e) =>
+                      modalContext.onModalToggled(e, "signup", true)
+                    }
+                  >
                     Sign Up
                   </Link>
                 </li>

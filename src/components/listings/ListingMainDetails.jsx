@@ -1,4 +1,3 @@
-import { Col } from "react-bootstrap";
 import { Fragment } from "react";
 import ListingDescription from "./ListingDescription";
 import ListingOverviewBar from "./ListingOverviewBar";

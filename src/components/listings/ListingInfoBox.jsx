@@ -1,28 +1,21 @@
-import IconBox from "../IconBox";
-import { Link } from "react-router-dom";
 import React from "react";
 
 export default function ListingInfoBox(props) {
-  const { listing } = props;
+  const { icon, title, children } = props;
+  console.log(React.Children);
 
   return (
     <div className="tr-single-box">
       <div className="tr-single-header">
         <h4>
-          <i className="ti-direction"></i> Listing Info
+          <i className={icon}></i> {title}
         </h4>
       </div>
       <div className="tr-single-body">
         <ul className="extra-service">
-          <li>
-            <IconBox icon="lni-map-marker" text={listing.location} />
-          </li>
-          <li>
-            <IconBox icon="lni-phone-handset" text={listing.author.phone} />
-          </li>
-          <li>
-            <IconBox icon="lni-envelope" text={listing.author.email} />
-          </li>
+          {React.Children.map(children, (c) => (
+            <li>{c}</li>
+          ))}
         </ul>
       </div>
     </div>

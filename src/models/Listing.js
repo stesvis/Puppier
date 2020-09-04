@@ -12,5 +12,7 @@ export class Listing {
     this.author = new User();
     this.category = new Category();
     this.tags = [];
+    this.viewsCount = 0;
+    this.comments = [];
   }
 }

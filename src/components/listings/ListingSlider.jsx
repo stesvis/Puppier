@@ -30,24 +30,22 @@ export default function ListingSlider(props) {
           interval={3000}
           pauseOnHover={true}
         >
-          {listing.images.map((image) => {
-            return (
-              <Carousel.Item key={image.id}>
-                <Image
-                  id={imageIndex}
-                  className="d-block w-100 pointer"
-                  src={image}
-                  alt="Listing photos"
-                  onClick={handleImageClicked}
-                />
+          {listing.images.map((image) => (
+            <Carousel.Item key={image.id}>
+              <Image
+                id={imageIndex}
+                className="d-block w-100 pointer"
+                src={image}
+                alt="Listing photos"
+                onClick={handleImageClicked}
+              />
 
-                {/* <Carousel.Caption>
+              {/* <Carousel.Caption>
               <h3>First slide label</h3>
               <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </Carousel.Caption> */}
-              </Carousel.Item>
-            );
-          })}
+            </Carousel.Item>
+          ))}
         </Carousel>
 
         {isLightboxOpen && (

@@ -4,5 +4,6 @@ export class User {
     this.avatarImage = "https://via.placeholder.com/400";
     this.phone = "";
     this.email = "";
+    this.reviews = [];
   }
 }

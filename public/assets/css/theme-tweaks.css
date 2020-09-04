@@ -18,6 +18,18 @@
   vertical-align: middle;
 }
 
+.yellow-skin .btn.btn-theme-light,
+.yellow-skin .tag {
+  font-size: 13px;
+  color: #ffa50d;
+  font-weight: 500;
+  background: rgba(255, 165, 13, 0.1);
+  padding: 3px 16px 6px 16px;
+  border-radius: 50px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
 /* react-bootstrap: Carousel */
 
 .w-100 {

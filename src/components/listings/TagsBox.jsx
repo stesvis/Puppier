@@ -16,7 +16,7 @@ export default function TagsBox(props) {
       <div className="tr-single-body">
         <ul className="extra-service half">
           {tags.map((tag) => (
-            <li style={{ width: "unset" }}>
+            <li key={tag} style={{ width: "unset" }}>
               <Tag tag={tag} />
             </li>
           ))}

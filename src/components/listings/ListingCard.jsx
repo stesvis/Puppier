@@ -4,6 +4,22 @@ import React from "react";
 export default function ListingCard(props) {
   const { listing } = props;
 
+  const reviews =
+    listing.author.reviews.length > 0 ? (
+      <div className="list-rates">
+        <i className="ti-star filled"></i>
+        <i className="ti-star filled"></i>
+        <i className="ti-star filled"></i>
+        <i className="ti-star filled"></i>
+        <i className="ti-star"></i>
+        <Link to="#" className="tl-review">
+          ({listing.author.reviews.length} Reviews)
+        </Link>
+      </div>
+    ) : (
+      ""
+    );
+
   return (
     // <!-- Single List -->
     <div className="list-slide-box">
@@ -24,16 +40,7 @@ export default function ListingCard(props) {
             <span className="pricetag">{listing.price}</span>
           </div>
           <div className="property_meta">
-            <div className="list-rates">
-              <i className="ti-star filled"></i>
-              <i className="ti-star filled"></i>
-              <i className="ti-star filled"></i>
-              <i className="ti-star filled"></i>
-              <i className="ti-star"></i>
-              <Link to="#" className="tl-review">
-                ({listing.reviewsCount} Reviews)
-              </Link>
-            </div>
+            {reviews}
             <h4 className="lst-title">
               <Link
                 to={{

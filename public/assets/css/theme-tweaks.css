@@ -2,6 +2,13 @@
   cursor: pointer;
 }
 
+@media (max-width: 992px) {
+  .header-fixed button.toggle-bar.core-nav-toggle,
+  .header-fixed button.toggle-bar.core-nav-toggle {
+    color: unset;
+  }
+}
+
 .list-slide-box {
   width: 400px;
 }

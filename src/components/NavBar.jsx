@@ -1,22 +1,36 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import React, { useContext } from "react";
 
+import { Fragment } from "react";
 import ModalContext from "../context/modalContext";
 
 export default function NavBar() {
   const modalContext = useContext(ModalContext);
   const location = useLocation();
 
-  let navbarClass = "header header-light nav-left-side"; // header-fixed
-  const logoClass = location.pathname === "/" ? "brand normal-logo" : "brand";
-  let logoImageSrc = `${process.env.PUBLIC_URL}/assets/img/y-logo.png`;
+  let navbarClass =
+    location.pathname === "/"
+      ? "header header-dark-transparent nav-left-side"
+      : "header header-light nav-left-side";
 
-  // console.log(location);
-  if (location.pathname === "/") {
-    // home page
-    navbarClass = "header header-dark-transparent nav-left-side"; // header-fixed
-    logoImageSrc = `${process.env.PUBLIC_URL}/assets/img/y-logo-light.png`;
-  }
+  const logoElement =
+    location.pathname === "/" ? (
+      <Fragment>
+        <Link to="/" className="brand normal-logo">
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/img/y-logo-light.png`}
+            alt=""
+          />
+        </Link>
+        <Link to="/" className="brand brand-overlay">
+          <img src={`${process.env.PUBLIC_URL}/assets/img/y-logo.png`} alt="" />
+        </Link>
+      </Fragment>
+    ) : (
+      <Link to="/" className="brand">
+        <img src={`${process.env.PUBLIC_URL}/assets/img/y-logo.png`} alt="" />
+      </Link>
+    );
 
   return (
     // <!-- Start Navigation -->
@@ -24,9 +38,7 @@ export default function NavBar() {
       <div className={navbarClass}>
         <nav className="headnavbar">
           <div className="nav-header">
-            <Link to="/" className={logoClass}>
-              <img src={logoImageSrc} alt="" />
-            </Link>
+            {logoElement}
             <button className="toggle-bar">
               <span className="ti-align-justify"></span>
             </button>

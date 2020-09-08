@@ -17,8 +17,8 @@ import SignUpForm from "./components/modals/SignUpForm";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
-  const [showSignUp, setShowSignUp] = useState(false);
+  // const [showLogin, setShowLogin] = useState(false);
+  // const [showSignUp, setShowSignUp] = useState(false);
 
   const showLoading = () => {
     console.log("started loading");
@@ -30,22 +30,22 @@ function App() {
     setIsLoading(false);
   };
 
-  const handleToggleModal = (e, modalId, show) => {
-    e && e.preventDefault();
-    console.log("handleToggleModal");
+  // const handleToggleModal = (e, modalId, show) => {
+  //   e && e.preventDefault();
+  //   console.log("handleToggleModal");
 
-    switch (modalId) {
-      case "login":
-        setShowLogin(show);
-        break;
-      case "signup":
-        setShowSignUp(show);
-        break;
+  //   switch (modalId) {
+  //     case "login":
+  //       setShowLogin(show);
+  //       break;
+  //     case "signup":
+  //       setShowSignUp(show);
+  //       break;
 
-      default:
-        break;
-    }
-  };
+  //     default:
+  //       break;
+  //   }
+  // };
 
   return (
     <LoadingContext.Provider
@@ -64,9 +64,11 @@ function App() {
       </div>
       <div id="main-wrapper">
         <ModalContext.Provider
-          value={{
-            onModalToggled: handleToggleModal,
-          }}
+          value={
+            {
+              // onModalToggled: handleToggleModal,
+            }
+          }
         >
           <NavBar />
           <div className="clearfix"></div>
@@ -80,17 +82,17 @@ function App() {
             <Redirect to="/404" />
           </Switch>
 
-          <Modal show={showLogin}>
-            <ModalBody>
-              <LogInForm />
-            </ModalBody>
-          </Modal>
+          {/* <Modal show={showLogin}>
+            <ModalBody> */}
+          <LogInForm />
+          {/* </ModalBody>
+          </Modal> */}
 
-          <Modal show={showSignUp}>
-            <ModalBody>
-              <SignUpForm />
-            </ModalBody>
-          </Modal>
+          {/* <Modal show={showSignUp}>
+            <ModalBody> */}
+          <SignUpForm />
+          {/* </ModalBody>
+          </Modal> */}
 
           <Link id="back2Top" className="top-scroll" title="Back to top" to="#">
             <i className="ti-arrow-up"></i>

@@ -1,11 +1,12 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
-import React, { useContext } from "react";
 
 import { Fragment } from "react";
-import ModalContext from "../context/modalContext";
+import React from "react";
+
+// import ModalContext from "../context/modalContext";
 
 export default function NavBar() {
-  const modalContext = useContext(ModalContext);
+  // const modalContext = useContext(ModalContext);
   const location = useLocation();
 
   let navbarClass =

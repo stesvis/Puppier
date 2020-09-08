@@ -13,7 +13,6 @@ export default function ListingSlider(props) {
 
   const handleSelect = (index, e) => {
     setActiveCarouselIndex(index);
-    console.log(index);
   };
 
   const handleImageClicked = (e) => {

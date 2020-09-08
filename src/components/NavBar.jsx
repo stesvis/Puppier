@@ -34,64 +34,54 @@ export default function NavBar() {
 
   return (
     // <!-- Start Navigation -->
-    <React.Fragment>
-      <div className={navbarClass}>
-        <nav className="headnavbar">
-          <div className="nav-header">
-            {logoElement}
-            <button className="toggle-bar">
-              <span className="ti-align-justify"></span>
-            </button>
-          </div>
-          <ul className="menu">
-            <li>
-              <NavLink exact to="/">
-                Home
-              </NavLink>
-            </li>
+    <div className={navbarClass}>
+      <nav className="headnavbar">
+        <div className="nav-header">
+          {logoElement}
+          <button className="toggle-bar">
+            <span className="ti-align-justify"></span>
+          </button>
+        </div>
+        <ul className="menu">
+          <li>
+            <NavLink exact to="/">
+              Home
+            </NavLink>
+          </li>
 
-            <li>
-              <NavLink exact to="/listings">
-                Explore
-              </NavLink>
-            </li>
-
-            {/* <li>
-              <Link to="#" data-toggle="modal" data-target="#signup">
-                Sign Up
-              </Link>
-            </li> */}
-          </ul>
-          <ul className="attributes attributes-desk">
-            <li className="log-icon log-seprate">
-              <Link
-                to="#"
-                data-toggle="modal"
-                data-target="#login"
-                aria-controls="login"
-                onClick={(e) => modalContext.onModalToggled(e, "login", true)}
-              >
-                Log In
-              </Link>
-            </li>
-            <li className="log-icon">
-              <Link
-                to="#"
-                data-toggle="modal"
-                data-target="#signup"
-                aria-controls="signup"
-                onClick={(e) => modalContext.onModalToggled(e, "signup", true)}
-              >
-                Sign Up
-              </Link>
-            </li>
-            <li className="submit-attri theme-log">
-              <Link to="/listings/create">Add Listing</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </React.Fragment>
+          <li>
+            <NavLink exact to="/listings">
+              Explore
+            </NavLink>
+          </li>
+        </ul>
+        <ul className="attributes attributes-desk">
+          <li className="log-icon log-seprate">
+            <Link
+              to="#"
+              data-toggle="modal"
+              data-target="#login"
+              // onClick={(e) => modalContext.onModalToggled(e, "login", true)}
+            >
+              Log In
+            </Link>
+          </li>
+          <li className="log-icon">
+            <Link
+              to="#"
+              data-toggle="modal"
+              data-target="#signup"
+              // onClick={(e) => modalContext.onModalToggled(e, "signup", true)}
+            >
+              Sign Up
+            </Link>
+          </li>
+          <li className="submit-attri theme-log">
+            <Link to="/listings/create">Add Listing</Link>
+          </li>
+        </ul>
+      </nav>
+    </div>
     // <!-- End Navigation -->
   );
 }

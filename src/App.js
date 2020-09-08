@@ -32,6 +32,7 @@ function App() {
 
   const handleToggleModal = (e, modalId, show) => {
     e && e.preventDefault();
+    console.log("handleToggleModal");
 
     switch (modalId) {
       case "login":

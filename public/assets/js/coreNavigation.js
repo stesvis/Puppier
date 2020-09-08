@@ -619,7 +619,7 @@
           o.attributesIcon(e),
           o.toggleMenu(n),
           o.megaMenu(e, ".core-nav-list .megamenu"),
-          o.dropddownMenu(e, ".core-nav-list .dropdown"),
+          o.dropdownMenu(e, ".core-nav-list .dropdown"),
           $(".dropdown-overlay").on("click", function (n) {
             n.preventDefault(),
               $(".core-nav .dropdown").removeClass("open"),
@@ -880,7 +880,7 @@
             }
           });
       },
-      dropddownMenu: function (n, e) {
+      dropdownMenu: function (n, e) {
         $(".dropdown-overlay").length ||
           $(".core-nav").after('<div class="dropdown-overlay"></div>'),
           $(e).each(function () {
@@ -1098,7 +1098,7 @@
                 })),
             o.remove(),
             this.megaMenu(n, ".attributes .megamenu"),
-            this.dropddownMenu(n, ".attributes .dropdown"),
+            this.dropdownMenu(n, ".attributes .dropdown"),
             $(".toggle-side-menu").on("click", function (n) {
               n.preventDefault(),
                 $(".core-content").toggleClass("open-side-menu");

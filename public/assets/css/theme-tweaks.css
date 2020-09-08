@@ -9,6 +9,11 @@
   }
 }
 
+section {
+  padding: 20px 0 80px;
+  position: relative;
+}
+
 .list-slide-box {
   width: 400px;
 }

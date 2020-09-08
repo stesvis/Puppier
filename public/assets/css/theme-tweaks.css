@@ -37,6 +37,15 @@
   vertical-align: middle;
 }
 
+.social-login ul li {
+  display: inline-block;
+  -ms-flex: 0 0 33.333333%;
+  flex: 0 0 100%;
+  width: 50%;
+  list-style: none;
+  padding: 0 10px;
+}
+
 /* react-bootstrap: Carousel */
 
 .w-100 {

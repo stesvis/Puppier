@@ -76,11 +76,11 @@ export default function LogInForm(props) {
                     <i className="ti-facebook"></i>Facebook
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to="#" className="btn connect-twitter">
                     <i className="ti-twitter"></i>Twitter
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div className="text-center">

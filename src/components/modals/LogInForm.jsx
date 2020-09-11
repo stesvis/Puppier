@@ -1,3 +1,6 @@
+import { Button, Form, FormGroup, ModalBody } from "react-bootstrap";
+
+import InputWithIcon from "../InputWithIcon";
 import { Link } from "react-router-dom";
 import React from "react";
 
@@ -26,45 +29,39 @@ export default function LogInForm(props) {
           >
             <i className="ti-close"></i>
           </span>
-          <div className="modal-body">
+          <ModalBody>
             <h4 className="modal-header-title">
               Log <span className="theme-cl">In</span>
             </h4>
             <div className="login-form">
-              <form>
-                <div className="form-group">
-                  <label>User Name</label>
-                  <div className="input-with-icon">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Username"
-                    />
-                    <i className="ti-user"></i>
-                  </div>
-                </div>
+              <Form>
+                <Form.Group>
+                  <Form.Label>User Name</Form.Label>
+                  <InputWithIcon
+                    type="text"
+                    placeholder="Username"
+                    icon="ti-user"
+                  />
+                </Form.Group>
 
-                <div className="form-group">
-                  <label>Password</label>
-                  <div className="input-with-icon">
-                    <input
-                      type="password"
-                      className="form-control"
-                      placeholder="*******"
-                    />
-                    <i className="ti-unlock"></i>
-                  </div>
-                </div>
+                <FormGroup>
+                  <Form.Label>Password</Form.Label>
+                  <InputWithIcon
+                    type="password"
+                    placeholder="*******"
+                    icon="ti-user"
+                  />
+                </FormGroup>
 
-                <div className="form-group">
-                  <button
+                <FormGroup>
+                  <Button
                     type="submit"
                     className="btn btn-md full-width pop-login"
                   >
                     Login
-                  </button>
-                </div>
-              </form>
+                  </Button>
+                </FormGroup>
+              </Form>
             </div>
             <div className="modal-divider">
               <span>Or login via</span>
@@ -90,7 +87,7 @@ export default function LogInForm(props) {
                 </Link>
               </p>
             </div>
-          </div>
+          </ModalBody>
         </div>
       </div>
     </div>

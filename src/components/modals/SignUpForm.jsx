@@ -1,5 +1,6 @@
-import { Col, Row } from "react-bootstrap";
+import { Button, Col, Form, ModalBody, Row } from "react-bootstrap";
 
+import InputWithIcon from "../InputWithIcon";
 import { Link } from "react-router-dom";
 import React from "react";
 
@@ -28,101 +29,83 @@ export default function SignUpForm(props) {
           >
             <i className="ti-close"></i>
           </span>
-          <div className="modal-body">
+          <ModalBody>
             <h4 className="modal-header-title">
               Sign <span className="theme-cl">Up</span>
             </h4>
             <div className="login-form">
-              <form>
-                <Row>
+              <Form>
+                <Form.Row>
                   <Col lg={6} md={6}>
-                    <div className="form-group">
-                      <div className="input-with-icon">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="First name"
-                        />
-                        <i className="ti-user"></i>
-                      </div>
-                    </div>
+                    <Form.Group>
+                      <InputWithIcon
+                        type="text"
+                        placeholder="First name"
+                        icon="ti-user"
+                      />
+                    </Form.Group>
                   </Col>
 
                   <Col lg={6} md={6}>
-                    <div className="form-group">
-                      <div className="input-with-icon">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Last name"
-                        />
-                        <i className="ti-user"></i>
-                      </div>
-                    </div>
+                    <Form.Group>
+                      <InputWithIcon
+                        type="text"
+                        placeholder="Last name"
+                        icon="ti-user"
+                      />
+                    </Form.Group>
                   </Col>
 
                   <Col lg={6} md={6}>
-                    <div className="form-group">
-                      <div className="input-with-icon">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Username"
-                        />
-                        <i className="ti-user"></i>
-                      </div>
-                    </div>
+                    <Form.Group>
+                      <InputWithIcon
+                        type="text"
+                        placeholder="Username"
+                        icon="ti-user"
+                      />
+                    </Form.Group>
                   </Col>
 
                   <Col lg={6} md={6}>
-                    <div className="form-group">
-                      <div className="input-with-icon">
-                        <input
-                          type="email"
-                          className="form-control"
-                          placeholder="Email"
-                        />
-                        <i className="ti-email"></i>
-                      </div>
-                    </div>
+                    <Form.Group>
+                      <InputWithIcon
+                        type="email"
+                        placeholder="Email"
+                        icon="ti-email"
+                      />
+                    </Form.Group>
                   </Col>
 
                   <Col lg={6} md={6}>
-                    <div className="form-group">
-                      <div className="input-with-icon">
-                        <input
-                          type="password"
-                          className="form-control"
-                          placeholder="Password"
-                        />
-                        <i className="ti-unlock"></i>
-                      </div>
-                    </div>
+                    <Form.Group>
+                      <InputWithIcon
+                        type="password"
+                        placeholder="Password"
+                        icon="ti-unlock"
+                      />
+                    </Form.Group>
                   </Col>
 
                   <Col lg={6} md={6}>
-                    <div className="form-group">
-                      <div className="input-with-icon">
-                        <input
-                          type="password"
-                          className="form-control"
-                          placeholder="Confirm Password"
-                        />
-                        <i className="ti-unlock"></i>
-                      </div>
-                    </div>
+                    <Form.Group>
+                      <InputWithIcon
+                        type="password"
+                        placeholder="Confirm Password"
+                        icon="ti-unlock"
+                      />
+                    </Form.Group>
                   </Col>
-                </Row>
+                </Form.Row>
 
-                <div className="form-group">
-                  <button
+                <Form.Group>
+                  <Button
                     type="submit"
                     className="btn btn-md full-width pop-login"
                   >
                     Sign Up
-                  </button>
-                </div>
-              </form>
+                  </Button>
+                </Form.Group>
+              </Form>
             </div>
             <div className="modal-divider">
               <span>Or login via</span>
@@ -149,7 +132,7 @@ export default function SignUpForm(props) {
                 </Link>
               </p>
             </div>
-          </div>
+          </ModalBody>
         </div>
       </div>
     </div>

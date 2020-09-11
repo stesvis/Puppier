@@ -1,6 +1,8 @@
+import { Col, Form, FormControl, FormGroup, Row } from "react-bootstrap";
+
+import InputWithIcon from "../../InputWithIcon";
 import { Link } from "react-router-dom";
 import React from "react";
-import { Row } from "react-bootstrap";
 
 export default function HomeSearchForm() {
   return (
@@ -8,54 +10,48 @@ export default function HomeSearchForm() {
     <div className="full-search-2 italian-search hero-search-radius">
       <div className="hero-search-content">
         <Row>
-          <div className="col-lg-4 col-md-4 col-sm-12 small-padd">
-            <div className="form-group">
-              <div className="input-with-icon">
-                <input
-                  type="text"
-                  className="form-control b-r"
-                  placeholder="Keywords..."
-                />
-                <i className="ti-search"></i>
-              </div>
-            </div>
-          </div>
+          <Col lg={4} md={4} sm={12} className="small-padd">
+            <FormGroup>
+              <InputWithIcon
+                type="text"
+                className="b-r"
+                placeholder="Keywords..."
+                icon="ti-search"
+              />
+            </FormGroup>
+          </Col>
 
-          <div className="col-lg-3 col-md-3 col-sm-12 small-padd">
-            <div className="form-group">
-              <div className="input-with-icon">
-                <input
-                  type="text"
-                  className="form-control b-r"
-                  placeholder="Location..."
-                />
-                <i className="ti-target"></i>
-              </div>
-            </div>
-          </div>
+          <Col lg={3} md={3} sm={12} className="small-padd">
+            <FormGroup>
+              <InputWithIcon
+                type="text"
+                className="b-r"
+                placeholder="Location..."
+                icon="ti-target"
+              />
+            </FormGroup>
+          </Col>
 
-          <div className="col-lg-3 col-md-3 col-sm-6 small-padd">
-            <div className="form-group">
+          <Col lg={3} md={3} sm={6} className="small-padd">
+            <FormGroup>
               <div className="input-with-icon">
-                <select id="list-category" className="form-control">
+                <FormControl as="select" id="list-category" custom>
                   <option value="">&nbsp;</option>
                   <option value="1">Dog</option>
                   <option value="2">Cat</option>
-                </select>
-                <i className="ti-briefcase"></i>
+                </FormControl>
+                <i className="fa fa-dog"></i>
               </div>
-            </div>
-          </div>
+            </FormGroup>
+          </Col>
 
-          <div className="col-lg-2 col-md-2 col-sm-12 small-padd">
-            <div className="form-group">
-              <div className="form-group">
-                <Link to="#" className="btn search-btn">
-                  Search
-                </Link>
-              </div>
-            </div>
-          </div>
+          <Col lg={2} md={2} sm={12} className="small-padd">
+            <FormGroup>
+              <Link to="#" className="btn search-btn">
+                Search
+              </Link>
+            </FormGroup>
+          </Col>
         </Row>
       </div>
     </div>

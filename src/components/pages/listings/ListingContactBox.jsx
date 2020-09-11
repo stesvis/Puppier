@@ -1,8 +1,19 @@
+import { Button, Form, FormControl, FormGroup } from "react-bootstrap";
+
 import { Link } from "react-router-dom";
 import React from "react";
 
 export default function ListingContactBox(props) {
   const { listing } = props;
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // avoids page reload
+    console.log(event.target);
+
+    // validate
+
+    // call the POST api
+  };
 
   return (
     <div className="agent-widget">
@@ -21,19 +32,24 @@ export default function ListingContactBox(props) {
         <div className="clearfix"></div>
       </div>
 
-      <div className="form-group">
-        <input type="text" className="form-control" placeholder="Your Name" />
-      </div>
-      <div className="form-group">
-        <input type="text" className="form-control" placeholder="Your Email" />
-      </div>
-      <div className="form-group">
-        <textarea
-          className="form-control"
-          placeholder="Send Message to author..."
-        ></textarea>
-      </div>
-      <button className="btn btn-theme full-width">Send Message</button>
+      <Form onSubmit={handleSubmit}>
+        <FormGroup>
+          <FormControl type="text" name="name" placeholder="Your Name" />
+        </FormGroup>
+        <FormGroup>
+          <FormControl type="text" name="email" placeholder="Your Email" />
+        </FormGroup>
+        <FormGroup>
+          <FormControl
+            as="textarea"
+            name="message"
+            placeholder="Send Message to author..."
+          ></FormControl>
+        </FormGroup>
+        <Button type="submit" className="btn btn-theme full-width">
+          Send Message
+        </Button>
+      </Form>
     </div>
   );
 }

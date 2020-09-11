@@ -2,8 +2,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import React, { useContext, useEffect, useState } from "react";
 
 import { Listing } from "../../models/Listing";
-import ListingMainDetails from "../listings/ListingMainDetails";
-import ListingSideBar from "../listings/ListingSideBar";
+import ListingMainDetails from "./listings/ListingMainDetails";
+import ListingSideBar from "./listings/ListingSideBar";
 import LoadingContext from "../../context/loadingContext";
 import { getListing } from "../../services/dataService";
 

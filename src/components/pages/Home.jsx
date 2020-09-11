@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import FeaturedListings from "../listings/FeaturedListings";
-import HomeBanner from "../HomeBanner";
+import FeaturedListings from "./listings/FeaturedListings";
+import HomeBanner from "./home/HomeBanner";
 import LoadingContext from "../../context/loadingContext";
 import { getFeaturedListings } from "../../services/dataService";
 

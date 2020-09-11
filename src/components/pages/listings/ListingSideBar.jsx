@@ -1,11 +1,9 @@
-import { Col } from "react-bootstrap";
 import { Fragment } from "react";
-import IconBox from "../IconBox";
-import { Link } from "react-router-dom";
+import IconBox from "../../IconBox";
 import ListingContactBox from "./ListingContactBox";
 import ListingInfoBox from "./ListingInfoBox";
+import ListingTagsBox from "./ListingTagsBox";
 import React from "react";
-import TagsBox from "./TagsBox";
 
 export default function ListingSideBar(props) {
   const { listing } = props;
@@ -38,7 +36,7 @@ export default function ListingSideBar(props) {
           />
         </ListingInfoBox>
         {/* Tags */}
-        <TagsBox tags={listing.tags} />
+        <ListingTagsBox tags={listing.tags} />
       </div>
     </Fragment>
   );

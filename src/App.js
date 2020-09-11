@@ -2,12 +2,12 @@ import "./App.css";
 import "react-image-lightbox/style.css";
 
 import { Link, Redirect, Route, Switch } from "react-router-dom";
-import { Modal, ModalBody } from "react-bootstrap";
+// import { Modal, ModalBody } from "react-bootstrap";
 import React, { useState } from "react";
 
 import Home from "./components/pages/Home";
 import ListingDetails from "./components/pages/ListingDetails";
-import ListingForm from "./components/ListingForm";
+import ListingForm from "./components/pages/listings/ListingForm";
 import Listings from "./components/pages/Listings";
 import LoadingContext from "./context/loadingContext";
 import LogInForm from "./components/modals/LogInForm";

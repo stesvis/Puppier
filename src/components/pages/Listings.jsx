@@ -2,8 +2,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import React, { useContext, useEffect } from "react";
 
 import { Fragment } from "react";
-import ListingCardDetailed from "../listings/ListingCardDetailed";
-import ListingsSidebar from "../listings/ListingsSidebar";
+import ListingCardDetailed from "./listings/ListingCardDetailed";
+import ListingsSidebar from "./listings/ListingsSidebar";
 import LoadingContext from "../../context/loadingContext";
 import PageTitle from "../PageTitle";
 import { all } from "../../services/dataService";

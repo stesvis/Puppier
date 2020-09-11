@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 import { Row } from "react-bootstrap";
 
-export default function BannerSearchForm() {
+export default function HomeSearchForm() {
   return (
     // <!-- ---------- Search Form -->
     <div className="full-search-2 italian-search hero-search-radius">

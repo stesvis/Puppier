@@ -1,5 +1,5 @@
-import BannerSearchForm from "./BannerSearchForm";
 import { Container } from "react-bootstrap";
+import HomeSearchForm from "./HomeSearchForm";
 import React from "react";
 
 export default function HomeBanner() {
@@ -15,7 +15,7 @@ export default function HomeBanner() {
       <Container>
         <h1 className="big-header-capt">Find Your Best Friend!</h1>
 
-        <BannerSearchForm />
+        <HomeSearchForm />
 
         <div className="popular-cat-list">
           <ul>

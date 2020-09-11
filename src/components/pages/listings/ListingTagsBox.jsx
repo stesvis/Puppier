@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
 import React from "react";
-import Tag from "../Tag";
+import Tag from "../../Tag";
 
-export default function TagsBox(props) {
+export default function ListingTagsBox(props) {
   const { tags } = props;
 
   return (

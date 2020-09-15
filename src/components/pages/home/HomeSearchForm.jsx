@@ -8,43 +8,28 @@ import {
 } from "react-bootstrap";
 
 import InputWithIcon from "../../InputWithIcon";
-import { Link } from "react-router-dom";
 import React from "react";
-import { useState } from "react";
+import { findListings } from "../../../services/dataService";
 
 export default function HomeSearchForm() {
-  const [keywords, setKeywords] = useState("");
-  const [location, setLocation] = useState("");
-  const [category, setCategory] = useState("");
-
-  const handleSearch = (event) => {
-    event.preventDefault();
-    console.log(event.target);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-  };
 
-  const handleChange = (event) => {
-    let { name, value } = event.target; // extract those two values
+    const keywords = event.target.keywords.value;
+    const location = event.target.location.value;
+    const categoryId = event.target.category.value;
 
-    switch (name) {
-      case "keywords":
-        setKeywords(value);
-        break;
+    // Perform the search api call
+    console.log(
+      `keywords=[${keywords}], location=[${location}], category=[${categoryId}]`
+    );
 
-      case "location":
-        setLocation(value);
-        break;
-
-      case "category":
-        setCategory(value);
-        break;
-
-      default:
-        break;
-    }
+    const searchResults = findListings(
+      keywords,
+      location,
+      parseInt(categoryId)
+    );
+    console.log(searchResults);
   };
 
   return (
@@ -61,8 +46,6 @@ export default function HomeSearchForm() {
                   className="b-r"
                   placeholder="Keywords..."
                   icon="ti-search"
-                  value={keywords}
-                  onChange={handleChange}
                 />
               </FormGroup>
             </Col>
@@ -75,8 +58,6 @@ export default function HomeSearchForm() {
                   className="b-r"
                   placeholder="Location..."
                   icon="ti-target"
-                  value={location}
-                  onChange={handleChange}
                 />
               </FormGroup>
             </Col>
@@ -89,8 +70,6 @@ export default function HomeSearchForm() {
                     id="list-category"
                     name="category"
                     custom
-                    value={category}
-                    onChange={handleChange}
                   >
                     <option value="">&nbsp;</option>
                     <option value="1">Dog</option>
@@ -103,13 +82,6 @@ export default function HomeSearchForm() {
 
             <Col lg={2} md={2} sm={12} className="small-padd">
               <FormGroup>
-                {/* <Link
-                  to={`/listings?keywords=${keywords}`}
-                  className="btn search-btn"
-                  onClick={handleSearch}
-                >
-                  Search
-                </Link> */}
                 <Button
                   type="submit"
                   className="btn search-btn"

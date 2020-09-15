@@ -220,3 +220,15 @@ export function saveListing(listing) {
 
   return dbListing;
 }
+
+export function findListings(keywords, location, categoryId) {
+  const match = listings.data.filter(
+    (l) =>
+      (keywords == null ||
+        l.title.includes(keywords) ||
+        l.description.includes(keywords)) &&
+      (location == null || l.location.includes(location)) &&
+      (isNaN(categoryId) || l.category.id === categoryId)
+  );
+  return match;
+}

@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { allCategories, getCategory } from "../../../services/dataService";
 
 import { Form } from "react-bootstrap";
 import InputWithIcon from "../../InputWithIcon";
+import { Select2Wrapper } from "../../Select2Wrapper";
+import { allCategories } from "../../../services/dataService";
 import { useEffect } from "react";
 
 export default function ListingsSidebar(props) {
   const [keywords, setKeywords] = useState("");
   const [location, setLocation] = useState("");
   const [categoryId, setCategoryId] = useState("");
-  const [categoryOptions, setCategoryOptions] = useState([]);
-
-  console.log(props);
 
   const [categories, setCategories] = useState({ data: [] });
 
@@ -23,8 +21,6 @@ export default function ListingsSidebar(props) {
     categories.data.map((category) => {
       return categoryOptions.push({ value: category.id, label: category.name });
     });
-
-    setCategoryOptions(categoryOptions);
   }, []);
 
   useEffect(() => {
@@ -33,7 +29,9 @@ export default function ListingsSidebar(props) {
     setCategoryId(props.categoryId);
   }, [props]);
 
-  const handleOnChange = (event) => {};
+  const handleOnChange = (event) => {
+    console.log(event);
+  };
 
   return (
     <div className="exlip-page-sidebar">
@@ -63,14 +61,15 @@ export default function ListingsSidebar(props) {
 
           <Form.Group>
             <div className="input-with-icon">
-              <Form.Control
-                as="select"
-                id="list-category"
-                name="categoryId"
+              <Select2Wrapper
                 value={categoryId}
                 onChange={handleOnChange}
-                className="form-control"
-                custom
+                className={"form-control"}
+                id={"categoryId"}
+                name={"categoryId"}
+                data={{
+                  placeholder: "Select a category",
+                }}
               >
                 <option value="">&nbsp;</option>
                 {categories.data.map((category) => (
@@ -78,7 +77,7 @@ export default function ListingsSidebar(props) {
                     {category.name}
                   </option>
                 ))}
-              </Form.Control>
+              </Select2Wrapper>
               <i className="fa fa-dog"></i>
             </div>
           </Form.Group>

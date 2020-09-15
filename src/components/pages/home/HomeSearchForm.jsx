@@ -9,6 +9,7 @@ import {
 
 import InputWithIcon from "../../InputWithIcon";
 import React from "react";
+import { Select2Wrapper } from "../../Select2Wrapper";
 import { allCategories } from "../../../services/dataService";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
@@ -74,23 +75,21 @@ export default function HomeSearchForm(props) {
             <Col lg={3} md={3} sm={6} className="small-padd">
               <FormGroup>
                 <div className="input-with-icon">
-                  <FormControl
-                    as="select"
-                    id="list-category"
-                    name="categoryId"
-                    className="form-control"
-                    placeholder="aaaaaa"
-                    custom
+                  <Select2Wrapper
+                    className={"form-control"}
+                    id={"categoryId"}
+                    name={"categoryId"}
+                    data={{
+                      placeholder: "Select a category",
+                    }}
                   >
-                    <option value="" disabled hidden selected>
-                      Select a category
-                    </option>
+                    <option value="">&nbsp;</option>
                     {categories.data.map((category) => (
                       <option key={category.id} value={category.id}>
                         {category.name}
                       </option>
                     ))}
-                  </FormControl>
+                  </Select2Wrapper>
                   <i className="fa fa-dog"></i>
                 </div>
               </FormGroup>

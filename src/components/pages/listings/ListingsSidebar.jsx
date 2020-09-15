@@ -1,46 +1,102 @@
-import React from "react";
+import React, { useState } from "react";
+import { allCategories, getCategory } from "../../../services/dataService";
 
-export default function ListingsSidebar() {
+import { Form } from "react-bootstrap";
+import InputWithIcon from "../../InputWithIcon";
+import { useEffect } from "react";
+
+export default function ListingsSidebar(props) {
+  const [keywords, setKeywords] = useState("");
+  const [location, setLocation] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [categoryOptions, setCategoryOptions] = useState([]);
+
+  console.log(props);
+
+  const [categories, setCategories] = useState({ data: [] });
+
+  useEffect(() => {
+    const categories = allCategories();
+    setCategories(categories);
+    let categoryOptions = [];
+
+    categories.data.map((category) => {
+      return categoryOptions.push({ value: category.id, label: category.name });
+    });
+
+    setCategoryOptions(categoryOptions);
+  }, []);
+
+  useEffect(() => {
+    setKeywords(props.keywords);
+    setLocation(props.location);
+    setCategoryId(props.categoryId);
+  }, [props]);
+
+  const handleOnChange = (event) => {};
+
   return (
     <div className="exlip-page-sidebar">
       <div className="sidebar-widgets">
-        <div className="form-group">
-          <div className="input-with-icon">
-            <input type="text" className="form-control" placeholder="Keyword" />
-            <i className="ti-search"></i>
-          </div>
-        </div>
+        <Form>
+          <Form.Group>
+            <InputWithIcon
+              type="text"
+              name="location"
+              placeholder="Keyword(s)..."
+              value={keywords}
+              onChange={handleOnChange}
+              icon="ti-search"
+            />
+          </Form.Group>
 
-        <div className="form-group">
-          <div className="input-with-icon">
-            <input type="text" className="form-control" placeholder="Where" />
-            <i className="ti-target"></i>
-          </div>
-        </div>
+          <Form.Group>
+            <InputWithIcon
+              type="text"
+              name="location"
+              value={location}
+              onChange={handleOnChange}
+              placeholder="Where..."
+              icon="ti-target"
+            />
+          </Form.Group>
 
-        <div className="form-group">
-          <div className="input-with-icon">
-            <select id="list-category" className="form-control">
-              <option value="">&nbsp;</option>
-              <option value="1">Dogs</option>
-              <option value="2">Cats</option>
-            </select>
-            <i className="ti-briefcase"></i>
+          <Form.Group>
+            <div className="input-with-icon">
+              <Form.Control
+                as="select"
+                id="list-category"
+                name="categoryId"
+                value={categoryId}
+                onChange={handleOnChange}
+                className="form-control"
+                custom
+              >
+                <option value="">&nbsp;</option>
+                {categories.data.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </Form.Control>
+              <i className="fa fa-dog"></i>
+            </div>
+          </Form.Group>
+
+          <div className="range-slider">
+            <label>Radius</label>
+            <div
+              data-min="0"
+              data-max="100"
+              data-min-name="min_price"
+              data-max-name="min_price"
+              data-unit="Miles"
+              className="range-slider-ui ui-slider"
+              aria-disabled="false"
+            ></div>
+            <div className="clearfix"></div>
           </div>
-        </div>
-        <div className="range-slider">
-          <label>Radius</label>
-          <div
-            data-min="0"
-            data-max="100"
-            data-min-name="min_price"
-            data-max-name="min_price"
-            data-unit="Miles"
-            className="range-slider-ui ui-slider"
-            aria-disabled="false"
-          ></div>
-          <div className="clearfix"></div>
-        </div>
+        </Form>
       </div>
     </div>
   );

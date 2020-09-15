@@ -180,29 +180,29 @@ $(function () {
     }
   });
 
-  // Select Category
-  $("#list-category").select2({
-    placeholder: "Choose Category",
-    allowClear: true,
-  });
+  // // Select Category
+  // $("#list-category").select2({
+  //   placeholder: "Choose Category",
+  //   allowClear: true,
+  // });
 
-  // Event Select Category
-  $("#event-list-category").select2({
-    placeholder: "Choose Category",
-    allowClear: true,
-  });
+  // // Event Select Category
+  // $("#event-list-category").select2({
+  //   placeholder: "Choose Category",
+  //   allowClear: true,
+  // });
 
-  // Select Rooms
-  $("#rooms").select2({
-    placeholder: "Choose Rooms",
-    allowClear: true,
-  });
+  // // Select Rooms
+  // $("#rooms").select2({
+  //   placeholder: "Choose Rooms",
+  //   allowClear: true,
+  // });
 
-  // Select Cities
-  $("#choose-city").select2({
-    placeholder: "Select City",
-    allowClear: true,
-  });
+  // // Select Cities
+  // $("#choose-city").select2({
+  //   placeholder: "Select City",
+  //   allowClear: true,
+  // });
 
   // Add Pricing
   function newMenuItem() {

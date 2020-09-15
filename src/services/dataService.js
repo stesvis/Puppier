@@ -181,7 +181,21 @@ const listings = {
   ],
 };
 
-export function all() {
+const categories = {
+  data: [
+    {
+      id: 1,
+      name: "Dog",
+    },
+    {
+      id: 2,
+      name: "Cat",
+    },
+  ],
+};
+
+// listings
+export function allListings() {
   return listings;
 }
 
@@ -225,10 +239,21 @@ export function findListings(keywords, location, categoryId) {
   const match = listings.data.filter(
     (l) =>
       (keywords == null ||
-        l.title.includes(keywords) ||
-        l.description.includes(keywords)) &&
-      (location == null || l.location.includes(location)) &&
+        l.title.toLowerCase().includes(keywords.toLowerCase()) ||
+        l.description.toLowerCase().includes(keywords.toLowerCase())) &&
+      (location == null ||
+        l.location.toLowerCase().includes(location.toLowerCase())) &&
       (isNaN(categoryId) || l.category.id === categoryId)
   );
   return match;
+}
+
+// categories
+export function allCategories() {
+  return categories;
+}
+
+export function getCategory(id) {
+  const category = categories.data.find((l) => l.id === id);
+  return category;
 }

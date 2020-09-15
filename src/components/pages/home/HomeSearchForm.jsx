@@ -9,27 +9,36 @@ import {
 
 import InputWithIcon from "../../InputWithIcon";
 import React from "react";
-import { findListings } from "../../../services/dataService";
+import { allCategories } from "../../../services/dataService";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useState } from "react";
 
-export default function HomeSearchForm() {
+export default function HomeSearchForm(props) {
+  const history = useHistory();
+  const [categories, setCategories] = useState({ data: [] });
+
+  useEffect(() => {
+    const categories = allCategories();
+    setCategories(categories);
+  }, []);
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const keywords = event.target.keywords.value;
     const location = event.target.location.value;
-    const categoryId = event.target.category.value;
+    const categoryId = event.target.categoryId.value;
 
     // Perform the search api call
     console.log(
       `keywords=[${keywords}], location=[${location}], category=[${categoryId}]`
     );
 
-    const searchResults = findListings(
-      keywords,
-      location,
-      parseInt(categoryId)
-    );
-    console.log(searchResults);
+    history.push({
+      pathname: "/listings",
+      search: `keywords=${keywords}&location=${location}&categoryId=${categoryId}`,
+    });
   };
 
   return (
@@ -44,7 +53,7 @@ export default function HomeSearchForm() {
                   type="text"
                   name="keywords"
                   className="b-r"
-                  placeholder="Keywords..."
+                  placeholder="Keyword(s)..."
                   icon="ti-search"
                 />
               </FormGroup>
@@ -68,12 +77,19 @@ export default function HomeSearchForm() {
                   <FormControl
                     as="select"
                     id="list-category"
-                    name="category"
+                    name="categoryId"
+                    className="form-control"
+                    placeholder="aaaaaa"
                     custom
                   >
-                    <option value="">&nbsp;</option>
-                    <option value="1">Dog</option>
-                    <option value="2">Cat</option>
+                    <option value="" disabled hidden selected>
+                      Select a category
+                    </option>
+                    {categories.data.map((category) => (
+                      <option key={category.id} value={category.id}>
+                        {category.name}
+                      </option>
+                    ))}
                   </FormControl>
                   <i className="fa fa-dog"></i>
                 </div>

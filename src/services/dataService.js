@@ -243,7 +243,7 @@ export function findListings(keywords, location, categoryId) {
         l.description.toLowerCase().includes(keywords.toLowerCase())) &&
       (location == null ||
         l.location.toLowerCase().includes(location.toLowerCase())) &&
-      (isNaN(categoryId) || l.category.id === categoryId)
+      (isNaN(categoryId) || categoryId === 0 || l.category.id === categoryId)
   );
   return match;
 }

@@ -15,14 +15,14 @@ export default function ListingDetails(props) {
   const [listing, setListing] = useState(new Listing());
 
   useEffect(() => {
-    loadingContext.onStartedLoading();
     // Fetch single listing by id
+    loadingContext.onStartedLoading();
     setTimeout(function () {
       const listing = getListing(parseInt(id));
       setListing(listing);
       loadingContext.onFinishedLoading();
     }, process.env.REACT_APP_FAKE_API_DELAY); //wait 1 seconds
-  }, [id]);
+  }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // useEffect(() => {
   //   console.log("loadingContext changed");

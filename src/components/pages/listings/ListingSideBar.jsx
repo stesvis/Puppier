@@ -15,7 +15,7 @@ export default function ListingSideBar(props) {
 
   useEffect(() => {
     console.log(searchContext);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Fragment>

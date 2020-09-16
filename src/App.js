@@ -2,10 +2,8 @@ import "./App.css";
 import "react-image-lightbox/style.css";
 
 import { Link, Redirect, Route, Switch } from "react-router-dom";
-// import { Modal, ModalBody } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import { Button } from "react-bootstrap";
 import Home from "./components/pages/Home";
 import ListingDetails from "./components/pages/ListingDetails";
 import ListingForm from "./components/pages/listings/ListingForm";
@@ -18,10 +16,11 @@ import SearchContext from "./context/searchContext";
 import { SearchParams } from "./models/SearchParams";
 import SignUpForm from "./components/modals/SignUpForm";
 
+// import { Modal, ModalBody } from "react-bootstrap";
+
 function App() {
   const [isLoading, setIsLoading] = useState(false);
-  const [searchParams, setSearchParams] = useState({});
-  console.log("setting empty searchParams");
+  const [searchParams, setSearchParams] = useState(new SearchParams());
   // const [showLogin, setShowLogin] = useState(false);
   // const [showSignUp, setShowSignUp] = useState(false);
 
@@ -41,14 +40,9 @@ function App() {
       value.location,
       value.categoryId
     );
-    console.log("New search parameters", newSearchParams);
-    try {
-      setSearchParams(newSearchParams);
-    } catch (error) {
-      console.log(error);
-    }
-    console.log("Saved search parameters", searchParams.keywords);
+    setSearchParams(newSearchParams);
   };
+
   // const handleToggleModal = (e, modalId, show) => {
   //   e && e.preventDefault();
   //   console.log("handleToggleModal");
@@ -106,18 +100,6 @@ function App() {
               <Route exact path="/listings" component={Listings} />
               <Redirect to="/404" />
             </Switch>
-            <Button
-              onClick={() =>
-                onSetSearchParams({
-                  keywords: "these are my keywords",
-                  location: "this is the location",
-                  categoryId: "2",
-                })
-              }
-            >
-              Click me
-            </Button>
-            <label>searchParams={JSON.stringify(searchParams)}</label>
           </SearchContext.Provider>
 
           {/* <Modal show={showLogin}>

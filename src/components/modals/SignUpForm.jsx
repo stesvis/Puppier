@@ -35,7 +35,7 @@ export default function SignUpForm(props) {
             </h4>
             <div className="login-form">
               <Form>
-                <Form.Row>
+                <Row>
                   <Col lg={6} md={6}>
                     <Form.Group>
                       <InputWithIcon
@@ -95,7 +95,7 @@ export default function SignUpForm(props) {
                       />
                     </Form.Group>
                   </Col>
-                </Form.Row>
+                </Row>
 
                 <Form.Group>
                   <Button

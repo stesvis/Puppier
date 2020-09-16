@@ -28,7 +28,7 @@ export default function Home() {
     }, process.env.REACT_APP_FAKE_API_DELAY); //wait 2 seconds
 
     //---------------
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <React.Fragment>

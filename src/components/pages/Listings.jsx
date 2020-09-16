@@ -7,39 +7,19 @@ import ListingCardDetailed from "./listings/ListingCardDetailed";
 import ListingsSidebar from "./listings/ListingsSidebar";
 import LoadingContext from "../../context/loadingContext";
 import PageTitle from "../PageTitle";
-import queryString from "query-string";
 import { useState } from "react";
 
 export default function Listings(props) {
-  // static contextType = LoadingContext;
   const loadingContext = useContext(LoadingContext);
-  const [listings, setListings] = useState({ data: [] });
-  const [keywords, setKeywords] = useState("");
-  const [location, setLocation] = useState("");
 
-  const [categoryId, setCategoryId] = useState();
+  const [listings, setListings] = useState({ data: [] });
 
   useEffect(() => {
     loadingContext.onStartedLoading();
 
     setTimeout(function () {
-      const queryParams = queryString.parse(props.location.search);
-
-      if (queryParams) {
-        setKeywords(queryParams.keywords);
-        setLocation(queryParams.location);
-        setCategoryId(queryParams.categoryId);
-
-        const searchResults = findListings(
-          queryParams.keywords,
-          queryParams.location,
-          parseInt(queryParams.categoryId)
-        );
-        setListings({ data: searchResults });
-      } else {
-        const listings = allListings();
-        setListings(listings);
-      }
+      const listings = allListings();
+      setListings(listings);
 
       loadingContext.onFinishedLoading();
     }, process.env.REACT_APP_FAKE_API_DELAY); //wait 1 seconds
@@ -52,11 +32,7 @@ export default function Listings(props) {
         <Container>
           <Row>
             <Col lg={4} md={4} className="order-2 order-lg-1 order-md-1">
-              <ListingsSidebar
-                keywords={keywords}
-                location={location}
-                categoryId={categoryId}
-              />
+              <ListingsSidebar />
             </Col>
             <Col
               lg={8}

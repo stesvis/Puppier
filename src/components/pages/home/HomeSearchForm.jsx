@@ -9,8 +9,10 @@ import {
 
 import InputWithIcon from "../../InputWithIcon";
 import React from "react";
+import SearchContext from "../../../context/searchContext";
 import { Select2Wrapper } from "../../Select2Wrapper";
 import { allCategories } from "../../../services/dataService";
+import { useContext } from "react";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
@@ -18,6 +20,7 @@ import { useState } from "react";
 export default function HomeSearchForm(props) {
   const history = useHistory();
   const [categories, setCategories] = useState({ data: [] });
+  const searchContext = useContext(SearchContext);
 
   useEffect(() => {
     const categories = allCategories();
@@ -26,6 +29,12 @@ export default function HomeSearchForm(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    searchContext.onSetSearchParams({
+      keywords: event.target.keywords.value,
+      location: event.target.location.value,
+      categoryId: event.target.categoryId.value,
+    });
 
     const keywords = event.target.keywords.value;
     const location = event.target.location.value;
@@ -38,7 +47,7 @@ export default function HomeSearchForm(props) {
 
     history.push({
       pathname: "/listings",
-      search: `keywords=${keywords}&location=${location}&categoryId=${categoryId}`,
+      // search: `keywords=${keywords}&location=${location}&categoryId=${categoryId}`,
     });
   };
 

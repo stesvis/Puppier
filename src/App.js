@@ -13,10 +13,13 @@ import LoadingContext from "./context/loadingContext";
 import LogInForm from "./components/modals/LogInForm";
 import ModalContext from "./context/modalContext";
 import NavBar from "./components/NavBar";
+import SearchContext from "./context/searchContext";
+import { SearchParams } from "./models/SearchParams";
 import SignUpForm from "./components/modals/SignUpForm";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
+  const [searchParams, setSearchParams] = useState(new SearchParams());
   // const [showLogin, setShowLogin] = useState(false);
   // const [showSignUp, setShowSignUp] = useState(false);
 
@@ -30,6 +33,10 @@ function App() {
     setIsLoading(false);
   };
 
+  const onSetSearchParams = (value) => {
+    console.log("setting search parameters", value);
+    setSearchParams(value);
+  };
   // const handleToggleModal = (e, modalId, show) => {
   //   e && e.preventDefault();
   //   console.log("handleToggleModal");
@@ -73,14 +80,21 @@ function App() {
           <NavBar />
           <div className="clearfix"></div>
 
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/listings/create" component={ListingForm} />
-            <Route exact path="/listings/:id" component={ListingDetails} />
-            <Route exact path="/listings/:id/edit" component={ListingForm} />
-            <Route exact path="/listings" component={Listings} />
-            <Redirect to="/404" />
-          </Switch>
+          <SearchContext.Provider
+            value={{
+              searchParams,
+              onSetSearchParams,
+            }}
+          >
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/listings/create" component={ListingForm} />
+              <Route exact path="/listings/:id" component={ListingDetails} />
+              <Route exact path="/listings/:id/edit" component={ListingForm} />
+              <Route exact path="/listings" component={Listings} />
+              <Redirect to="/404" />
+            </Switch>
+          </SearchContext.Provider>
 
           {/* <Modal show={showLogin}>
             <ModalBody> */}

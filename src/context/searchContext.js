@@ -1,6 +1,6 @@
 import React from "react";
 
-const ModalContext = React.createContext();
-ModalContext.displayName = "ModalContext";
+const SearchContext = React.createContext();
+SearchContext.displayName = "SearchContext";
 
-export default ModalContext;
+export default SearchContext;

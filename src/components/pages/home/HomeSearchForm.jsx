@@ -41,9 +41,9 @@ export default function HomeSearchForm(props) {
     const categoryId = event.target.categoryId.value;
 
     // Perform the search api call
-    console.log(
-      `keywords=[${keywords}], location=[${location}], category=[${categoryId}]`
-    );
+    // console.log(
+    //   `keywords=[${keywords}], location=[${location}], category=[${categoryId}]`
+    // );
 
     history.push({
       pathname: "/listings",

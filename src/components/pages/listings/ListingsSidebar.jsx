@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { Form } from "react-bootstrap";
 import InputWithIcon from "../../InputWithIcon";
+import SearchContext from "../../../context/searchContext";
+import { SearchParams } from "../../../models/SearchParams";
 import { Select2Wrapper } from "../../Select2Wrapper";
 import { allCategories } from "../../../services/dataService";
 import { useEffect } from "react";
 
 export default function ListingsSidebar(props) {
-  const [keywords, setKeywords] = useState("");
-  const [location, setLocation] = useState("");
-  const [categoryId, setCategoryId] = useState("");
-
+  const searchContext = useContext(SearchContext);
   const [categories, setCategories] = useState({ data: [] });
 
   useEffect(() => {
+    console.log(
+      "ListingsSidebar search parameters",
+      searchContext.searchParameters
+    );
     const categories = allCategories();
     setCategories(categories);
     let categoryOptions = [];
@@ -23,14 +26,12 @@ export default function ListingsSidebar(props) {
     });
   }, []);
 
-  useEffect(() => {
-    setKeywords(props.keywords);
-    setLocation(props.location);
-    setCategoryId(props.categoryId);
-  }, [props]);
-
   const handleOnChange = (event) => {
-    console.log(event);
+    const { name, value } = event.target;
+    searchContext.searchParameters[name] = value;
+    searchContext.onSetSearchParams(searchContext.searchParameters);
+
+    console.log(searchContext.searchParameters);
   };
 
   return (
@@ -40,9 +41,13 @@ export default function ListingsSidebar(props) {
           <Form.Group>
             <InputWithIcon
               type="text"
-              name="location"
+              name="keywords"
               placeholder="Keyword(s)..."
-              value={keywords}
+              value={
+                searchContext.searchParameters
+                  ? searchContext.searchParameters.keywords
+                  : ""
+              }
               onChange={handleOnChange}
               icon="ti-search"
             />
@@ -52,7 +57,11 @@ export default function ListingsSidebar(props) {
             <InputWithIcon
               type="text"
               name="location"
-              value={location}
+              value={
+                searchContext.searchParameters
+                  ? searchContext.searchParameters.location
+                  : ""
+              }
               onChange={handleOnChange}
               placeholder="Where..."
               icon="ti-target"
@@ -62,7 +71,11 @@ export default function ListingsSidebar(props) {
           <Form.Group>
             <div className="input-with-icon">
               <Select2Wrapper
-                value={categoryId}
+                value={
+                  searchContext.searchParameters
+                    ? searchContext.searchParameters.categoryId
+                    : ""
+                }
                 onChange={handleOnChange}
                 className={"form-control"}
                 id={"categoryId"}

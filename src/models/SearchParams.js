@@ -1,7 +1,7 @@
 export class SearchParams {
-  constructor() {
-    this.keywords = "";
-    this.location = "";
-    this.categoryId = "";
+  constructor(keywords = "", location = "", categoryId = "") {
+    this.keywords = keywords;
+    this.location = location;
+    this.categoryId = categoryId;
   }
 }

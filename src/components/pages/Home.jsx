@@ -1,9 +1,10 @@
+import * as dataService from "../../services/dataService";
+
 import React, { useContext, useEffect, useState } from "react";
 
 import FeaturedListings from "./listings/FeaturedListings";
 import HomeBanner from "./home/HomeBanner";
 import LoadingContext from "../../context/loadingContext";
-import { getFeaturedListings } from "../../services/dataService";
 
 export default function Home() {
   const [featuredListings, setFeaturedListings] = useState([]);
@@ -13,7 +14,7 @@ export default function Home() {
 
   const fetchData = () => {
     // fetch FeaturedListings API (coming from dataService for now)
-    const featuredListings = getFeaturedListings();
+    const featuredListings = dataService.getFeaturedListings();
     return featuredListings;
   };
 

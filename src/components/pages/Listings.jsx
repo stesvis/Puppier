@@ -1,3 +1,5 @@
+import * as listingsApiService from "../../services/api/listingsApiService";
+
 import { Col, Container, Row } from "react-bootstrap";
 import React, { useContext, useEffect } from "react";
 
@@ -9,6 +11,7 @@ import PageTitle from "../PageTitle";
 import SearchContext from "../../context/searchContext";
 import { SearchParams } from "../../models/SearchParams";
 import { findListings } from "../../services/dataService";
+import httpService from "../../services/api/httpService";
 import queryString from "query-string";
 import { useState } from "react";
 
@@ -16,7 +19,7 @@ export default function Listings(props) {
   const loadingContext = useContext(LoadingContext);
   const searchContext = useContext(SearchContext);
 
-  const [listings, setListings] = useState({ data: [] });
+  const [listings, setListings] = useState([]);
 
   // componentDidMount
   useEffect(() => {
@@ -50,9 +53,19 @@ export default function Listings(props) {
       parseInt(searchContext.searchParameters.categoryId)
     );
 
-    setListings({
-      data: filteredListings,
-    });
+    // setListings({
+    //   data: filteredListings,
+    // });
+
+    async function getAllListings() {
+      const response = await listingsApiService.all();
+      console.log(response.data.data);
+      setListings(response.data.data);
+    }
+
+    getAllListings();
+
+    // setListings(getAllListings());
     return () => {};
   }, [searchContext.searchParameters]);
 
@@ -71,7 +84,7 @@ export default function Listings(props) {
               className="order-1 content-area order-md-2 order-lg-2"
             >
               <Row>
-                {listings.data.map((listing) => (
+                {listings.map((listing) => (
                   <Col lg={6} md={12} sm={12} key={listing.id}>
                     <ListingCardDetailed listing={listing} />
                   </Col>

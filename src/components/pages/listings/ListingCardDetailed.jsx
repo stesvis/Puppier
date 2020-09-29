@@ -9,7 +9,7 @@ export default function ListingCardDetailed(props) {
       <div className="image">
         <Link to={`/listings/${listing.id}`} className="listing-thumb">
           <img
-            src={listing.images[0]}
+            src={listing.photos[0].public_url}
             alt="latest property"
             className="img-responsive"
           />
@@ -26,7 +26,7 @@ export default function ListingCardDetailed(props) {
       <div className="proerty_content">
         <div className="author-avatar">
           <img
-            src={listing.author.avatarImage}
+            src={listing.user.profile_photo_path}
             className="author-avatar-img"
             alt=""
           />
@@ -34,8 +34,8 @@ export default function ListingCardDetailed(props) {
         <div className="proerty_text">
           <h3 className="captlize">
             <Link to={`/listings/${listing.id}`}>
-              {listing.title.length > 27
-                ? `${listing.title.slice(0, 27)} ...`
+              {listing.title.length > 25
+                ? `${listing.title.slice(0, 25)} ...`
                 : listing.title}
             </Link>
             <span className="veryfied-author"></span>
@@ -49,10 +49,10 @@ export default function ListingCardDetailed(props) {
         <div className="property_meta">
           <div className="list-fx-features">
             <div className="listing-card-info-icon">
-              <span className="inc-fleat inc-add">{listing.location}</span>
+              <span className="inc-fleat inc-add">{listing.address}</span>
             </div>
             <div className="listing-card-info-icon">
-              <span className="inc-fleat inc-call">{listing.author.phone}</span>
+              <span className="inc-fleat inc-call">{listing.user.phone}</span>
             </div>
           </div>
         </div>

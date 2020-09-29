@@ -122,7 +122,8 @@ const listings = {
     {
       id: 5,
       images: [
-        "http://place-puppy.com/1200x850",
+        // "http://place-puppy.com/1200x850",
+        "https://placedog.net/1200/850",
         "https://via.placeholder.com/1200/850",
       ],
       title: "Energetic pup looking for a home",

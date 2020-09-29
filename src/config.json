@@ -1,3 +1,3 @@
 {
-  "apiUrl": "http://localhost:3000/api"
+  "api_base_url": "https://api.puppier.ca/api/v1.0"
 }

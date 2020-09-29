@@ -1,5 +1,6 @@
 import "./App.css";
 import "react-image-lightbox/style.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 import React, { useState } from "react";
@@ -15,6 +16,7 @@ import NavBar from "./components/NavBar";
 import SearchContext from "./context/searchContext";
 import { SearchParams } from "./models/SearchParams";
 import SignUpForm from "./components/modals/SignUpForm";
+import { ToastContainer } from "react-toastify";
 
 // import { Modal, ModalBody } from "react-bootstrap";
 
@@ -68,6 +70,17 @@ function App() {
         onFinishedLoading: hideLoading,
       }}
     >
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {/* <!-- Preloader - style you can find in spinners.css --> */}
       <div id="preloader" style={isLoading ? {} : { display: "none" }}>
         <div className="preloader">

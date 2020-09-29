@@ -1,20 +1,27 @@
+import * as categoriesApiService from "../../../services/api/categoriesApiService";
+
 import { Button, Col, Form, FormGroup, Row } from "react-bootstrap";
 
 import InputWithIcon from "../../InputWithIcon";
 import React from "react";
+import { SearchParams } from "../../../models/SearchParams";
 import { Select2Wrapper } from "../../Select2Wrapper";
-import { allCategories } from "../../../services/dataService";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 
 export default function HomeSearchForm(props) {
   const history = useHistory();
-  const [categories, setCategories] = useState({ data: [] });
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const categories = allCategories();
-    setCategories(categories);
+    async function getCategories() {
+      const response = await categoriesApiService.all();
+      setCategories(response.data.data);
+      return response.data.data;
+    }
+
+    getCategories();
   }, []);
 
   const handleSubmit = (event) => {
@@ -73,7 +80,7 @@ export default function HomeSearchForm(props) {
                     }}
                   >
                     <option value="">&nbsp;</option>
-                    {categories.data.map((category) => (
+                    {categories.map((category) => (
                       <option key={category.id} value={category.id}>
                         {category.name}
                       </option>

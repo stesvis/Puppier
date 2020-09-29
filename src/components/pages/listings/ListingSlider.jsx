@@ -7,6 +7,7 @@ import { useState } from "react";
 
 export default function ListingSlider(props) {
   const { listing } = props;
+  console.log(listing.photos);
   const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -29,12 +30,12 @@ export default function ListingSlider(props) {
           interval={3000}
           pauseOnHover={true}
         >
-          {listing.images.map((image) => (
-            <Carousel.Item key={image.id}>
+          {listing.photos.map((photo) => (
+            <Carousel.Item key={photo.id}>
               <Image
                 id={imageIndex}
                 className="d-block w-100 pointer"
-                src={image}
+                src={photo.public_url}
                 alt="Listing photos"
                 onClick={handleImageClicked}
               />
@@ -49,21 +50,21 @@ export default function ListingSlider(props) {
 
         {isLightboxOpen && (
           <Lightbox
-            mainSrc={listing.images[imageIndex]}
-            nextSrc={listing.images[(imageIndex + 1) % listing.images.length]}
+            mainSrc={listing.photos[imageIndex]}
+            nextSrc={listing.photos[(imageIndex + 1) % listing.photos.length]}
             prevSrc={
-              listing.images[
-                (imageIndex + listing.images.length - 1) % listing.images.length
+              listing.photos[
+                (imageIndex + listing.photos.length - 1) % listing.photos.length
               ]
             }
             onCloseRequest={() => setIsLightboxOpen(false)}
             onMovePrevRequest={() =>
               setImageIndex(
-                (imageIndex + listing.images.length - 1) % listing.images.length
+                (imageIndex + listing.photos.length - 1) % listing.photos.length
               )
             }
             onMoveNextRequest={() =>
-              setImageIndex((imageIndex + 1) % listing.images.length)
+              setImageIndex((imageIndex + 1) % listing.photos.length)
             }
           />
         )}

@@ -1,25 +1,35 @@
+import * as categoriesApiService from "../../../services/api/categoriesApiService";
+
 import React, { useContext, useState } from "react";
 
 import { Form } from "react-bootstrap";
 import InputWithIcon from "../../InputWithIcon";
 import SearchContext from "../../../context/searchContext";
 import { Select2Wrapper } from "../../Select2Wrapper";
-import { allCategories } from "../../../services/dataService";
 import { useEffect } from "react";
 
 export default function ListingsSidebar(props) {
   const searchContext = useContext(SearchContext);
-  const [categories, setCategories] = useState({ data: [] });
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const categories = allCategories();
-    setCategories(categories);
+    async function getCategories() {
+      const response = await categoriesApiService.all();
+      setCategories(response.data.data);
+      return response.data.data;
+    }
+
+    getCategories();
   }, []);
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
-    searchContext.searchParameters[name] = value;
-    searchContext.onSetSearchParams(searchContext.searchParameters);
+    // TODO: why does this fire so many times??
+    if (searchContext.searchParameters[name] !== value) {
+      console.log(name, value);
+      searchContext.searchParameters[name] = value;
+      searchContext.onSetSearchParams(searchContext.searchParameters);
+    }
   };
 
   return (
@@ -70,7 +80,7 @@ export default function ListingsSidebar(props) {
                 }}
               >
                 <option value="0">&nbsp;</option>
-                {categories.data.map((category) => (
+                {categories.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
                   </option>

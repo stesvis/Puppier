@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ListingInfoBox(props) {
   const { icon, title, children } = props;
-  console.log(React.Children);
+  // console.log(React.Children);
 
   return (
     <div className="tr-single-box">

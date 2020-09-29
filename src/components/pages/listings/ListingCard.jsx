@@ -5,7 +5,7 @@ export default function ListingCard(props) {
   const { listing } = props;
 
   const reviews =
-    listing.author.reviews.length > 0 ? (
+    listing.user.reviews.length > 0 ? (
       <div className="list-rates">
         <i className="ti-star filled"></i>
         <i className="ti-star filled"></i>
@@ -13,7 +13,7 @@ export default function ListingCard(props) {
         <i className="ti-star filled"></i>
         <i className="ti-star"></i>
         <Link to="#" className="tl-review">
-          ({listing.author.reviews.length} Reviews)
+          ({listing.user.reviews.length} Reviews)
         </Link>
       </div>
     ) : (
@@ -34,7 +34,11 @@ export default function ListingCard(props) {
             }}
             className="overlay-cate"
           >
-            <img src={listing.images[0]} className="img-responsive" alt="" />
+            <img
+              src={listing.photos[0].public_url}
+              className="img-responsive"
+              alt=""
+            />
           </Link>
           <div className="listing-price-info">
             <span className="pricetag">{listing.price}</span>
@@ -55,7 +59,7 @@ export default function ListingCard(props) {
               <span className="veryfied-author"></span>
             </h4>
             <span className="font-10 font-italic bg-info-light">
-              {listing.location}
+              {listing.address}
             </span>
           </div>
         </div>
@@ -75,7 +79,7 @@ export default function ListingCard(props) {
           </div>
           <div className="author-avatar">
             <img
-              src={listing.author.avatarImage}
+              src={listing.user.profile_photo_path}
               className="author-avatar-img"
               alt=""
             />

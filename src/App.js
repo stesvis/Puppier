@@ -27,16 +27,17 @@ function App() {
   // const [showSignUp, setShowSignUp] = useState(false);
 
   const showLoading = () => {
-    console.log("started loading");
+    // console.log("started loading");
     setIsLoading(true);
   };
 
   const hideLoading = () => {
-    console.log("finished loading");
+    // console.log("finished loading");
     setIsLoading(false);
   };
 
   const onSetSearchParams = (value) => {
+    console.log("onSetSearchParams");
     const newSearchParams = new SearchParams(
       value.keywords,
       value.location,

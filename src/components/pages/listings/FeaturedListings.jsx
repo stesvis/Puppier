@@ -1,13 +1,28 @@
 import "react-multi-carousel/lib/styles.css";
 
+import * as listingsApiService from "../../../services/api/listingsApiService";
+
 import { Col, Container, Row } from "react-bootstrap";
-import React, { memo } from "react";
+import React, { useState } from "react";
 
 import Carousel from "react-multi-carousel";
 import ListingCard from "./ListingCard";
+import { useEffect } from "react";
 
-const FeaturedListings = memo(function FeaturedListings(props) {
-  const { listings } = props;
+export default function FeaturedListings(props) {
+  const [listings, setListings] = useState({ data: [] });
+
+  useEffect(() => {
+    // Fetch single listing by id
+    async function getFeaturedListings() {
+      const featuredListings = await listingsApiService.getFeaturedListings();
+      setListings(featuredListings.data);
+      console.log(featuredListings.data);
+      return featuredListings.data;
+    }
+
+    getFeaturedListings();
+  }, []);
 
   const responsive = {
     superLargeDesktop: {
@@ -53,7 +68,7 @@ const FeaturedListings = memo(function FeaturedListings(props) {
               infinite
               autoPlaySpeed={3000}
             >
-              {listings.map((listing) => (
+              {listings.data.map((listing) => (
                 <ListingCard key={listing.id} listing={listing} />
               ))}
             </Carousel>
@@ -62,6 +77,4 @@ const FeaturedListings = memo(function FeaturedListings(props) {
       </Container>
     </section>
   );
-});
-
-export default FeaturedListings;
+}

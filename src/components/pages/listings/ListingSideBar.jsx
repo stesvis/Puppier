@@ -32,13 +32,13 @@ export default function ListingSideBar(props) {
           title="Listing Info"
           icon="ti-direction"
         >
-          <IconBox icon="lni-map-marker" text={listing.location} />
-          <IconBox icon="lni-phone-handset" text={listing.author.phone} />
-          <IconBox icon="lni-envelope" text={listing.author.email} />
+          <IconBox icon="lni-map-marker" text={listing.address} />
+          <IconBox icon="lni-phone-handset" text={listing.user.phone} />
+          <IconBox icon="lni-envelope" text={listing.user.email} />
         </ListingInfoBox>
         {/* Listing Stats */}
         <ListingInfoBox listing={listing} title="Stats" icon="ti-bar-chart">
-          <IconBox icon="ti-eye" text={listing.viewsCount + " views"} />
+          <IconBox icon="ti-eye" text={listing.views_count + " views"} />
           <IconBox
             icon="ti-comment-alt"
             text={listing.comments.length + " comments"}

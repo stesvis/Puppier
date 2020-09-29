@@ -20,7 +20,7 @@ export default function ListingCardDetailed(props) {
         <Link to="#" className="tag_t">
           <i className="ti-heart"></i>Save
         </Link>
-        <span className="list-rate great">5</span>
+        <span className="list-rate great">{listing.views_count}</span>
       </div>
 
       <div className="proerty_content">
@@ -70,7 +70,7 @@ export default function ListingCardDetailed(props) {
             ></i>
             {listing.category.name}
           </Link>
-          <span className="more-cat">+{Math.round(Math.random() * 10)}</span>
+          <span className="more-cat">+{listing.user.listings_count}</span>
         </div>
         <span className="place-status">Available</span>
       </div>

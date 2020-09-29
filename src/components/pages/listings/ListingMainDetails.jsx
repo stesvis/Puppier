@@ -16,7 +16,7 @@ export default function ListingMainDetails(props) {
             <span className="prt-type rent">{listing.category.name}</span>
           </h2>
           <span>
-            <i className="lni-map-marker"></i> {listing.location}
+            <i className="lni-map-marker"></i> {listing.address}
           </span>
         </div>
       </div>

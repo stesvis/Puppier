@@ -27,7 +27,7 @@ export default function ListingOverviewBar(props) {
               </div>
               <div className="call-ic-box-caption">
                 <span>Call Now</span>
-                <h5 className="aut-call">{listing.author.phone}</h5>
+                <h5 className="aut-call">{listing.user.phone}</h5>
               </div>
             </div>
           </div>

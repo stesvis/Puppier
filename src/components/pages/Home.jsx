@@ -1,5 +1,3 @@
-import * as dataService from "../../services/dataService";
-
 import React, { useContext, useEffect, useState } from "react";
 
 import FeaturedListings from "./listings/FeaturedListings";
@@ -12,22 +10,10 @@ export default function Home() {
 
   // console.log(process.env);
 
-  const fetchData = () => {
-    // fetch FeaturedListings API (coming from dataService for now)
-    const featuredListings = dataService.getFeaturedListings();
-    return featuredListings;
-  };
-
   useEffect(() => {
-    console.log("Home -> useEffect()");
     loadingContext.onStartedLoading();
-    // Fetch single listing by id
-    setTimeout(function () {
-      const featuredListings = fetchData();
-      setFeaturedListings(featuredListings);
-      loadingContext.onFinishedLoading();
-    }, process.env.REACT_APP_FAKE_API_DELAY); //wait 2 seconds
 
+    loadingContext.onFinishedLoading();
     //---------------
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

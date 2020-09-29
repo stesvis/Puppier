@@ -19,11 +19,11 @@ export default function ListingContactBox(props) {
     <div className="agent-widget">
       <div className="agent-title">
         <div className="agent-photo">
-          <img src={listing.author.avatarImage} alt="" />
+          <img src={listing.user.profile_photo_path} alt="" />
         </div>
         <div className="agent-details">
           <h4>
-            <Link to="author-detail.html">{listing.author.name}</Link>
+            <Link to="author-detail.html">{listing.user.name}</Link>
           </h4>
           <span>
             <i className="ti-view-grid"></i>202 Listings

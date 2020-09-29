@@ -9,7 +9,7 @@ Axios.interceptors.response.use(null, (error) => {
     error.response.status < 500;
 
   if (!expectedError) {
-    console.log(error);
+    // console.log(error);
     toast.error(error, {
       position: "top-right",
       autoClose: 3000,

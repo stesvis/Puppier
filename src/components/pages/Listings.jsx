@@ -10,8 +10,6 @@ import LoadingContext from "../../context/loadingContext";
 import PageTitle from "../PageTitle";
 import SearchContext from "../../context/searchContext";
 import { SearchParams } from "../../models/SearchParams";
-import { findListings } from "../../services/dataService";
-import httpService from "../../services/api/httpService";
 import queryString from "query-string";
 import { useState } from "react";
 
@@ -21,53 +19,67 @@ export default function Listings(props) {
 
   const [listings, setListings] = useState([]);
 
+  async function filterListings(keywords, location, categoryId) {
+    const response = await listingsApiService.search(
+      keywords,
+      location,
+      categoryId
+    );
+    setListings(response.data.data);
+    return response.data;
+  }
+
   // componentDidMount
   useEffect(() => {
     loadingContext.onStartedLoading();
 
-    setTimeout(function () {
-      // queryParams: set by HomeSearchForm in the url after submitting a search
-      const queryParams = queryString.parse(props.location.search);
+    // queryParams: set by HomeSearchForm in the url after submitting a search
+    const queryParams = queryString.parse(props.location.search);
 
-      if (queryParams) {
-        // set the global searchParams state
-        searchContext.onSetSearchParams(
-          new SearchParams(
-            queryParams.keywords,
-            queryParams.location,
-            queryParams.categoryId
-          )
-        );
-        // updating searchParams will trigger the useEffect() in this page
-      }
-      loadingContext.onFinishedLoading();
-    }, process.env.REACT_APP_FAKE_API_DELAY); //wait 1 seconds
+    if (queryParams) {
+      // set the global searchParams state
+      searchContext.onSetSearchParams(
+        new SearchParams(
+          queryParams.keywords,
+          queryParams.location,
+          queryParams.categoryId
+        )
+      );
+
+      console.log("first try");
+
+      // TODO: why do I have to do this to make it work??
+      filterListings(
+        queryParams.keywords,
+        queryParams.location,
+        parseInt(queryParams.categoryId)
+      );
+
+      // updating searchParams will trigger the useEffect() in this page
+    }
+    loadingContext.onFinishedLoading();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // componentDidUpdate -> searchParameters
   useEffect(() => {
+    loadingContext.onStartedLoading();
+
+    console.log("another try");
     // executed every time the searchParams are updated
-    const filteredListings = findListings(
+    filterListings(
       searchContext.searchParameters.keywords,
       searchContext.searchParameters.location,
       parseInt(searchContext.searchParameters.categoryId)
     );
+    loadingContext.onFinishedLoading();
 
-    // setListings({
-    //   data: filteredListings,
-    // });
-
-    async function getAllListings() {
-      const response = await listingsApiService.all();
-      console.log(response.data.data);
-      setListings(response.data.data);
-    }
-
-    getAllListings();
-
-    // setListings(getAllListings());
     return () => {};
-  }, [searchContext.searchParameters]);
+  }, [
+    // searchContext.searchParameters,
+    searchContext.searchParameters.keywords,
+    searchContext.searchParameters.location,
+    searchContext.searchParameters.categoryId,
+  ]);
 
   return (
     <Fragment>

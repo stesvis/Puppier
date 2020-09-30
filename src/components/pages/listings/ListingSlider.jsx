@@ -50,7 +50,7 @@ export default function ListingSlider(props) {
 
         {isLightboxOpen && (
           <Lightbox
-            mainSrc={listing.photos[imageIndex]}
+            mainSrc={listing.photos[imageIndex].public_url}
             nextSrc={listing.photos[(imageIndex + 1) % listing.photos.length]}
             prevSrc={
               listing.photos[

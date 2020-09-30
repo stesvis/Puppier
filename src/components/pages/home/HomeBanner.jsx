@@ -8,7 +8,8 @@ export default function HomeBanner() {
     <div
       className="image-cover hero-banner"
       style={{
-        background: "url(http://place-puppy.com/1920x1000) no-repeat",
+        background:
+          "url(https://cdn.pixabay.com/photo/2014/08/21/14/51/pet-423398_960_720.jpg) no-repeat",
       }}
       data-overlay="6"
     >

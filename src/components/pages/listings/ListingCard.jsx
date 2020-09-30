@@ -75,7 +75,7 @@ export default function ListingCard(props) {
               ></i>
               {listing.category.name}
             </Link>
-            <span className="more-cat">+3</span>
+            <span className="more-cat">+{listing.user.listings_count}</span>
           </div>
           <div className="author-avatar">
             <img

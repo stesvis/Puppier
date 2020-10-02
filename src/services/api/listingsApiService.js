@@ -19,6 +19,10 @@ export async function getFeaturedListings() {
 }
 
 export async function search(keywords, location, categoryId) {
+  if (keywords === undefined) keywords = "";
+  if (location === undefined) location = "";
+  if (categoryId === undefined) categoryId = "";
+
   const url = `${process.env.REACT_APP_API_BASE_URL}/listings?include=user,photos,category&keywords=${keywords}&where=${location}&category_id=${categoryId}`;
   console.log(url);
   const listings = await httpService.get(url);

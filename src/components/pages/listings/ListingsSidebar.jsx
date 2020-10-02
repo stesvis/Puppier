@@ -5,12 +5,22 @@ import React, { useContext, useState } from "react";
 import { Form } from "react-bootstrap";
 import InputWithIcon from "../../InputWithIcon";
 import SearchContext from "../../../context/searchContext";
+import { SearchParams } from "../../../models/SearchParams";
 import { Select2Wrapper } from "../../Select2Wrapper";
 import { useEffect } from "react";
 
 export default function ListingsSidebar(props) {
   const searchContext = useContext(SearchContext);
   const [categories, setCategories] = useState([]);
+  const [keywords, setKeywords] = useState(
+    searchContext.searchParameters.keywords
+  );
+  const [location, setLocation] = useState(
+    searchContext.searchParameters.location
+  );
+  const [categoryId, setCategoryId] = useState(
+    searchContext.searchParameters.categoryId
+  );
 
   useEffect(() => {
     async function getCategories() {
@@ -25,11 +35,31 @@ export default function ListingsSidebar(props) {
   const handleOnChange = (event) => {
     const { name, value } = event.target;
     // TODO: why does this fire so many times??
-    if (searchContext.searchParameters[name] !== value) {
-      console.log(name, value);
-      searchContext.searchParameters[name] = value;
-      searchContext.onSetSearchParams(searchContext.searchParameters);
+    // if (searchContext.searchParameters[name] !== value) {
+    // console.log(name, value);
+    switch (name) {
+      case "keywords":
+        setKeywords(value);
+        break;
+      case "location":
+        setLocation(value);
+        break;
+      case "categoryId":
+        setCategoryId(value);
+        break;
+
+      default:
+        break;
     }
+
+    searchContext.onSetSearchParams(
+      new SearchParams(keywords, location, categoryId)
+    );
+
+    // setKeywords(searchContext.searchParameters.keywords);
+    // setLocation(searchContext.searchParameters.location);
+    // setCategoryId(searchContext.searchParameters.categoryId);
+    // }
   };
 
   return (
@@ -41,10 +71,7 @@ export default function ListingsSidebar(props) {
               type="text"
               name="keywords"
               placeholder="Keyword(s)..."
-              value={
-                searchContext.searchParameters &&
-                searchContext.searchParameters.keywords
-              }
+              value={keywords}
               onChange={handleOnChange}
               icon="ti-search"
             />
@@ -54,10 +81,7 @@ export default function ListingsSidebar(props) {
             <InputWithIcon
               type="text"
               name="location"
-              value={
-                searchContext.searchParameters &&
-                searchContext.searchParameters.location
-              }
+              value={location}
               onChange={handleOnChange}
               placeholder="Where..."
               icon="ti-target"
@@ -67,10 +91,7 @@ export default function ListingsSidebar(props) {
           <Form.Group>
             <div className="input-with-icon">
               <Select2Wrapper
-                value={
-                  searchContext.searchParameters &&
-                  searchContext.searchParameters.categoryId
-                }
+                value={categoryId}
                 onChange={handleOnChange}
                 className={"form-control"}
                 id={"categoryId"}

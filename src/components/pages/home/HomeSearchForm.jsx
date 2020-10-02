@@ -4,7 +4,6 @@ import { Button, Col, Form, FormGroup, Row } from "react-bootstrap";
 
 import InputWithIcon from "../../InputWithIcon";
 import React from "react";
-import { SearchParams } from "../../../models/SearchParams";
 import { Select2Wrapper } from "../../Select2Wrapper";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";

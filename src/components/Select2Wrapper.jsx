@@ -6,6 +6,7 @@ export function Select2Wrapper(props) {
 
   useEffect(() => {
     let $el = ele.current;
+
     if ($el !== null) {
       let $els = $($el);
       $els

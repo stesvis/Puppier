@@ -5,12 +5,15 @@ import React, { useContext, useEffect } from "react";
 
 import { Fragment } from "react";
 import ListingCardDetailed from "./listings/ListingCardDetailed";
+import ListingsGrid from "./listings/ListingsGrid";
 import ListingsSidebar from "./listings/ListingsSidebar";
 import LoadingContext from "../../context/loadingContext";
 import PageTitle from "../PageTitle";
 import SearchContext from "../../context/searchContext";
 import { SearchParams } from "../../models/SearchParams";
+import _ from "lodash";
 import queryString from "query-string";
+import { useRef } from "react";
 import { useState } from "react";
 
 export default function Listings(props) {
@@ -18,14 +21,18 @@ export default function Listings(props) {
   const searchContext = useContext(SearchContext);
 
   const [listings, setListings] = useState([]);
+  const mounted = useRef(false);
 
-  async function filterListings(keywords, location, categoryId) {
+  async function fetchListings(keywords, location, categoryId) {
+    // const time = new Date().getTime();
+    // console.log(`Start ${time}`);
     const response = await listingsApiService.search(
       keywords,
       location,
       categoryId
     );
     setListings(response.data.data);
+    // console.log(`End ${time}`, response.data.data);
     return response.data;
   }
 
@@ -37,49 +44,37 @@ export default function Listings(props) {
     const queryParams = queryString.parse(props.location.search);
 
     if (queryParams) {
-      // set the global searchParams state
-      searchContext.onSetSearchParams(
-        new SearchParams(
-          queryParams.keywords,
-          queryParams.location,
-          queryParams.categoryId
-        )
-      );
-
-      console.log("first try");
-
-      // TODO: why do I have to do this to make it work??
-      filterListings(
+      // updating searchParams will trigger the useEffect() in this page
+      const newSearchParams = new SearchParams(
         queryParams.keywords,
         queryParams.location,
-        parseInt(queryParams.categoryId)
+        queryParams.categoryId
       );
-
-      // updating searchParams will trigger the useEffect() in this page
+      searchContext.onSetSearchParams(newSearchParams);
     }
     loadingContext.onFinishedLoading();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // componentDidUpdate -> searchParameters
   useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+
     loadingContext.onStartedLoading();
 
-    console.log("another try");
     // executed every time the searchParams are updated
-    filterListings(
+    fetchListings(
       searchContext.searchParameters.keywords,
       searchContext.searchParameters.location,
       parseInt(searchContext.searchParameters.categoryId)
     );
+
     loadingContext.onFinishedLoading();
 
     return () => {};
-  }, [
-    // searchContext.searchParameters,
-    searchContext.searchParameters.keywords,
-    searchContext.searchParameters.location,
-    searchContext.searchParameters.categoryId,
-  ]);
+  }, [searchContext.searchParameters]);
 
   return (
     <Fragment>
@@ -95,13 +90,7 @@ export default function Listings(props) {
               md={8}
               className="order-1 content-area order-md-2 order-lg-2"
             >
-              <Row>
-                {listings.map((listing) => (
-                  <Col lg={6} md={12} sm={12} key={listing.id}>
-                    <ListingCardDetailed listing={listing} />
-                  </Col>
-                ))}
-              </Row>
+              <ListingsGrid listings={listings} />
             </Col>
           </Row>
         </Container>

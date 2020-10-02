@@ -37,13 +37,8 @@ function App() {
   };
 
   const onSetSearchParams = (value) => {
-    console.log("onSetSearchParams");
-    const newSearchParams = new SearchParams(
-      value.keywords,
-      value.location,
-      value.categoryId
-    );
-    setSearchParams(newSearchParams);
+    // console.log(value);
+    setSearchParams(value);
   };
 
   // const handleToggleModal = (e, modalId, show) => {

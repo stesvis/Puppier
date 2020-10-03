@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import Axios from "axios";
-import { Button } from "react-bootstrap";
+// import Axios from "axios";
 import FeaturedListings from "./listings/FeaturedListings";
 import HomeBanner from "./home/HomeBanner";
 import LoadingContext from "../../context/loadingContext";

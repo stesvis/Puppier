@@ -1,12 +1,12 @@
 import * as categoriesApiService from "../../../services/api/categoriesApiService";
 
 import React, { useContext, useState } from "react";
-import { Select2Wrapper, Select2WrapperMemo } from "../../Select2Wrapper";
 
 import { Form } from "react-bootstrap";
 import InputWithIcon from "../../InputWithIcon";
 import SearchContext from "../../../context/searchContext";
 import { SearchParams } from "../../../models/SearchParams";
+import { Select2WrapperMemo } from "../../Select2Wrapper";
 import { useEffect } from "react";
 
 export default function ListingsSidebar(props) {
@@ -21,6 +21,13 @@ export default function ListingsSidebar(props) {
   const [categoryId, setCategoryId] = useState(
     searchContext.searchParameters.categoryId
   );
+
+  useEffect(() => {
+    console.log("componentDidMount");
+    setKeywords(props.keywords);
+    setLocation(props.location);
+    setCategoryId(props.categoryId);
+  }, [props.keywords, props.location, props.categoryId]);
 
   useEffect(() => {
     async function getCategories() {

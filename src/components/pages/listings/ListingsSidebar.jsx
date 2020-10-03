@@ -1,12 +1,12 @@
 import * as categoriesApiService from "../../../services/api/categoriesApiService";
 
 import React, { useContext, useState } from "react";
+import { Select2Wrapper, Select2WrapperMemo } from "../../Select2Wrapper";
 
 import { Form } from "react-bootstrap";
 import InputWithIcon from "../../InputWithIcon";
 import SearchContext from "../../../context/searchContext";
 import { SearchParams } from "../../../models/SearchParams";
-import { Select2Wrapper } from "../../Select2Wrapper";
 import { useEffect } from "react";
 
 export default function ListingsSidebar(props) {
@@ -35,31 +35,31 @@ export default function ListingsSidebar(props) {
   const handleOnChange = (event) => {
     const { name, value } = event.target;
     // TODO: why does this fire so many times??
-    // if (searchContext.searchParameters[name] !== value) {
-    // console.log(name, value);
+
+    console.log(name, value);
     switch (name) {
       case "keywords":
         setKeywords(value);
+        searchContext.onSetSearchParams(
+          new SearchParams(value, location, categoryId)
+        );
         break;
       case "location":
         setLocation(value);
+        searchContext.onSetSearchParams(
+          new SearchParams(keywords, value, categoryId)
+        );
         break;
       case "categoryId":
         setCategoryId(value);
+        searchContext.onSetSearchParams(
+          new SearchParams(keywords, location, value)
+        );
         break;
 
       default:
         break;
     }
-
-    searchContext.onSetSearchParams(
-      new SearchParams(keywords, location, categoryId)
-    );
-
-    // setKeywords(searchContext.searchParameters.keywords);
-    // setLocation(searchContext.searchParameters.location);
-    // setCategoryId(searchContext.searchParameters.categoryId);
-    // }
   };
 
   return (
@@ -90,7 +90,7 @@ export default function ListingsSidebar(props) {
 
           <Form.Group>
             <div className="input-with-icon">
-              <Select2Wrapper
+              <select //Select2WrapperMemo
                 value={categoryId}
                 onChange={handleOnChange}
                 className={"form-control"}
@@ -100,13 +100,13 @@ export default function ListingsSidebar(props) {
                   placeholder: "Select a category",
                 }}
               >
-                <option value="0">&nbsp;</option>
+                <option value="">Select a category</option>
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
                   </option>
                 ))}
-              </Select2Wrapper>
+              </select>
               <i className="fa fa-dog"></i>
             </div>
           </Form.Group>

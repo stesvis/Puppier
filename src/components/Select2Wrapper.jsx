@@ -25,3 +25,5 @@ export function Select2Wrapper(props) {
     </select>
   );
 }
+
+export const Select2WrapperMemo = React.memo(Select2Wrapper);

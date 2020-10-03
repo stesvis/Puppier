@@ -1,24 +1,24 @@
 import httpService from "./httpService";
 
-export async function all() {
+async function all() {
   const url = `${process.env.REACT_APP_API_BASE_URL}/listings?include=user,photos,category`;
   const listings = await httpService.get(url);
   return listings;
 }
 
-export async function get(id) {
+async function get(id) {
   const url = `${process.env.REACT_APP_API_BASE_URL}/listings/${id}?include=user,photos,category,comments`;
   const listing = await httpService.get(url);
   return listing;
 }
 
-export async function getFeaturedListings() {
+async function getFeaturedListings() {
   const url = `${process.env.REACT_APP_API_BASE_URL}/listings/featured?include=user,photos,category`;
   const listings = await httpService.get(url);
   return listings;
 }
 
-export async function search(keywords, location, categoryId) {
+async function search(keywords, location, categoryId) {
   if (keywords === undefined) keywords = "";
   if (location === undefined) location = "";
   if (categoryId === undefined) categoryId = "";
@@ -28,3 +28,10 @@ export async function search(keywords, location, categoryId) {
   const listings = await httpService.get(url);
   return listings;
 }
+
+export default {
+  all: all,
+  get: get,
+  getFeaturedListings: getFeaturedListings,
+  search: search,
+};

@@ -1,29 +1,25 @@
-import * as listingsApiService from "../../services/api/listingsApiService";
-
 import React, { useContext, useEffect, useState } from "react";
 
 import FeaturedListings from "./listings/FeaturedListings";
 import HomeBanner from "./home/HomeBanner";
 import LoadingContext from "../../context/loadingContext";
+import apiService from "../../services/api/apiService";
 
 // import Axios from "axios";
-
-
-
 
 export default function Home() {
   const [featuredListings, setFeaturedListings] = useState([]);
   const loadingContext = useContext(LoadingContext);
 
+  async function getFeaturedListings() {
+    const featuredListings = await apiService.listings.getFeaturedListings();
+    setFeaturedListings(featuredListings.data.data);
+    // console.log(featuredListings.data.data);
+    return featuredListings.data;
+  }
+
   useEffect(() => {
     // Fetch single listing by id
-    async function getFeaturedListings() {
-      const featuredListings = await listingsApiService.getFeaturedListings();
-      setFeaturedListings(featuredListings.data.data);
-      // console.log(featuredListings.data.data);
-      return featuredListings.data;
-    }
-
     getFeaturedListings();
   }, []);
 

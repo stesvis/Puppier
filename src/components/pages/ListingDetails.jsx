@@ -1,5 +1,3 @@
-import * as listingsApiService from "../../services/api/listingsApiService";
-
 import { Col, Container, Row } from "react-bootstrap";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -7,6 +5,7 @@ import { Listing } from "../../models/Listing";
 import ListingMainDetails from "./listings/ListingMainDetails";
 import ListingSideBar from "./listings/ListingSideBar";
 import LoadingContext from "../../context/loadingContext";
+import listingsApiService from "../../services/api/listingsApiService";
 
 export default function ListingDetails(props) {
   const loadingContext = useContext(LoadingContext);

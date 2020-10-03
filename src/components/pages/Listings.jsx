@@ -1,5 +1,3 @@
-import * as listingsApiService from "../../services/api/listingsApiService";
-
 import { Col, Container, Row } from "react-bootstrap";
 import React, { useContext, useEffect } from "react";
 
@@ -10,7 +8,10 @@ import PageTitle from "../PageTitle";
 import SearchContext from "../../context/searchContext";
 import { SearchParams } from "../../models/SearchParams";
 import _ from "lodash";
+import apiService from "../../services/api/apiService";
+import listingsApiService from "../../services/api/listingsApiService";
 import queryString from "query-string";
+import { toast } from "react-toastify";
 import { useRef } from "react";
 import { useState } from "react";
 

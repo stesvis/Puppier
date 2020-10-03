@@ -1,13 +1,86 @@
-import { Button, Form, FormGroup, ModalBody } from "react-bootstrap";
+import { Alert, Button, Form, FormGroup, ModalBody } from "react-bootstrap";
 
 import InputWithIcon from "../InputWithIcon";
 import { Link } from "react-router-dom";
 import React from "react";
+import apiService from "../../services/api/apiService";
+import { toast } from "react-toastify";
+import { useReducer } from "react";
 
 // import ModalContext from "../../context/modalContext";
+const initialState = {
+  username: "",
+  password: "",
+  error: "",
+  isBusy: false,
+};
+
+const formReducer = (prevState, action) => {
+  switch (action.type) {
+    case "onChange":
+      return {
+        ...prevState,
+        [action.payload.fieldName]: action.payload.value,
+      };
+
+    case "onSubmit":
+      return { ...prevState, isBusy: true };
+
+    case "onSuccess":
+      toast.success(`Welcome ${prevState.username}`);
+      const $ = window.$;
+      $("#login").modal("hide");
+      return { ...prevState, error: "", isBusy: false };
+
+    case "onError":
+      return {
+        ...prevState,
+        error: action.payload.value,
+        isBusy: false,
+      };
+
+    default:
+      return prevState;
+  }
+};
 
 export default function LogInForm(props) {
   // const modalContext = useContext(ModalContext);
+  const [state, dispatch] = useReducer(formReducer, initialState);
+  const { username, password, error, isBusy } = state;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    dispatch({
+      type: "onSubmit",
+    });
+
+    try {
+      const response = await apiService.account.login(username, password);
+      dispatch({
+        type: "onSuccess",
+      });
+    } catch (error) {
+      // toast.error(error.response.data.data.message);
+      dispatch({
+        type: "onError",
+        payload: { value: error.response.data.data.message },
+      });
+    }
+  };
+
+  const handleOnChange = (event) => {
+    // console.log("handleOnChange");
+    const { name, value } = event.target;
+
+    dispatch({
+      type: "onChange",
+      payload: {
+        fieldName: name,
+        value: value,
+      },
+    });
+  };
 
   return (
     <div
@@ -34,13 +107,16 @@ export default function LogInForm(props) {
               Log <span className="theme-cl">In</span>
             </h4>
             <div className="login-form">
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <Form.Group>
                   <Form.Label>User Name</Form.Label>
                   <InputWithIcon
                     type="text"
+                    name="username"
                     placeholder="Username"
+                    value={username}
                     icon="ti-user"
+                    onChange={handleOnChange}
                   />
                 </Form.Group>
 
@@ -48,17 +124,25 @@ export default function LogInForm(props) {
                   <Form.Label>Password</Form.Label>
                   <InputWithIcon
                     type="password"
+                    name="password"
                     placeholder="*******"
+                    value={password}
                     icon="ti-user"
+                    onChange={handleOnChange}
                   />
                 </FormGroup>
+
+                <Alert variant="danger" show={error.length > 0}>
+                  {error}
+                </Alert>
 
                 <FormGroup>
                   <Button
                     type="submit"
                     className="btn btn-md full-width pop-login"
+                    disabled={isBusy}
                   >
-                    Login
+                    {isBusy ? "Loading..." : "Log In"}
                   </Button>
                 </FormGroup>
               </Form>

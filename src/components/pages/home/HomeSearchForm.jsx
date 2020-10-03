@@ -1,10 +1,9 @@
-import * as categoriesApiService from "../../../services/api/categoriesApiService";
-
 import { Button, Col, Form, FormGroup, Row } from "react-bootstrap";
 
 import InputWithIcon from "../../InputWithIcon";
 import React from "react";
 import { Select2Wrapper } from "../../Select2Wrapper";
+import categoriesApiService from "../../../services/api/categoriesApiService";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";

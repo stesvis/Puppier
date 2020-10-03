@@ -1,5 +1,3 @@
-import * as categoriesApiService from "../../../services/api/categoriesApiService";
-
 import React, { useContext, useState } from "react";
 
 import { Form } from "react-bootstrap";
@@ -7,30 +5,70 @@ import InputWithIcon from "../../InputWithIcon";
 import SearchContext from "../../../context/searchContext";
 import { SearchParams } from "../../../models/SearchParams";
 import { Select2WrapperMemo } from "../../Select2Wrapper";
+import apiService from "../../../services/api/apiService";
 import { useEffect } from "react";
+import { useReducer } from "react";
+import { useRef } from "react";
 
 export default function ListingsSidebar(props) {
   const searchContext = useContext(SearchContext);
   const [categories, setCategories] = useState([]);
-  const [keywords, setKeywords] = useState(
-    searchContext.searchParameters.keywords
-  );
-  const [location, setLocation] = useState(
-    searchContext.searchParameters.location
-  );
-  const [categoryId, setCategoryId] = useState(
-    searchContext.searchParameters.categoryId
-  );
+  const initialState = {
+    keywords: "",
+    location: "",
+    categoryId: "",
+  };
+  const searchFormReducer = (prevState, action) => {
+    switch (action.type) {
+      case "onChange":
+        return {
+          ...prevState,
+          [action.payload.fieldName]:
+            action.payload.value === undefined ? "" : action.payload.value,
+        };
+
+      default:
+        return prevState;
+    }
+  };
+
+  const [state, dispatch] = useReducer(searchFormReducer, initialState);
+  const { keywords, location, categoryId } = state;
+  const mounted = useRef(false);
 
   useEffect(() => {
-    setKeywords(props.keywords);
-    setLocation(props.location);
-    setCategoryId(props.categoryId);
-  }, [props.keywords, props.location, props.categoryId]);
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+
+    // set the current state
+    dispatch({
+      type: "onChange",
+      payload: {
+        fieldName: "keywords",
+        value: props.keywords,
+      },
+    });
+    dispatch({
+      type: "onChange",
+      payload: {
+        fieldName: "location",
+        value: props.location,
+      },
+    });
+    dispatch({
+      type: "onChange",
+      payload: {
+        fieldName: "categoryId",
+        value: props.categoryId,
+      },
+    });
+  }, [props]);
 
   useEffect(() => {
     async function getCategories() {
-      const response = await categoriesApiService.all();
+      const response = await apiService.categories.all();
       setCategories(response.data.data);
       return response.data.data;
     }
@@ -40,37 +78,25 @@ export default function ListingsSidebar(props) {
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
-    // TODO: why does this fire so many times??
+    dispatch({
+      type: "onChange",
+      payload: {
+        fieldName: name,
+        value: value,
+      },
+    });
 
-    console.log(name, value);
-    switch (name) {
-      case "keywords":
-        setKeywords(value);
-        searchContext.onSetSearchParams(
-          new SearchParams(value, location, categoryId)
-        );
-        break;
-      case "location":
-        setLocation(value);
-        searchContext.onSetSearchParams(
-          new SearchParams(keywords, value, categoryId)
-        );
-        break;
-      case "categoryId":
-        setCategoryId(value);
-        searchContext.onSetSearchParams(
-          new SearchParams(keywords, location, value)
-        );
-        break;
+    searchContext.onSetSearchParams(
+      new SearchParams(state.keywords, state.location, state.categoryId)
+    );
 
-      default:
-        break;
-    }
+    // console.log(name, value);
   };
 
   return (
     <div className="exlip-page-sidebar">
       <div className="sidebar-widgets">
+        <label>{keywords}</label>
         <Form>
           <Form.Group>
             <InputWithIcon

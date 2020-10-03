@@ -1,8 +1,7 @@
-import React, { Fragment } from "react";
-
 import Carousel from "react-bootstrap/Carousel";
 import { Image } from "react-bootstrap";
 import Lightbox from "react-image-lightbox";
+import React from "react";
 import { useState } from "react";
 
 export default function ListingSlider(props) {
@@ -21,7 +20,7 @@ export default function ListingSlider(props) {
   };
 
   return (
-    <Fragment>
+    <>
       <div className="property3-slide single-advance-property mb-4">
         <Carousel
           activeIndex={activeCarouselIndex}
@@ -68,6 +67,6 @@ export default function ListingSlider(props) {
           />
         )}
       </div>
-    </Fragment>
+    </>
   );
 }

@@ -1,6 +1,5 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 
-import { Fragment } from "react";
 import React from "react";
 
 // import ModalContext from "../context/modalContext";
@@ -16,7 +15,7 @@ export default function NavBar() {
 
   const logoElement =
     location.pathname === "/" ? (
-      <Fragment>
+      <>
         <Link to="/" className="brand normal-logo">
           <img
             src={`${process.env.PUBLIC_URL}/assets/img/y-logo-light.png`}
@@ -26,7 +25,7 @@ export default function NavBar() {
         <Link to="/" className="brand brand-overlay">
           <img src={`${process.env.PUBLIC_URL}/assets/img/y-logo.png`} alt="" />
         </Link>
-      </Fragment>
+      </>
     ) : (
       <Link to="/" className="brand">
         <img src={`${process.env.PUBLIC_URL}/assets/img/y-logo.png`} alt="" />

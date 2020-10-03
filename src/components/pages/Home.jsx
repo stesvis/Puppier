@@ -2,10 +2,14 @@ import * as listingsApiService from "../../services/api/listingsApiService";
 
 import React, { useContext, useEffect, useState } from "react";
 
-// import Axios from "axios";
 import FeaturedListings from "./listings/FeaturedListings";
 import HomeBanner from "./home/HomeBanner";
 import LoadingContext from "../../context/loadingContext";
+
+// import Axios from "axios";
+
+
+
 
 export default function Home() {
   const [featuredListings, setFeaturedListings] = useState([]);
@@ -65,7 +69,7 @@ export default function Home() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <React.Fragment>
+    <>
       {/* Hero Banner  Start */}
       <HomeBanner />
       {/* Hero Banner End */}
@@ -73,6 +77,6 @@ export default function Home() {
       <FeaturedListings listings={featuredListings} />
 
       {/* <Button onClick={handleClick}>Click me</Button> */}
-    </React.Fragment>
+    </>
   );
 }

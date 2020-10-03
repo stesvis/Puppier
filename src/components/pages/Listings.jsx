@@ -3,8 +3,6 @@ import * as listingsApiService from "../../services/api/listingsApiService";
 import { Col, Container, Row } from "react-bootstrap";
 import React, { useContext, useEffect } from "react";
 
-import { Fragment } from "react";
-import ListingCardDetailed from "./listings/ListingCardDetailed";
 import ListingsGrid from "./listings/ListingsGrid";
 import ListingsSidebar from "./listings/ListingsSidebar";
 import LoadingContext from "../../context/loadingContext";
@@ -84,7 +82,7 @@ export default function Listings(props) {
   }, [searchContext.searchParameters]);
 
   return (
-    <Fragment>
+    <>
       <PageTitle title="Explore" subtitle="Find your new best friend" />
       <section className="gray">
         <Container>
@@ -106,6 +104,6 @@ export default function Listings(props) {
           </Row>
         </Container>
       </section>
-    </Fragment>
+    </>
   );
 }

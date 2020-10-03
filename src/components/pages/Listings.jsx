@@ -21,6 +21,10 @@ export default function Listings(props) {
   const searchContext = useContext(SearchContext);
 
   const [listings, setListings] = useState([]);
+  const [keywords, setKeywords] = useState("");
+  const [location, setLocation] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+
   const mounted = useRef(false);
 
   async function fetchListings(keywords, location, categoryId) {
@@ -50,6 +54,9 @@ export default function Listings(props) {
         queryParams.location,
         queryParams.categoryId
       );
+      setKeywords(queryParams.keywords);
+      setLocation(queryParams.location);
+      setCategoryId(queryParams.categoryId);
       searchContext.onSetSearchParams(newSearchParams);
     }
     loadingContext.onFinishedLoading();
@@ -83,7 +90,11 @@ export default function Listings(props) {
         <Container>
           <Row>
             <Col lg={4} md={4} className="order-2 order-lg-1 order-md-1">
-              <ListingsSidebar />
+              <ListingsSidebar
+                keywords={keywords}
+                location={location}
+                categoryId={categoryId}
+              />
             </Col>
             <Col
               lg={8}

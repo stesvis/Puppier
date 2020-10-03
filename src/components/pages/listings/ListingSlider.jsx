@@ -7,7 +7,6 @@ import { useState } from "react";
 
 export default function ListingSlider(props) {
   const { listing } = props;
-  console.log(listing.photos);
   const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);

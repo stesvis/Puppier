@@ -23,7 +23,6 @@ export default function ListingsSidebar(props) {
   );
 
   useEffect(() => {
-    console.log("componentDidMount");
     setKeywords(props.keywords);
     setLocation(props.location);
     setCategoryId(props.categoryId);

@@ -1,29 +1,15 @@
 import "react-multi-carousel/lib/styles.css";
 
-import * as listingsApiService from "../../../services/api/listingsApiService";
-
 import { Col, Container, Row } from "react-bootstrap";
-import React, { useState } from "react";
 
 import Carousel from "react-multi-carousel";
 import ListingCard from "./ListingCard";
+import React from "react";
 import { useEffect } from "react";
+import { useState } from "react";
 
 export default function FeaturedListings(props) {
-  const [listings, setListings] = useState({ data: [] });
-
-  useEffect(() => {
-    // Fetch single listing by id
-    async function getFeaturedListings() {
-      const featuredListings = await listingsApiService.getFeaturedListings();
-      setListings(featuredListings.data);
-      console.log(featuredListings.data);
-      return featuredListings.data;
-    }
-
-    getFeaturedListings();
-  }, []);
-
+  const [listings, setListings] = useState(props.listings);
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -46,6 +32,11 @@ export default function FeaturedListings(props) {
       slidesToSlide: 1, // optional, default to 1.
     },
   };
+  useEffect(() => {
+    // executes when the home component finishes to fetch the features listings
+    // console.log(props.listings);
+    setListings(props.listings);
+  }, [props]);
 
   return (
     <section>
@@ -68,7 +59,7 @@ export default function FeaturedListings(props) {
               infinite
               autoPlaySpeed={3000}
             >
-              {listings.data.map((listing) => (
+              {listings.map((listing) => (
                 <ListingCard key={listing.id} listing={listing} />
               ))}
             </Carousel>

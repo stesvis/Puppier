@@ -1,3 +1,5 @@
+import * as listingsApiService from "../../services/api/listingsApiService";
+
 import React, { useContext, useEffect, useState } from "react";
 
 // import Axios from "axios";
@@ -8,6 +10,18 @@ import LoadingContext from "../../context/loadingContext";
 export default function Home() {
   const [featuredListings, setFeaturedListings] = useState([]);
   const loadingContext = useContext(LoadingContext);
+
+  useEffect(() => {
+    // Fetch single listing by id
+    async function getFeaturedListings() {
+      const featuredListings = await listingsApiService.getFeaturedListings();
+      setFeaturedListings(featuredListings.data.data);
+      // console.log(featuredListings.data.data);
+      return featuredListings.data;
+    }
+
+    getFeaturedListings();
+  }, []);
 
   // const handleClick = async () => {
   //   const $ = window.$;

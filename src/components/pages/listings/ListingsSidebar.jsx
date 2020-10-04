@@ -13,58 +13,16 @@ import { useRef } from "react";
 export default function ListingsSidebar(props) {
   const searchContext = useContext(SearchContext);
   const [categories, setCategories] = useState([]);
+  // const [keywords, setKeywords] = useState("");
+  // const [location, setLocation] = useState("");
+  // const [categoryId, setCategoryId] = useState("");
+
   const initialState = {
-    keywords: "",
-    location: "",
-    categoryId: "",
+    keywords: props.keywords,
+    location: props.location,
+    categoryId: props.categoryId,
   };
-  const searchFormReducer = (prevState, action) => {
-    switch (action.type) {
-      case "onChange":
-        return {
-          ...prevState,
-          [action.payload.fieldName]:
-            action.payload.value === undefined ? "" : action.payload.value,
-        };
-
-      default:
-        return prevState;
-    }
-  };
-
-  const [state, dispatch] = useReducer(searchFormReducer, initialState);
-  const { keywords, location, categoryId } = state;
-  const mounted = useRef(false);
-
-  useEffect(() => {
-    if (!mounted.current) {
-      mounted.current = true;
-      return;
-    }
-
-    // set the current state
-    dispatch({
-      type: "onChange",
-      payload: {
-        fieldName: "keywords",
-        value: props.keywords,
-      },
-    });
-    dispatch({
-      type: "onChange",
-      payload: {
-        fieldName: "location",
-        value: props.location,
-      },
-    });
-    dispatch({
-      type: "onChange",
-      payload: {
-        fieldName: "categoryId",
-        value: props.categoryId,
-      },
-    });
-  }, [props]);
+  const [state, setState] = useState(initialState);
 
   useEffect(() => {
     async function getCategories() {
@@ -78,33 +36,31 @@ export default function ListingsSidebar(props) {
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
-    dispatch({
-      type: "onChange",
-      payload: {
-        fieldName: name,
-        value: value,
-      },
-    });
+    console.log(name, value);
+
+    const newState = { ...state, [name]: value };
+    setState(newState);
 
     searchContext.onSetSearchParams(
-      new SearchParams(state.keywords, state.location, state.categoryId)
+      new SearchParams(
+        newState.keywords,
+        newState.location,
+        newState.categoryId
+      )
     );
-
-    // console.log(name, value);
   };
 
   return (
     <div className="exlip-page-sidebar">
       <div className="sidebar-widgets">
-        <label>{keywords}</label>
         <Form>
           <Form.Group>
             <InputWithIcon
               type="text"
               name="keywords"
-              placeholder="Keyword(s)..."
-              value={keywords}
+              defaultValue={props.keywords}
               onChange={handleOnChange}
+              placeholder="Keyword(s)..."
               icon="ti-search"
             />
           </Form.Group>
@@ -113,7 +69,7 @@ export default function ListingsSidebar(props) {
             <InputWithIcon
               type="text"
               name="location"
-              value={location}
+              defaultValue={props.location}
               onChange={handleOnChange}
               placeholder="Where..."
               icon="ti-target"
@@ -123,7 +79,7 @@ export default function ListingsSidebar(props) {
           <Form.Group>
             <div className="input-with-icon">
               <select //Select2WrapperMemo
-                value={categoryId}
+                defaultValue={props.categoryId}
                 onChange={handleOnChange}
                 className={"form-control"}
                 id={"categoryId"}

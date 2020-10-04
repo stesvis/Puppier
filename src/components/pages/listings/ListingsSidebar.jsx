@@ -7,8 +7,6 @@ import { SearchParams } from "../../../models/SearchParams";
 import { Select2WrapperMemo } from "../../Select2Wrapper";
 import apiService from "../../../services/api/apiService";
 import { useEffect } from "react";
-import { useReducer } from "react";
-import { useRef } from "react";
 
 export default function ListingsSidebar(props) {
   const searchContext = useContext(SearchContext);
@@ -78,17 +76,17 @@ export default function ListingsSidebar(props) {
 
           <Form.Group>
             <div className="input-with-icon">
-              <select //Select2WrapperMemo
+              <select
                 defaultValue={props.categoryId}
                 onChange={handleOnChange}
-                className={"form-control"}
+                className={"form-control select2-container--default"}
                 id={"categoryId"}
                 name={"categoryId"}
                 data={{
                   placeholder: "Select a category",
                 }}
               >
-                <option value="">Select a category</option>
+                <option value="">All pets</option>
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}

@@ -8,7 +8,7 @@ export default function ListingContactBox(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault(); // avoids page reload
-    console.log(event.target);
+    // console.log(event.target);
 
     // validate
 

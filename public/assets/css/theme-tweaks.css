@@ -9,6 +9,15 @@
   }
 }
 
+/* Nav bar */
+.header-dark-transparent.header-fixed nav .btn.btn-order-by-filt {
+  color: #606c8e;
+}
+
+.header-dark-transparent nav .btn.btn-order-by-filt {
+  color: #ffffff;
+}
+
 section {
   padding: 20px 0 80px;
   position: relative;

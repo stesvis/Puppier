@@ -79,7 +79,7 @@ $(function () {
     animated: true,
     animatedIn: "flipInX",
     animatedOut: "bounceOut",
-    dropdownEvent: "click", // Hover, Click & Accordion
+    dropdownEvent: "hover", // Hover, Click & Accordion
     onOpenDropdown: function () {
       console.log("open");
     },

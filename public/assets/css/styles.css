@@ -3547,7 +3547,7 @@ ul.attributes li a {
 .header-dark-transparent.header-fixed ul.attributes li a {
   color: #606c8e;
 }
-ul.attributes li.log-seprate:before {
+ul.attributes li.log-separator:before {
   position: absolute;
   content: "/";
   font-size: 18px;
@@ -3555,13 +3555,13 @@ ul.attributes li.log-seprate:before {
   right: -4px;
   top: 28px;
 }
-ul.attributes.ad-2 li.log-seprate:before {
+ul.attributes.ad-2 li.log-separator:before {
   display: none;
 }
-.header-dark-transparent ul.attributes li.log-seprate:before {
+.header-dark-transparent ul.attributes li.log-separator:before {
   color: #ffffff;
 }
-.header-dark-transparent.header-fixed ul.attributes li.log-seprate:before {
+.header-dark-transparent.header-fixed ul.attributes li.log-separator:before {
   color: #606c8e;
 }
 nav {
@@ -12796,7 +12796,7 @@ textarea.form-control::placeholder {
   ul li.login-attri {
     padding: 13px 0 10px 15px;
   }
-  ul.attributes li.log-seprate:before {
+  ul.attributes li.log-separator:before {
     top: 23px;
     right: -3px;
   }

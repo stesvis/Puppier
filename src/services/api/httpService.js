@@ -26,9 +26,14 @@ Axios.interceptors.response.use(
   }
 );
 
+function setToken(token) {
+  Axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+
 export default {
   get: Axios.get,
   post: Axios.post,
   put: Axios.put,
   delete: Axios.delete,
+  setToken,
 };

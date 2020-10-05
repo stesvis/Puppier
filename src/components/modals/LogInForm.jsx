@@ -1,7 +1,7 @@
 import { Alert, Button, Form, FormGroup, ModalBody } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
 
 import InputWithIcon from "../InputWithIcon";
-import { Link } from "react-router-dom";
 import React from "react";
 import apiService from "../../services/api/apiService";
 import { toast } from "react-toastify";
@@ -48,6 +48,7 @@ export default function LogInForm(props) {
   // const modalContext = useContext(ModalContext);
   const [state, dispatch] = useReducer(formReducer, initialState);
   const { username, password, error, isBusy } = state;
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,7 +57,11 @@ export default function LogInForm(props) {
     });
 
     try {
-      const response = await apiService.account.login(username, password);
+      await apiService.auth.login(username, password);
+      await apiService.users.me();
+      window.location.reload();
+      // history.go(0);
+
       dispatch({
         type: "onSuccess",
       });
@@ -64,7 +69,7 @@ export default function LogInForm(props) {
       // toast.error(error.response.data.data.message);
       dispatch({
         type: "onError",
-        payload: { value: error.response.data.data.message },
+        payload: { value: error.response && error.response.data.data.message },
       });
     }
   };

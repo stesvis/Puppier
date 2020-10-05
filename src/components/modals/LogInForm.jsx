@@ -5,6 +5,7 @@ import InputWithIcon from "../InputWithIcon";
 import React from "react";
 import apiService from "../../services/api/apiService";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 import { useReducer } from "react";
 
 // import ModalContext from "../../context/modalContext";
@@ -59,12 +60,15 @@ export default function LogInForm(props) {
     try {
       await apiService.auth.login(username, password);
       await apiService.users.me();
-      window.location.reload();
-      // history.go(0);
-
       dispatch({
         type: "onSuccess",
       });
+      setTimeout(
+        () =>
+          // window.location.reload();
+          history.go(0),
+        2000
+      );
     } catch (error) {
       // toast.error(error.response.data.data.message);
       dispatch({

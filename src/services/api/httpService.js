@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
 
-const { default: Axios } = require("axios");
+const axios = require("axios");
 
-Axios.interceptors.response.use(
+axios.interceptors.response.use(
   // SUCCESS
   (response) => {
     // console.log("response", response);
@@ -27,13 +27,13 @@ Axios.interceptors.response.use(
 );
 
 function setToken(token) {
-  Axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 }
 
 export default {
-  get: Axios.get,
-  post: Axios.post,
-  put: Axios.put,
-  delete: Axios.delete,
+  get: axios.get,
+  post: axios.post,
+  put: axios.put,
+  delete: axios.delete,
   setToken,
 };

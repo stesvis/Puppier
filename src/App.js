@@ -17,16 +17,12 @@ import NavBar from "./components/NavBar";
 import SearchContext from "./context/searchContext";
 import { SearchParams } from "./models/SearchParams";
 import SignUpForm from "./components/modals/SignUpForm";
-import { useEffect } from "react";
 
 // import { Modal, ModalBody } from "react-bootstrap";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useState(new SearchParams());
-  const [currentUser, setCurrentUser] = useState(
-    localStorage.getItem("currentUser")
-  );
   // const [showLogin, setShowLogin] = useState(false);
   // const [showSignUp, setShowSignUp] = useState(false);
 
@@ -98,7 +94,7 @@ function App() {
             }
           }
         >
-          <NavBar currentUser={currentUser} />
+          <NavBar currentUser={localStorage.getItem("currentUser")} />
           <div className="clearfix"></div>
 
           <SearchContext.Provider

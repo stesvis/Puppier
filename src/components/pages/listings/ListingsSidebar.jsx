@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 
 import { Form } from "react-bootstrap";
-import InputWithIcon from "../../InputWithIcon";
+import InputWithIcon from "../../common/InputWithIcon";
 import SearchContext from "../../../context/searchContext";
 import { SearchParams } from "../../../models/SearchParams";
-import { Select2WrapperMemo } from "../../Select2Wrapper";
 import apiService from "../../../services/api/apiService";
 import { useEffect } from "react";
 

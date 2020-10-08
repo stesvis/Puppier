@@ -1,5 +1,5 @@
 import React from "react";
-import Tag from "../../Tag";
+import Tag from "../../common/Tag";
 
 export default function ListingTagsBox(props) {
   const { tags } = props;

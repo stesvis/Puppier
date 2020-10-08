@@ -42,6 +42,9 @@ export default function NavBarLoggedIn(props) {
             <a className="active" href="login.html">
               <i className="ti-unlock"></i>Change Password
             </a>
+            <a className="active" href="login.html">
+              <i className="ti-unlock"></i>Log Out
+            </a>
           </div>
         </div>
       </li>

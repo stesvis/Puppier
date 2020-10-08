@@ -1,95 +1,133 @@
 import { Alert, Button, Form, FormGroup, ModalBody } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 
-import InputWithIcon from "../InputWithIcon";
+import InputWithIcon from "../common/InputWithIcon";
+import Joi from "joi-browser";
 import React from "react";
 import apiService from "../../services/api/apiService";
-import { toast } from "react-toastify";
-import { useEffect } from "react";
-import { useReducer } from "react";
+import { useState } from "react";
 
-// import ModalContext from "../../context/modalContext";
+// import { toast } from "react-toastify";
+
+//#region Helpers
 const initialState = {
-  username: "",
-  password: "",
-  error: "",
+  account: { username: "", password: "" },
+  errors: {},
   isBusy: false,
 };
 
-const formReducer = (prevState, action) => {
-  switch (action.type) {
-    case "onChange":
-      return {
-        ...prevState,
-        [action.payload.fieldName]: action.payload.value,
-      };
-
-    case "onSubmit":
-      return { ...prevState, isBusy: true };
-
-    case "onSuccess":
-      toast.success(`Welcome ${prevState.username}`);
-      const $ = window.$;
-      $("#login").modal("hide");
-      return { ...prevState, error: "", isBusy: false };
-
-    case "onError":
-      return {
-        ...prevState,
-        error: action.payload.value,
-        isBusy: false,
-      };
-
-    default:
-      return prevState;
-  }
+const schema = {
+  username: Joi.string()
+    .email({
+      minDomainSegments: 2,
+    })
+    .required()
+    .label("Email"),
+  password: Joi.string()
+    // .regex(new RegExp("^[a-zA-Z0-9]{3,20}$"))
+    .required()
+    .label("Password"),
 };
+
+const validate = (data) => {
+  const options = { abortEarly: false };
+  const result = Joi.validate(data, schema, options);
+
+  if (!result.error) {
+    return null;
+  }
+
+  const errors = {};
+
+  result.error.details.map((details) => {
+    if (!errors[details.path[0]]) {
+      errors[details.path[0]] = details.message;
+    }
+    return null;
+  });
+
+  return errors;
+};
+
+const validateField = ({ name, value }) => {
+  const obj = { [name]: value };
+  const fieldSchema = Joi.object({ [name]: schema[name] });
+  const { error } = fieldSchema.validate(obj);
+
+  if (!error) {
+    return null;
+  }
+
+  return error.details[0].message;
+};
+//#endregion
 
 export default function LogInForm(props) {
   // const modalContext = useContext(ModalContext);
-  const [state, dispatch] = useReducer(formReducer, initialState);
-  const { username, password, error, isBusy } = state;
+  const [state, setState] = useState(initialState);
   const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch({
-      type: "onSubmit",
-    });
+
+    const errors = validate(state.account);
+    if (errors) {
+      const newState = { ...state, errors: errors };
+      setState(newState);
+      return;
+    }
+
+    // reset the errors
+    const newState = { ...state, errors: {} };
+    setState(newState);
 
     try {
-      await apiService.auth.login(username, password);
-      await apiService.users.me();
-      dispatch({
-        type: "onSuccess",
-      });
-      setTimeout(
-        () =>
-          // window.location.reload();
-          history.go(0),
-        2000
+      await apiService.auth.login(
+        state.account.username,
+        state.account.password
       );
+      // toast.success("Success!");
+
+      // close the modal
+      const $ = window.$;
+      $("#login").modal("hide");
+
+      await apiService.users.me();
+      // reload the current page
+      history.go(0);
     } catch (error) {
       // toast.error(error.response.data.data.message);
-      dispatch({
-        type: "onError",
-        payload: { value: error.response && error.response.data.data.message },
-      });
+      if (error.response) {
+        const newState = {
+          ...state,
+          errors: {
+            ...state.errors,
+            general: error.response.data.data.message,
+          },
+        };
+        setState(newState);
+      }
     }
   };
 
   const handleOnChange = (event) => {
     // console.log("handleOnChange");
     const { name, value } = event.target;
-
-    dispatch({
-      type: "onChange",
-      payload: {
-        fieldName: name,
-        value: value,
+    const fieldError = validateField(event.target);
+    console.log(fieldError);
+    const newState = {
+      ...state,
+      account: {
+        ...state.account,
+        [name]: value,
       },
-    });
+      errors: { ...state.errors, [name]: fieldError },
+    };
+    console.log(("newState", newState));
+    setState(newState);
   };
+
+  const { account, errors, isBusy } = state;
 
   return (
     <div
@@ -118,15 +156,21 @@ export default function LogInForm(props) {
             <div className="login-form">
               <Form onSubmit={handleSubmit}>
                 <Form.Group>
-                  <Form.Label>User Name</Form.Label>
+                  <Form.Label>Email</Form.Label>
                   <InputWithIcon
                     type="text"
                     name="username"
-                    placeholder="Username"
-                    value={username}
+                    placeholder="Enter your email"
+                    value={account.username}
                     icon="ti-user"
                     onChange={handleOnChange}
                   />
+                  <Alert
+                    variant="danger"
+                    show={errors.username ? errors.username.length > 0 : false}
+                  >
+                    {errors.username}
+                  </Alert>
                 </Form.Group>
 
                 <FormGroup>
@@ -135,15 +179,17 @@ export default function LogInForm(props) {
                     type="password"
                     name="password"
                     placeholder="*******"
-                    value={password}
+                    value={account.password}
                     icon="ti-user"
                     onChange={handleOnChange}
                   />
+                  <Alert
+                    variant="danger"
+                    show={errors.password ? errors.password.length > 0 : false}
+                  >
+                    {errors.password}
+                  </Alert>
                 </FormGroup>
-
-                <Alert variant="danger" show={error.length > 0}>
-                  {error}
-                </Alert>
 
                 <FormGroup>
                   <Button
@@ -153,6 +199,13 @@ export default function LogInForm(props) {
                   >
                     {isBusy ? "Loading..." : "Log In"}
                   </Button>
+                  <Alert
+                    variant="danger"
+                    show={errors.general ? errors.general.length > 0 : false}
+                    className="mt-3"
+                  >
+                    {errors.general}
+                  </Alert>
                 </FormGroup>
               </Form>
             </div>

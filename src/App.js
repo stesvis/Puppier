@@ -4,7 +4,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 
 import Home from "./components/pages/Home";
 import ListingDetails from "./components/pages/ListingDetails";
@@ -17,6 +16,7 @@ import NavBar from "./components/NavBar";
 import SearchContext from "./context/searchContext";
 import { SearchParams } from "./models/SearchParams";
 import SignUpForm from "./components/modals/SignUpForm";
+import { ToastContainer } from "react-toastify";
 
 // import { Modal, ModalBody } from "react-bootstrap";
 

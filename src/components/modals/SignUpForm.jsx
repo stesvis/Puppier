@@ -1,6 +1,6 @@
 import { Button, Col, Form, ModalBody, Row } from "react-bootstrap";
 
-import InputWithIcon from "../InputWithIcon";
+import InputWithIcon from "../common/InputWithIcon";
 import { Link } from "react-router-dom";
 import React from "react";
 

@@ -4,14 +4,12 @@ import React, { useContext, useEffect } from "react";
 import ListingsGrid from "./listings/ListingsGrid";
 import ListingsSidebar from "./listings/ListingsSidebar";
 import LoadingContext from "../../context/loadingContext";
-import PageTitle from "../PageTitle";
+import PageTitle from "../common/PageTitle";
 import SearchContext from "../../context/searchContext";
 import { SearchParams } from "../../models/SearchParams";
 import _ from "lodash";
 import apiService from "../../services/api/apiService";
-import listingsApiService from "../../services/api/listingsApiService";
 import queryString from "query-string";
-import { toast } from "react-toastify";
 import { useRef } from "react";
 import { useState } from "react";
 
@@ -29,7 +27,7 @@ export default function Listings(props) {
   async function fetchListings(keywords, location, categoryId) {
     // const time = new Date().getTime();
     // console.log(`Start ${time}`);
-    const response = await listingsApiService.search(
+    const response = await apiService.listings.search(
       keywords,
       location,
       categoryId

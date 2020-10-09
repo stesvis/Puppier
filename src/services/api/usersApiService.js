@@ -14,8 +14,21 @@ async function me() {
   const response = await httpService.get(url);
   const currentUser = response.data.data;
 
-  localStorage.setItem("currentUser", currentUser);
-  sessionStorage.setItem("currentUser", currentUser);
+  localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+  return response;
+}
+
+async function register(name, username, password, password_confirmation) {
+  const url = `${base_url}`;
+
+  const response = await httpService.post(url, {
+    name: name,
+    email: username,
+    password: password,
+    password_confirmation: password_confirmation,
+  });
 
   return response;
 }
@@ -23,4 +36,5 @@ async function me() {
 export default {
   all,
   me,
+  register,
 };

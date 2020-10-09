@@ -40,7 +40,9 @@ export default function NavBar(props) {
           </li>
         </ul>
         {!props.currentUser && <NavBarLoggedOut />}
-        {props.currentUser && <NavBarLoggedIn />}
+        {props.currentUser && (
+          <NavBarLoggedIn currentUser={props.currentUser} />
+        )}
       </nav>
     </div>
     // <!-- End Navigation -->

@@ -1,13 +1,115 @@
-import { Button, Col, Form, ModalBody, Row } from "react-bootstrap";
+import * as formService from "../../services/formService";
+
+import { Alert, Button, Col, Form, ModalBody, Row } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
 
 import InputWithIcon from "../common/InputWithIcon";
-import { Link } from "react-router-dom";
+import Joi from "joi-browser";
 import React from "react";
+import apiService from "../../services/api/apiService";
+import { useState } from "react";
 
-// import ModalContext from "../../context/modalContext";
+//#region Helpers
+const initialState = {
+  account: { name: "", username: "", password: "", password_confirmation: "" },
+  errors: {},
+  isBusy: false,
+};
+
+const schema = {
+  name: Joi.string().required().min(3).max(30).label("Full name"),
+  username: Joi.string()
+    .email({
+      minDomainSegments: 2,
+    })
+    .required()
+    .label("Email"),
+  password: Joi.string()
+    // .regex(new RegExp("^[a-zA-Z0-9]{3,20}$"))
+    .required()
+    .min(6)
+    .label("Password"),
+  password_confirmation: Joi.any()
+    // TODO: pass "password" to validateField()!
+    .valid(Joi.ref("password"))
+    .required()
+    .label("Password confirmation")
+    .options({ language: { any: { allowOnly: "!!Passwords do not match" } } }),
+};
+//#endregion
 
 export default function SignUpForm(props) {
-  // const modalContext = useContext(ModalContext);
+  const [state, setState] = useState(initialState);
+  const history = useHistory();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { account } = state;
+
+    const errors = formService.validate(account, schema);
+    if (errors) {
+      const newState = { ...state, errors: errors };
+      setState(newState);
+      return;
+    }
+
+    // reset the errors
+    const newState = { ...state, errors: {}, isBusy: true };
+    setState(newState);
+
+    try {
+      await apiService.users.register(
+        account.name,
+        account.username,
+        account.password,
+        account.password_confirmation
+      );
+      await apiService.auth.login(account.username, account.password);
+      // toast.success("Success!");
+
+      // close the modal
+      const $ = window.$;
+      $("#login").modal("hide");
+
+      await apiService.users.me();
+
+      setState({ ...state, isBusy: false });
+      // reload the current page
+      history.go(0);
+    } catch (error) {
+      // toast.error(error.response.data.data.message);
+      if (error.response) {
+        const newState = {
+          ...state,
+          errors: {
+            ...state.errors,
+            general: error.response.data.data.message,
+          },
+          isBusy: false,
+        };
+        setState(newState);
+      }
+    }
+  };
+
+  const handleOnChange = (event) => {
+    // console.log("handleOnChange");
+    const { name, value } = event.target;
+    const fieldError = formService.validateField(name, value, schema);
+
+    const newState = {
+      ...state,
+      account: {
+        ...state.account,
+        [name]: value,
+      },
+      errors: { ...state.errors, [name]: fieldError },
+    };
+    setState(newState);
+  };
+
+  const { account, errors, isBusy } = state;
 
   return (
     <div
@@ -34,19 +136,28 @@ export default function SignUpForm(props) {
               Sign <span className="theme-cl">Up</span>
             </h4>
             <div className="login-form">
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <Row>
                   <Col lg={6} md={6}>
                     <Form.Group>
                       <InputWithIcon
+                        name="name"
                         type="text"
-                        placeholder="First name"
+                        placeholder="Full name"
                         icon="ti-user"
+                        value={account.name}
+                        onChange={handleOnChange}
                       />
+                      <Alert
+                        variant="danger"
+                        show={errors.name ? errors.name.length > 0 : false}
+                      >
+                        {errors.name}
+                      </Alert>
                     </Form.Group>
                   </Col>
 
-                  <Col lg={6} md={6}>
+                  {/* <Col lg={6} md={6}>
                     <Form.Group>
                       <InputWithIcon
                         type="text"
@@ -54,9 +165,9 @@ export default function SignUpForm(props) {
                         icon="ti-user"
                       />
                     </Form.Group>
-                  </Col>
+                  </Col> */}
 
-                  <Col lg={6} md={6}>
+                  {/* <Col lg={6} md={6}>
                     <Form.Group>
                       <InputWithIcon
                         type="text"
@@ -64,35 +175,70 @@ export default function SignUpForm(props) {
                         icon="ti-user"
                       />
                     </Form.Group>
-                  </Col>
+                  </Col> */}
 
                   <Col lg={6} md={6}>
                     <Form.Group>
                       <InputWithIcon
+                        name="username"
                         type="email"
                         placeholder="Email"
                         icon="ti-email"
+                        value={account.username}
+                        onChange={handleOnChange}
                       />
+                      <Alert
+                        variant="danger"
+                        show={
+                          errors.username ? errors.username.length > 0 : false
+                        }
+                      >
+                        {errors.username}
+                      </Alert>
                     </Form.Group>
                   </Col>
 
                   <Col lg={6} md={6}>
                     <Form.Group>
                       <InputWithIcon
+                        name="password"
                         type="password"
                         placeholder="Password"
                         icon="ti-unlock"
+                        value={account.password}
+                        onChange={handleOnChange}
                       />
+                      <Alert
+                        variant="danger"
+                        show={
+                          errors.password ? errors.password.length > 0 : false
+                        }
+                      >
+                        {errors.password}
+                      </Alert>
                     </Form.Group>
                   </Col>
 
                   <Col lg={6} md={6}>
                     <Form.Group>
                       <InputWithIcon
+                        name="password_confirmation"
                         type="password"
                         placeholder="Confirm Password"
                         icon="ti-unlock"
+                        value={account.password_confirmation}
+                        onChange={handleOnChange}
                       />
+                      <Alert
+                        variant="danger"
+                        show={
+                          errors.password_confirmation
+                            ? errors.password_confirmation.length > 0
+                            : false
+                        }
+                      >
+                        {errors.password_confirmation}
+                      </Alert>
                     </Form.Group>
                   </Col>
                 </Row>
@@ -101,8 +247,9 @@ export default function SignUpForm(props) {
                   <Button
                     type="submit"
                     className="btn btn-md full-width pop-login"
+                    disabled={isBusy}
                   >
-                    Sign Up
+                    {isBusy ? "Loading..." : "Sign Up"}
                   </Button>
                 </Form.Group>
               </Form>

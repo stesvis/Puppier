@@ -18,7 +18,7 @@ export default function NavBarLoggedIn(props) {
               className="avater-img"
               alt=""
             />
-            Hi, Admin
+            Hi, {props.currentUser.name}
           </button>
           <div className="dropdown-menu pull-right animated flipInX">
             <a href="dashboard.html">

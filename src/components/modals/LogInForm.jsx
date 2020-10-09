@@ -1,3 +1,5 @@
+import * as formService from "../../services/formService";
+
 import { Alert, Button, Form, FormGroup, ModalBody } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 
@@ -28,38 +30,6 @@ const schema = {
     .required()
     .label("Password"),
 };
-
-const validate = (data) => {
-  const options = { abortEarly: false };
-  const result = Joi.validate(data, schema, options);
-
-  if (!result.error) {
-    return null;
-  }
-
-  const errors = {};
-
-  result.error.details.map((details) => {
-    if (!errors[details.path[0]]) {
-      errors[details.path[0]] = details.message;
-    }
-    return null;
-  });
-
-  return errors;
-};
-
-const validateField = ({ name, value }) => {
-  const obj = { [name]: value };
-  const fieldSchema = Joi.object({ [name]: schema[name] });
-  const { error } = fieldSchema.validate(obj);
-
-  if (!error) {
-    return null;
-  }
-
-  return error.details[0].message;
-};
 //#endregion
 
 export default function LogInForm(props) {
@@ -70,7 +40,7 @@ export default function LogInForm(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const errors = validate(state.account);
+    const errors = formService.validate(state.account, schema);
     if (errors) {
       const newState = { ...state, errors: errors };
       setState(newState);
@@ -78,7 +48,7 @@ export default function LogInForm(props) {
     }
 
     // reset the errors
-    const newState = { ...state, errors: {} };
+    const newState = { ...state, errors: {}, isBusy: true };
     setState(newState);
 
     try {
@@ -93,6 +63,8 @@ export default function LogInForm(props) {
       $("#login").modal("hide");
 
       await apiService.users.me();
+
+      setState({ ...state, isBusy: false });
       // reload the current page
       history.go(0);
     } catch (error) {
@@ -104,6 +76,7 @@ export default function LogInForm(props) {
             ...state.errors,
             general: error.response.data.data.message,
           },
+          isBusy: false,
         };
         setState(newState);
       }
@@ -113,8 +86,8 @@ export default function LogInForm(props) {
   const handleOnChange = (event) => {
     // console.log("handleOnChange");
     const { name, value } = event.target;
-    const fieldError = validateField(event.target);
-    console.log(fieldError);
+    const fieldError = formService.validateField(name, value, schema);
+
     const newState = {
       ...state,
       account: {
@@ -123,7 +96,6 @@ export default function LogInForm(props) {
       },
       errors: { ...state.errors, [name]: fieldError },
     };
-    console.log(("newState", newState));
     setState(newState);
   };
 
@@ -161,8 +133,8 @@ export default function LogInForm(props) {
                     type="text"
                     name="username"
                     placeholder="Enter your email"
-                    value={account.username}
                     icon="ti-user"
+                    value={account.username}
                     onChange={handleOnChange}
                   />
                   <Alert
@@ -179,8 +151,8 @@ export default function LogInForm(props) {
                     type="password"
                     name="password"
                     placeholder="*******"
-                    value={account.password}
                     icon="ti-user"
+                    value={account.password}
                     onChange={handleOnChange}
                   />
                   <Alert

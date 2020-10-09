@@ -94,7 +94,9 @@ function App() {
             }
           }
         >
-          <NavBar currentUser={localStorage.getItem("currentUser")} />
+          <NavBar
+            currentUser={JSON.parse(localStorage.getItem("currentUser"))}
+          />
           <div className="clearfix"></div>
 
           <SearchContext.Provider

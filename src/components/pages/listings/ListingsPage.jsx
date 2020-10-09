@@ -1,14 +1,14 @@
 import { Col, Container, Row } from "react-bootstrap";
 import React, { useContext, useEffect } from "react";
 
-import ListingsGrid from "./listings/ListingsGrid";
-import ListingsSidebar from "./listings/ListingsSidebar";
-import LoadingContext from "../../context/loadingContext";
-import PageTitle from "../common/PageTitle";
-import SearchContext from "../../context/searchContext";
-import { SearchParams } from "../../models/SearchParams";
+import ListingsGrid from "./ListingsGrid";
+import ListingsSidebar from "./ListingsSidebar";
+import LoadingContext from "../../../context/loadingContext";
+import PageTitle from "../../common/PageTitle";
+import SearchContext from "../../../context/searchContext";
+import { SearchParams } from "../../../models/SearchParams";
 import _ from "lodash";
-import apiService from "../../services/api/apiService";
+import apiService from "../../../services/api/apiService";
 import queryString from "query-string";
 import { useRef } from "react";
 import { useState } from "react";

@@ -1,9 +1,10 @@
 import httpService from "./httpService";
+import localStorageService from "../localStorageService";
 
-const base_url = `${process.env.REACT_APP_API_BASE_URL}/auth`;
+const base_url = process.env.REACT_APP_API_BASE_URL;
 
 async function logIn(username, password) {
-  const url = `${base_url}/token`;
+  const url = `${base_url}/auth/token`;
   const response = await httpService.post(url, {
     email: username,
     password: password,
@@ -13,13 +14,25 @@ async function logIn(username, password) {
   // extract the token
   const access_token = response.data.data.access_token;
   // save the token
-  localStorage.setItem("access_token", access_token);
-  sessionStorage.setItem("access_token", access_token);
-  httpService.setToken(access_token);
+  localStorageService.setToken(access_token);
 
   return response;
 }
 
+async function logOut() {
+  const url = `${process.env.REACT_APP_API_BASE_URL}/logout`;
+  const response = await httpService.post(url);
+
+  localStorageService.removeToken();
+  localStorageService.removeCurrentUser();
+
+  return response;
+}
+
+//#region Private methods
+//#endregion
+
 export default {
-  login: logIn,
+  logIn,
+  logOut,
 };

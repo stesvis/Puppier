@@ -1,4 +1,5 @@
 import httpService from "./httpService";
+import localStorageService from "../localStorageService";
 
 const base_url = `${process.env.REACT_APP_API_BASE_URL}/users`;
 async function all() {
@@ -13,9 +14,7 @@ async function me() {
   // console.log(url);
   const response = await httpService.get(url);
   const currentUser = response.data.data;
-
-  localStorage.setItem("currentUser", JSON.stringify(currentUser));
-  sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
+  localStorageService.setCurrentUser(currentUser);
 
   return response;
 }

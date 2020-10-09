@@ -38,7 +38,7 @@ const schema = {
 };
 //#endregion
 
-export default function SignUpForm(props) {
+export default function SignUpFormModal(props) {
   const [state, setState] = useState(initialState);
   const history = useHistory();
 
@@ -122,12 +122,10 @@ export default function SignUpForm(props) {
       id="signup"
       tabIndex="-1"
       role="dialog"
-      aria-labelledby="sign-up"
-    >
+      aria-labelledby="sign-up">
       <div
         className="modal-dialog modal-dialog-centered login-pop-form"
-        role="document"
-      >
+        role="document">
         <div className="modal-content" id="sign-up">
           <span
             className="mod-close"
@@ -155,8 +153,7 @@ export default function SignUpForm(props) {
                       />
                       <Alert
                         variant="danger"
-                        show={errors.name ? errors.name.length > 0 : false}
-                      >
+                        show={errors.name ? errors.name.length > 0 : false}>
                         {errors.name}
                       </Alert>
                     </Form.Group>
@@ -196,8 +193,7 @@ export default function SignUpForm(props) {
                         variant="danger"
                         show={
                           errors.username ? errors.username.length > 0 : false
-                        }
-                      >
+                        }>
                         {errors.username}
                       </Alert>
                     </Form.Group>
@@ -217,8 +213,7 @@ export default function SignUpForm(props) {
                         variant="danger"
                         show={
                           errors.password ? errors.password.length > 0 : false
-                        }
-                      >
+                        }>
                         {errors.password}
                       </Alert>
                     </Form.Group>
@@ -240,8 +235,7 @@ export default function SignUpForm(props) {
                           errors.password_confirmation
                             ? errors.password_confirmation.length > 0
                             : false
-                        }
-                      >
+                        }>
                         {errors.password_confirmation}
                       </Alert>
                     </Form.Group>
@@ -252,8 +246,7 @@ export default function SignUpForm(props) {
                   <Button
                     type="submit"
                     className="btn btn-md full-width pop-login"
-                    disabled={isBusy}
-                  >
+                    disabled={isBusy}>
                     {isBusy ? "Loading..." : "Sign Up"}
                   </Button>
                 </Form.Group>

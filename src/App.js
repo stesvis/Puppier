@@ -5,18 +5,26 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 import React, { useState } from "react";
 
-import Home from "./components/pages/Home";
-import ListingDetails from "./components/pages/ListingDetails";
-import ListingForm from "./components/pages/listings/ListingForm";
-import Listings from "./components/pages/Listings";
+import DashboardPage from "./components/pages/account/DashboardPage";
+import HomePage from "./components/pages/home/HomePage";
+import ListingDetailsPage from "./components/pages/listings/ListingDetailsPage";
+import ListingFormPage from "./components/pages/account/ListingFormPage";
+import ListingsPage from "./components/pages/listings/ListingsPage";
 import LoadingContext from "./context/loadingContext";
-import LogInForm from "./components/modals/LogInForm";
+import LogInFormModal from "./components/modals/LogInFormModal";
+import LogOut from "./components/pages/account/LogOut";
 import ModalContext from "./context/modalContext";
+import MyListingsPage from "./components/pages/account/MyListingsPage";
 import NavBar from "./components/NavBar";
+import ProfileFormPage from "./components/pages/account/ProfileFormPage";
+import ProfilePage from "./components/pages/account/ProfilePage";
+import { Routes } from "./services/api/routes";
+import SavedListingsPage from "./components/pages/account/SavedListingsPage";
 import SearchContext from "./context/searchContext";
 import { SearchParams } from "./models/SearchParams";
-import SignUpForm from "./components/modals/SignUpForm";
+import SignUpFormModal from "./components/modals/SignUpFormModal";
 import { ToastContainer } from "react-toastify";
+import localStorageService from "./services/localStorageService";
 
 // import { Modal, ModalBody } from "react-bootstrap";
 
@@ -25,6 +33,7 @@ function App() {
   const [searchParams, setSearchParams] = useState(new SearchParams());
   // const [showLogin, setShowLogin] = useState(false);
   // const [showSignUp, setShowSignUp] = useState(false);
+  const currentUser = localStorageService.getCurrentUser();
 
   //#region context
   const showLoading = () => {
@@ -66,8 +75,7 @@ function App() {
         isLoading: true,
         onStartedLoading: showLoading,
         onFinishedLoading: hideLoading,
-      }}
-    >
+      }}>
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -92,38 +100,79 @@ function App() {
             {
               // onModalToggled: handleToggleModal,
             }
-          }
-        >
-          <NavBar
-            currentUser={JSON.parse(localStorage.getItem("currentUser"))}
-          />
+          }>
+          <NavBar currentUser={currentUser} />
           <div className="clearfix"></div>
 
           <SearchContext.Provider
             value={{
               searchParameters: searchParams,
               onSetSearchParams,
-            }}
-          >
+            }}>
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/listings/create" component={ListingForm} />
-              <Route exact path="/listings/:id" component={ListingDetails} />
-              <Route exact path="/listings/:id/edit" component={ListingForm} />
-              <Route exact path="/listings" component={Listings} />
+              <Route exact path={Routes.home} component={HomePage} />
+              {/* Listings */}
+              <Route
+                exact
+                path={Routes.listing_create}
+                render={(props) => {
+                  if (!currentUser) {
+                    return <Redirect to={Routes.home} />;
+                  }
+
+                  return <ListingFormPage {...props} />;
+                }}
+              />
+              <Route
+                exact
+                path={Routes.listing_details}
+                component={ListingDetailsPage}
+              />
+              <Route
+                exact
+                path={Routes.listing_edit}
+                render={(props) => {
+                  if (!currentUser) {
+                    return <Redirect to={Routes.home} />;
+                  }
+
+                  return <ListingFormPage {...props} />;
+                }}
+              />
+              <Route exact path={Routes.listings} component={ListingsPage} />
+              {/* Profile */}
+              <Route exact path={Routes.dashboard} component={DashboardPage} />
+              <Route exact path={Routes.profile} component={ProfilePage} />
+              <Route
+                exact
+                path={Routes.my_listings}
+                component={MyListingsPage}
+              />
+              <Route
+                exact
+                path={Routes.saved_listings}
+                component={SavedListingsPage}
+              />
+              <Route
+                exact
+                path={Routes.profile_edit}
+                component={ProfileFormPage}
+              />
+              <Route exact path={Routes.logout} component={LogOut} />
+
               <Redirect to="/404" />
             </Switch>
           </SearchContext.Provider>
 
           {/* <Modal show={showLogin}>
             <ModalBody> */}
-          <LogInForm />
+          <LogInFormModal />
           {/* </ModalBody>
           </Modal> */}
 
           {/* <Modal show={showSignUp}>
             <ModalBody> */}
-          <SignUpForm />
+          <SignUpFormModal />
           {/* </ModalBody>
           </Modal> */}
           <Link id="back2Top" className="top-scroll" title="Back to top" to="#">

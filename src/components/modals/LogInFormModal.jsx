@@ -7,9 +7,8 @@ import InputWithIcon from "../common/InputWithIcon";
 import Joi from "joi-browser";
 import React from "react";
 import apiService from "../../services/api/apiService";
+import logService from "../../services/logService";
 import { useState } from "react";
-
-// import { toast } from "react-toastify";
 
 //#region Helpers
 const initialState = {
@@ -32,7 +31,7 @@ const schema = {
 };
 //#endregion
 
-export default function LogInForm(props) {
+export default function LogInFormModal(props) {
   // const modalContext = useContext(ModalContext);
   const [state, setState] = useState(initialState);
   const history = useHistory();
@@ -52,17 +51,17 @@ export default function LogInForm(props) {
     setState(newState);
 
     try {
-      await apiService.auth.login(
+      await apiService.auth.logIn(
         state.account.username,
         state.account.password
       );
       // toast.success("Success!");
 
+      await apiService.users.me();
+
       // close the modal
       const $ = window.$;
       $("#login").modal("hide");
-
-      await apiService.users.me();
 
       setState({ ...state, isBusy: false });
       // reload the current page
@@ -74,7 +73,7 @@ export default function LogInForm(props) {
           ...state,
           errors: {
             ...state.errors,
-            general: error.response.data.data.message,
+            general: logService.extractErrorMessage(error),
           },
           isBusy: false,
         };
@@ -107,12 +106,10 @@ export default function LogInForm(props) {
       id="login"
       tabIndex="-1"
       role="dialog"
-      aria-labelledby="registermodal"
-    >
+      aria-labelledby="registermodal">
       <div
         className="modal-dialog modal-dialog-centered login-pop-form"
-        role="document"
-      >
+        role="document">
         <div className="modal-content" id="registermodal">
           <span
             className="mod-close"
@@ -139,8 +136,7 @@ export default function LogInForm(props) {
                   />
                   <Alert
                     variant="danger"
-                    show={errors.username ? errors.username.length > 0 : false}
-                  >
+                    show={errors.username ? errors.username.length > 0 : false}>
                     {errors.username}
                   </Alert>
                 </Form.Group>
@@ -157,8 +153,7 @@ export default function LogInForm(props) {
                   />
                   <Alert
                     variant="danger"
-                    show={errors.password ? errors.password.length > 0 : false}
-                  >
+                    show={errors.password ? errors.password.length > 0 : false}>
                     {errors.password}
                   </Alert>
                 </FormGroup>
@@ -167,15 +162,13 @@ export default function LogInForm(props) {
                   <Button
                     type="submit"
                     className="btn btn-md full-width pop-login"
-                    disabled={isBusy}
-                  >
+                    disabled={isBusy}>
                     {isBusy ? "Loading..." : "Log In"}
                   </Button>
                   <Alert
                     variant="danger"
                     show={errors.general ? errors.general.length > 0 : false}
-                    className="mt-3"
-                  >
+                    className="mt-3">
                     {errors.general}
                   </Alert>
                 </FormGroup>

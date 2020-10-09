@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import React from "react";
+import { Routes } from "../../services/api/routes";
+import authApiService from "../../services/api/authApiService";
+import { toast } from "react-toastify";
 
 export default function NavBarLoggedIn(props) {
   return (
@@ -11,8 +14,7 @@ export default function NavBarLoggedIn(props) {
             className="btn btn-order-by-filt"
             data-toggle="dropdown"
             aria-haspopup="true"
-            aria-expanded="false"
-          >
+            aria-expanded="false">
             <img
               src="https://via.placeholder.com/400x400"
               className="avater-img"
@@ -21,30 +23,30 @@ export default function NavBarLoggedIn(props) {
             Hi, {props.currentUser.name}
           </button>
           <div className="dropdown-menu pull-right animated flipInX">
-            <a href="dashboard.html">
+            <Link to={Routes.dashboard}>
               <i className="ti-dashboard"></i>Dashboard
-            </a>
-            <a href="add-listing.html">
-              <i className="ti-plus"></i>Add Listing
-            </a>
-            <a href="my-profile.html">
+            </Link>
+            <Link to={Routes.profile}>
               <i className="ti-user"></i>My Profile
-            </a>
-            <a href="my-listings.html">
-              <i className="ti-layers"></i>My Listing
-            </a>
-            <a href="wallet.html">
+            </Link>
+            <Link to={Routes.listing_create}>
+              <i className="ti-plus"></i>Add Listing
+            </Link>
+            <Link to={Routes.my_listings}>
+              <i className="ti-layers"></i>My Listings
+            </Link>
+            {/* <Link to="wallet.html">
               <i className="ti-pencil-alt"></i>Wallet
-            </a>
-            <a href="bookmark-list.html">
+            </Link> */}
+            <Link to={Routes.saved_listings}>
               <i className="ti-bookmark"></i>Bookmarked Listings
-            </a>
-            <a className="active" href="login.html">
+            </Link>
+            <Link to={Routes.profile_edit}>
               <i className="ti-unlock"></i>Change Password
-            </a>
-            <a className="active" href="login.html">
+            </Link>
+            <Link to={Routes.logout}>
               <i className="ti-unlock"></i>Log Out
-            </a>
+            </Link>
           </div>
         </div>
       </li>

@@ -1,6 +1,13 @@
+import localStorageService from "../localStorageService";
+import logService from "../logService";
 import { toast } from "react-toastify";
 
 const axios = require("axios");
+
+axios.interceptors.request.use((config) => {
+  config.headers.Authorization = `Bearer ${localStorageService.getToken()}`;
+  return config;
+});
 
 axios.interceptors.response.use(
   // SUCCESS
@@ -19,21 +26,16 @@ axios.interceptors.response.use(
       error.response.status < 500;
 
     if (!expectedError) {
-      toast.error(error.response.data.data.message);
+      toast.error(logService.extractErrorMessage(error));
     }
 
     return Promise.reject(error);
   }
 );
 
-function setToken(token) {
-  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-}
-
 export default {
   get: axios.get,
   post: axios.post,
   put: axios.put,
   delete: axios.delete,
-  setToken,
 };

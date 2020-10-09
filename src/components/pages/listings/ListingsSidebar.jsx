@@ -5,11 +5,14 @@ import InputWithIcon from "../../common/InputWithIcon";
 import SearchContext from "../../../context/searchContext";
 import { SearchParams } from "../../../models/SearchParams";
 import apiService from "../../../services/api/apiService";
+import { isValidElement } from "react";
 import { useEffect } from "react";
+import { useRef } from "react";
 
 export default function ListingsSidebar(props) {
-  const searchContext = useContext(SearchContext);
   const [categories, setCategories] = useState([]);
+  const searchContext = useContext(SearchContext);
+  const searchParamsChanged = useRef(false);
   // const [keywords, setKeywords] = useState("");
   // const [location, setLocation] = useState("");
   // const [categoryId, setCategoryId] = useState("");
@@ -21,19 +24,33 @@ export default function ListingsSidebar(props) {
   };
   const [state, setState] = useState(initialState);
 
+  async function getCategories() {
+    const response = await apiService.categories.all();
+    setCategories(response.data.data);
+    return response.data.data;
+  }
+   
   useEffect(() => {
-    async function getCategories() {
-      const response = await apiService.categories.all();
-      setCategories(response.data.data);
-      return response.data.data;
-    }
-
     getCategories();
   }, []);
+
+  useEffect(()=>{
+    if(!searchParamsChanged.current){
+      const newState = {
+        keywords: props.keywords,
+        location: props.location,
+        categoryId: props.categoryId,
+      };
+    setState(newState);
+  }
+  }, [props])
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
+
+    // This will prevent triggering the effect when props change
+    searchParamsChanged.current=true;
 
     const newState = { ...state, [name]: value };
     setState(newState);
@@ -55,7 +72,8 @@ export default function ListingsSidebar(props) {
             <InputWithIcon
               type="text"
               name="keywords"
-              defaultValue={props.keywords}
+              // defaultValue={props.keywords}
+              value={state.keywords}
               onChange={handleOnChange}
               placeholder="Keyword(s)..."
               icon="ti-search"
@@ -66,7 +84,8 @@ export default function ListingsSidebar(props) {
             <InputWithIcon
               type="text"
               name="location"
-              defaultValue={props.location}
+              // defaultValue={props.location}
+              value={state.location}
               onChange={handleOnChange}
               placeholder="Where..."
               icon="ti-target"
@@ -76,7 +95,8 @@ export default function ListingsSidebar(props) {
           <Form.Group>
             <div className="input-with-icon">
               <select
-                defaultValue={props.categoryId}
+                // defaultValue={props.categoryId}
+                value={state.categoryId}
                 onChange={handleOnChange}
                 className={"form-control select2-container--default"}
                 id={"categoryId"}

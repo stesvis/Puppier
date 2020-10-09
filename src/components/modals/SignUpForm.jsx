@@ -99,8 +99,8 @@ export default function SignUpForm(props) {
     let fieldError = formService.validateField(name, value, schema);
 
     // TODO: this is just a hack
-    if(name==='password_confirmation' && value === state.account.password){
-      fieldError='';
+    if (name === "password_confirmation" && value === state.account.password) {
+      fieldError = "";
     }
 
     const newState = {
@@ -132,7 +132,7 @@ export default function SignUpForm(props) {
           <span
             className="mod-close"
             data-dismiss="modal"
-          // onClick={(e) => modalContext.onModalToggled(e, "signup", false)}
+            // onClick={(e) => modalContext.onModalToggled(e, "signup", false)}
           >
             <i className="ti-close"></i>
           </span>

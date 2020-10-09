@@ -29,28 +29,28 @@ export default function ListingsSidebar(props) {
     setCategories(response.data.data);
     return response.data.data;
   }
-   
+
   useEffect(() => {
     getCategories();
   }, []);
 
-  useEffect(()=>{
-    if(!searchParamsChanged.current){
+  useEffect(() => {
+    if (!searchParamsChanged.current) {
       const newState = {
         keywords: props.keywords,
         location: props.location,
         categoryId: props.categoryId,
       };
-    setState(newState);
-  }
-  }, [props])
+      setState(newState);
+    }
+  }, [props]);
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
 
     // This will prevent triggering the effect when props change
-    searchParamsChanged.current=true;
+    searchParamsChanged.current = true;
 
     const newState = { ...state, [name]: value };
     setState(newState);

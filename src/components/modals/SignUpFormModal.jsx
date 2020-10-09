@@ -7,6 +7,7 @@ import InputWithIcon from "../common/InputWithIcon";
 import Joi from "joi-browser";
 import React from "react";
 import apiService from "../../services/api/apiService";
+import logService from "../../services/logService";
 import { useState } from "react";
 
 //#region Helpers
@@ -84,7 +85,7 @@ export default function SignUpFormModal(props) {
           ...state,
           errors: {
             ...state.errors,
-            general: error.response.data.data.message,
+            general: logService.extractErrorMessage(error),
           },
           isBusy: false,
         };

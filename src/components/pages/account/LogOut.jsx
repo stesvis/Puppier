@@ -1,3 +1,4 @@
+import { Col, Container, Row } from "react-bootstrap";
 import React, { useEffect } from "react";
 
 import { Routes } from "../../../services/api/routes";
@@ -23,5 +24,17 @@ export default function LogOut() {
     logOut();
   }, []);
 
-  return null;
+  return (
+    <section className="gray">
+      <Container>
+        <Row>
+          <Col lg={8} md={12} sm={12}>
+            <h4 className="modal-header-title">
+              Logging <span className="theme-cl">Out...</span>
+            </h4>
+          </Col>
+        </Row>
+      </Container>
+    </section>
+  );
 }

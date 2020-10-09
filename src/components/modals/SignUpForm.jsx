@@ -96,7 +96,12 @@ export default function SignUpForm(props) {
   const handleOnChange = (event) => {
     // console.log("handleOnChange");
     const { name, value } = event.target;
-    const fieldError = formService.validateField(name, value, schema);
+    let fieldError = formService.validateField(name, value, schema);
+
+    // TODO: this is just a hack
+    if(name==='password_confirmation' && value === state.account.password){
+      fieldError='';
+    }
 
     const newState = {
       ...state,
@@ -127,7 +132,7 @@ export default function SignUpForm(props) {
           <span
             className="mod-close"
             data-dismiss="modal"
-            // onClick={(e) => modalContext.onModalToggled(e, "signup", false)}
+          // onClick={(e) => modalContext.onModalToggled(e, "signup", false)}
           >
             <i className="ti-close"></i>
           </span>

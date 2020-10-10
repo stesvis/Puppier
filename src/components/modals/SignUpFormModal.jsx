@@ -66,7 +66,7 @@ export default function SignUpFormModal(props) {
         account.password,
         account.password_confirmation
       );
-      await apiService.auth.login(account.username, account.password);
+      await apiService.auth.logIn(account.username, account.password);
       // toast.success("Success!");
 
       // close the modal
@@ -79,7 +79,7 @@ export default function SignUpFormModal(props) {
       // reload the current page
       history.go(0);
     } catch (error) {
-      // toast.error(error.response.data.data.message);
+      console.log(error);
       if (error.response) {
         const newState = {
           ...state,

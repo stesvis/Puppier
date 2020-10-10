@@ -94,8 +94,8 @@ export default function SignUpFormModal(props) {
     }
   };
 
-  const handleOnChange = (event) => {
-    // console.log("handleOnChange");
+  const handleChange = (event) => {
+    // console.log("handleChange");
     const { name, value } = event.target;
     let fieldError = formService.validateField(name, value, schema);
 
@@ -150,7 +150,7 @@ export default function SignUpFormModal(props) {
                         placeholder="Full name"
                         icon="ti-user"
                         value={account.name}
-                        onChange={handleOnChange}
+                        onChange={handleChange}
                       />
                       <Alert
                         variant="danger"
@@ -188,7 +188,7 @@ export default function SignUpFormModal(props) {
                         placeholder="Email"
                         icon="ti-email"
                         value={account.username}
-                        onChange={handleOnChange}
+                        onChange={handleChange}
                       />
                       <Alert
                         variant="danger"
@@ -208,7 +208,7 @@ export default function SignUpFormModal(props) {
                         placeholder="Password"
                         icon="ti-unlock"
                         value={account.password}
-                        onChange={handleOnChange}
+                        onChange={handleChange}
                       />
                       <Alert
                         variant="danger"
@@ -228,7 +228,7 @@ export default function SignUpFormModal(props) {
                         placeholder="Confirm Password"
                         icon="ti-unlock"
                         value={account.password_confirmation}
-                        onChange={handleOnChange}
+                        onChange={handleChange}
                       />
                       <Alert
                         variant="danger"

@@ -2,8 +2,8 @@ import { Button, Col, Form, FormGroup, Row } from "react-bootstrap";
 
 import InputWithIcon from "../../common/InputWithIcon";
 import React from "react";
+import { Routes } from "../../../services/api/routes";
 import { Select2Wrapper } from "../../common/Select2Wrapper";
-import categoriesApiService from "../../../services/api/categoriesApiService";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
@@ -13,14 +13,8 @@ export default function HomeSearchForm(props) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    async function getCategories() {
-      const response = await categoriesApiService.all();
-      setCategories(response.data.data);
-      return response.data.data;
-    }
-
-    getCategories();
-  }, []);
+    setCategories(props.categories);
+  }, [props]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,7 +25,7 @@ export default function HomeSearchForm(props) {
 
     // Perform the search api call
     history.push({
-      pathname: "/listings",
+      pathname: Routes.listings,
       search: `keywords=${keywords}&location=${location}&categoryId=${categoryId}`,
     });
   };
@@ -75,14 +69,14 @@ export default function HomeSearchForm(props) {
                     name={"categoryId"}
                     data={{
                       placeholder: "Select a category",
-                    }}
-                  >
+                    }}>
                     <option value="">&nbsp;</option>
-                    {categories.map((category) => (
-                      <option key={category.id} value={category.id}>
-                        {category.name}
-                      </option>
-                    ))}
+                    {categories &&
+                      categories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                          {category.name}
+                        </option>
+                      ))}
                   </Select2Wrapper>
                   <i className="fa fa-dog"></i>
                 </div>
@@ -94,8 +88,7 @@ export default function HomeSearchForm(props) {
                 <Button
                   type="submit"
                   className="btn search-btn"
-                  style={{ border: "none" }}
-                >
+                  style={{ border: "none" }}>
                   Search
                 </Button>
               </FormGroup>

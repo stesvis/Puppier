@@ -82,8 +82,8 @@ export default function LogInFormModal(props) {
     }
   };
 
-  const handleOnChange = (event) => {
-    // console.log("handleOnChange");
+  const handleChange = (event) => {
+    // console.log("handleChange");
     const { name, value } = event.target;
     const fieldError = formService.validateField(name, value, schema);
 
@@ -132,7 +132,7 @@ export default function LogInFormModal(props) {
                     placeholder="Enter your email"
                     icon="ti-user"
                     value={account.username}
-                    onChange={handleOnChange}
+                    onChange={handleChange}
                   />
                   <Alert
                     variant="danger"
@@ -149,7 +149,7 @@ export default function LogInFormModal(props) {
                     placeholder="*******"
                     icon="ti-user"
                     value={account.password}
-                    onChange={handleOnChange}
+                    onChange={handleChange}
                   />
                   <Alert
                     variant="danger"

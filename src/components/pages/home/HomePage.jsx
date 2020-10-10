@@ -9,7 +9,14 @@ import apiService from "../../../services/api/apiService";
 
 export default function Home() {
   const [featuredListings, setFeaturedListings] = useState([]);
+  const [categories, setCategories] = useState([]);
   const loadingContext = useContext(LoadingContext);
+
+  async function getCategories() {
+    const response = await apiService.categories.all();
+    setCategories(response.data.data);
+    return response.data.data;
+  }
 
   async function getFeaturedListings() {
     const featuredListings = await apiService.listings.getFeaturedListings();
@@ -19,7 +26,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    // Fetch single listing by id
+    getCategories();
     getFeaturedListings();
   }, []);
 
@@ -33,7 +40,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Banner  Start */}
-      <HomeBanner />
+      <HomeBanner categories={categories} />
       {/* Hero Banner End */}
 
       <FeaturedListings listings={featuredListings} />

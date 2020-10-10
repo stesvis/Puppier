@@ -31,7 +31,6 @@ const schema = {
     .min(6)
     .label("Password"),
   password_confirmation: Joi.any()
-    // TODO: pass "password" to validateField()!
     .valid(Joi.ref("password"))
     .required()
     .label("Password confirmation")
@@ -80,6 +79,8 @@ export default function SignUpFormModal(props) {
       history.go(0);
     } catch (error) {
       console.log(error);
+      setState({ ...state, isBusy: false });
+
       if (error.response) {
         const newState = {
           ...state,
@@ -99,7 +100,7 @@ export default function SignUpFormModal(props) {
     const { name, value } = event.target;
     let fieldError = formService.validateField(name, value, schema);
 
-    // TODO: this is just a hack
+    // TODO: this is just a hack to validate password_confirmation
     if (name === "password_confirmation" && value === state.account.password) {
       fieldError = "";
     }

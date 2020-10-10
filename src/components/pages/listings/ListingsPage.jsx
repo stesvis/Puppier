@@ -78,7 +78,7 @@ export default function Listings(props) {
     loadingContext.onFinishedLoading();
 
     return () => {};
-  }, [searchContext.searchParameters]);
+  }, [searchContext.searchParameters]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -96,8 +96,7 @@ export default function Listings(props) {
             <Col
               lg={8}
               md={8}
-              className="order-1 content-area order-md-2 order-lg-2"
-            >
+              className="order-1 content-area order-md-2 order-lg-2">
               <ListingsGrid listings={listings} />
             </Col>
           </Row>

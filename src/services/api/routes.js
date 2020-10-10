@@ -12,4 +12,6 @@ export const Routes = {
   listing_edit: "/listings/:id/edit",
   listing_create: "/listings/create",
   logout: "/logout",
+  // not-found
+  not_found: "/404",
 };

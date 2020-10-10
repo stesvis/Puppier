@@ -5,7 +5,6 @@ import InputWithIcon from "../../common/InputWithIcon";
 import SearchContext from "../../../context/searchContext";
 import { SearchParams } from "../../../models/SearchParams";
 import apiService from "../../../services/api/apiService";
-import { isValidElement } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 
@@ -18,9 +17,9 @@ export default function ListingsSidebar(props) {
   // const [categoryId, setCategoryId] = useState("");
 
   const initialState = {
-    keywords: props.keywords,
-    location: props.location,
-    categoryId: props.categoryId,
+    keywords: "",
+    location: "",
+    categoryId: "",
   };
   const [state, setState] = useState(initialState);
 
@@ -37,9 +36,9 @@ export default function ListingsSidebar(props) {
   useEffect(() => {
     if (!searchParamsChanged.current) {
       const newState = {
-        keywords: props.keywords,
-        location: props.location,
-        categoryId: props.categoryId,
+        keywords: props.keywords || "",
+        location: props.location || "",
+        categoryId: props.categoryId || "",
       };
       setState(newState);
     }
@@ -103,8 +102,7 @@ export default function ListingsSidebar(props) {
                 name={"categoryId"}
                 data={{
                   placeholder: "Select a category",
-                }}
-              >
+                }}>
                 <option value="">All pets</option>
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>

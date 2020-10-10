@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { Routes } from "../../services/api/routes";
-import authApiService from "../../services/api/authApiService";
-import { toast } from "react-toastify";
 
 export default function NavBarLoggedIn(props) {
   return (

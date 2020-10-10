@@ -16,6 +16,7 @@ import LogOut from "./components/pages/account/LogOut";
 import ModalContext from "./context/modalContext";
 import MyListingsPage from "./components/pages/account/MyListingsPage";
 import NavBar from "./components/NavBar";
+import NotFound from "./components/pages/NotFound";
 import ProfileFormPage from "./components/pages/account/ProfileFormPage";
 import ProfilePage from "./components/pages/account/ProfilePage";
 import { Routes } from "./services/api/routes";
@@ -159,8 +160,9 @@ function App() {
                 component={ProfileFormPage}
               />
               <Route exact path={Routes.logout} component={LogOut} />
+              <Route exact path={Routes.not_found} component={NotFound} />
 
-              <Redirect to="/404" />
+              <Redirect to={Routes.not_found} />
             </Switch>
           </SearchContext.Provider>
 

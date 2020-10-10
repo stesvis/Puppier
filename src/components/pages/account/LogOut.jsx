@@ -8,8 +8,6 @@ import { toast } from "react-toastify";
 
 export default function LogOut() {
   const logOut = async () => {
-    console.log("logging out...");
-
     try {
       await authApiService.logOut();
       window.location = Routes.home;
@@ -29,9 +27,9 @@ export default function LogOut() {
       <Container>
         <Row>
           <Col lg={8} md={12} sm={12}>
-            <h4 className="modal-header-title">
+            <h5 className="modal-header-title">
               Logging <span className="theme-cl">Out...</span>
-            </h4>
+            </h5>
           </Col>
         </Row>
       </Container>

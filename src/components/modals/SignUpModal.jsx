@@ -38,7 +38,7 @@ const schema = {
 };
 //#endregion
 
-export default function SignUpFormModal(props) {
+export default function SignUpModal(props) {
   const [state, setState] = useState(initialState);
   const history = useHistory();
 

@@ -31,7 +31,7 @@ const schema = {
 };
 //#endregion
 
-export default function LogInFormModal(props) {
+export default function LogInModal(props) {
   // const modalContext = useContext(ModalContext);
   const [state, setState] = useState(initialState);
   const history = useHistory();

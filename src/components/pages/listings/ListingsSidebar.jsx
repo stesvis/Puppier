@@ -12,9 +12,6 @@ export default function ListingsSidebar(props) {
   const [categories, setCategories] = useState([]);
   const searchContext = useContext(SearchContext);
   const searchParamsChanged = useRef(false);
-  // const [keywords, setKeywords] = useState("");
-  // const [location, setLocation] = useState("");
-  // const [categoryId, setCategoryId] = useState("");
 
   const initialState = {
     keywords: "",

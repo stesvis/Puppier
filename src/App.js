@@ -11,7 +11,7 @@ import ListingDetailsPage from "./components/pages/listings/ListingDetailsPage";
 import ListingFormPage from "./components/pages/account/ListingFormPage";
 import ListingsPage from "./components/pages/listings/ListingsPage";
 import LoadingContext from "./context/loadingContext";
-import LogInFormModal from "./components/modals/LogInFormModal";
+import LogInModal from "./components/modals/LogInModal";
 import LogOut from "./components/pages/account/LogOut";
 import ModalContext from "./context/modalContext";
 import MyListingsPage from "./components/pages/account/MyListingsPage";
@@ -23,7 +23,7 @@ import { Routes } from "./services/api/routes";
 import SavedListingsPage from "./components/pages/account/SavedListingsPage";
 import SearchContext from "./context/searchContext";
 import { SearchParams } from "./models/SearchParams";
-import SignUpFormModal from "./components/modals/SignUpFormModal";
+import SignUpModal from "./components/modals/SignUpModal";
 import { ToastContainer } from "react-toastify";
 import localStorageService from "./services/localStorageService";
 
@@ -168,13 +168,13 @@ function App() {
 
           {/* <Modal show={showLogin}>
             <ModalBody> */}
-          <LogInFormModal />
+          <LogInModal />
           {/* </ModalBody>
           </Modal> */}
 
           {/* <Modal show={showSignUp}>
             <ModalBody> */}
-          <SignUpFormModal />
+          <SignUpModal />
           {/* </ModalBody>
           </Modal> */}
           <Link id="back2Top" className="top-scroll" title="Back to top" to="#">

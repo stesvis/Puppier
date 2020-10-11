@@ -1,5 +1,3 @@
-import * as formService from "../../services/formService";
-
 import { Alert, Button, Col, Form, ModalBody, Row } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 
@@ -7,6 +5,7 @@ import InputWithIcon from "../common/InputWithIcon";
 import Joi from "joi-browser";
 import React from "react";
 import apiService from "../../services/api/apiService";
+import formService from "../../services/formService";
 import logService from "../../services/logService";
 import { useState } from "react";
 
@@ -114,6 +113,14 @@ export default function SignUpModal(props) {
       errors: { ...state.errors, [name]: fieldError },
     };
     setState(newState);
+  };
+
+  const handleLoginClick = (e) => {
+    e.preventDefault();
+    // close the modal
+    const $ = window.$;
+    $("#signup").modal("hide");
+    $("#login").modal("show");
   };
 
   const { account, errors, isBusy } = state;
@@ -274,7 +281,7 @@ export default function SignUpModal(props) {
             <div className="text-center">
               <p className="mt-5">
                 <i className="ti-user mr-1"></i>Already Have An Account?{" "}
-                <Link to="#" className="link">
+                <Link to="#" className="link" onClick={handleLoginClick}>
                   Go For LogIn
                 </Link>
               </p>

@@ -1,6 +1,6 @@
 import Joi from "joi-browser";
 
-export function validate(data, schema) {
+function validate(data, schema) {
   const options = { abortEarly: false };
   const result = Joi.validate(data, schema, options);
 
@@ -20,7 +20,7 @@ export function validate(data, schema) {
   return errors;
 }
 
-export function validateField(name, value, schema) {
+function validateField(name, value, schema) {
   const obj = { [name]: value };
   const fieldSchema = Joi.object({ [name]: schema[name] });
   const { error } = fieldSchema.validate(obj);
@@ -31,3 +31,8 @@ export function validateField(name, value, schema) {
 
   return error.details[0].message;
 }
+
+export default {
+  validate,
+  validateField,
+};

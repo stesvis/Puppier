@@ -23,13 +23,11 @@ export default function LogOut() {
   }, []);
 
   return (
-    <section className="gray">
+    <section className="gray" style={{ padding: "100px 0" }}>
       <Container>
         <Row>
-          <Col lg={8} md={12} sm={12}>
-            <h5 className="modal-header-title">
-              Logging <span className="theme-cl">Out...</span>
-            </h5>
+          <Col lg={12} md={12} sm={12}>
+            <h5 className="modal-header-title text-center">Logging Out...</h5>
           </Col>
         </Row>
       </Container>

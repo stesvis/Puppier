@@ -12,6 +12,7 @@ import ListingFormPage from "./components/pages/account/ListingFormPage";
 import ListingsPage from "./components/pages/listings/ListingsPage";
 import LoadingContext from "./context/loadingContext";
 import LogInModal from "./components/modals/LogInModal";
+import LogInPage from "./components/pages/account/LogInPage";
 import LogOut from "./components/pages/account/LogOut";
 import ModalContext from "./context/modalContext";
 import MyListingsPage from "./components/pages/account/MyListingsPage";
@@ -113,17 +114,26 @@ function App() {
             <Switch>
               <Route exact path={Routes.home} component={HomePage} />
               {/* Listings */}
-              <Route
+              <Route exact path={Routes.listing_create}>
+                {currentUser ? (
+                  <ListingFormPage />
+                ) : (
+                  <Redirect
+                    to={`${Routes.login}?return_url=${Routes.listing_create}`}
+                  />
+                )}
+              </Route>
+              {/* <Route
                 exact
                 path={Routes.listing_create}
                 render={(props) => {
                   if (!currentUser) {
-                    return <Redirect to={Routes.home} />;
+                    return <Redirect to={Routes.login} />;
                   }
 
                   return <ListingFormPage {...props} />;
                 }}
-              />
+              /> */}
               <Route
                 exact
                 path={Routes.listing_details}
@@ -134,7 +144,7 @@ function App() {
                 path={Routes.listing_edit}
                 render={(props) => {
                   if (!currentUser) {
-                    return <Redirect to={Routes.home} />;
+                    return <Redirect to={Routes.login} />;
                   }
 
                   return <ListingFormPage {...props} />;
@@ -159,6 +169,8 @@ function App() {
                 path={Routes.profile_edit}
                 component={ProfileFormPage}
               />
+              <Route exact path={Routes.login} component={LogInPage} />
+              <Route exact path={Routes.signup} component={LogInPage} />
               <Route exact path={Routes.logout} component={LogOut} />
               <Route exact path={Routes.not_found} component={NotFound} />
 

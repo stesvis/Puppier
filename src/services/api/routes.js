@@ -11,6 +11,8 @@ export const Routes = {
   saved_listings: "/account/saved-listings",
   listing_edit: "/listings/:id/edit",
   listing_create: "/listings/create",
+  login: "/login",
+  signup: "/register",
   logout: "/logout",
   // not-found
   not_found: "/404",

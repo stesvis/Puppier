@@ -1,4 +1,4 @@
-import { Alert, Button, Form, FormGroup } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 
@@ -100,6 +100,15 @@ export default function LogInForm(props) {
     setState(newState);
   };
 
+  const handleSignUpClick = (e) => {
+    e.preventDefault();
+
+    // close the modal
+    const $ = window.$;
+    $("#login").modal("hide");
+    $("#signup").modal("show");
+  };
+
   const { account, errors, isBusy } = state;
 
   return (
@@ -123,7 +132,7 @@ export default function LogInForm(props) {
             </Alert>
           </Form.Group>
 
-          <FormGroup>
+          <Form.Group>
             <Form.Label>Password</Form.Label>
             <InputWithIcon
               type="password"
@@ -138,28 +147,34 @@ export default function LogInForm(props) {
               show={errors.password ? errors.password.length > 0 : false}>
               {errors.password}
             </Alert>
-          </FormGroup>
+          </Form.Group>
 
-          <FormGroup>
+          <Form.Group className="text-center">
             <Button
               type="submit"
               className="btn btn-md full-width pop-login"
               disabled={isBusy}>
               {isBusy ? "Loading..." : "Log In"}
             </Button>
+            <Form.Label>
+              No account yet?{" "}
+              <Link to="#" className="link" onClick={handleSignUpClick}>
+                Sign Up
+              </Link>
+            </Form.Label>
             <Alert
               variant="danger"
               show={errors.general ? errors.general.length > 0 : false}
               className="mt-3">
               {errors.general}
             </Alert>
-          </FormGroup>
+          </Form.Group>
         </Form>
       </div>
       <div className="modal-divider">
         <span>Or login via</span>
       </div>
-      <div className="social-login mb-3">
+      <div className="social-login text-center mb-3">
         <ul>
           <li>
             <Link to="#" className="btn connect-fb">

@@ -7,6 +7,7 @@ import React from "react";
 import apiService from "../../services/api/apiService";
 import formService from "../../services/formService";
 import logService from "../../services/logService";
+import queryString from "query-string";
 import { useState } from "react";
 
 //#region Helpers
@@ -69,13 +70,20 @@ export default function SignUpModal(props) {
 
       // close the modal
       const $ = window.$;
-      $("#login").modal("hide");
+      $("#signup").modal("hide");
 
       await apiService.users.me();
 
       setState({ ...state, isBusy: false });
-      // reload the current page
-      history.go(0);
+      const params = new URLSearchParams(window.location.search);
+      const returnUrl = params && params.get("return_url");
+
+      if (!returnUrl) {
+        // reload the current page
+        history.go(0);
+      } else {
+        history.push(returnUrl);
+      }
     } catch (error) {
       console.log(error);
       setState({ ...state, isBusy: false });
@@ -115,7 +123,7 @@ export default function SignUpModal(props) {
     setState(newState);
   };
 
-  const handleLoginClick = (e) => {
+  const handleLogInClick = (e) => {
     e.preventDefault();
     // close the modal
     const $ = window.$;
@@ -281,7 +289,7 @@ export default function SignUpModal(props) {
             <div className="text-center">
               <p className="mt-5">
                 <i className="ti-user mr-1"></i>Already Have An Account?{" "}
-                <Link to="#" className="link" onClick={handleLoginClick}>
+                <Link to="#" className="link" onClick={handleLogInClick}>
                   Go For LogIn
                 </Link>
               </p>

@@ -94,9 +94,9 @@ export default function ListingsSidebar(props) {
                 // defaultValue={props.categoryId}
                 value={state.categoryId}
                 onChange={handleOnChange}
-                className={"form-control select2-container--default"}
-                id={"categoryId"}
-                name={"categoryId"}
+                className="form-control select2-container--default"
+                id="categoryId"
+                name="categoryId"
                 data={{
                   placeholder: "Select a category",
                 }}>

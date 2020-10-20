@@ -1,9 +1,10 @@
 function extractErrorMessage(ex) {
-  const message =
-    ex.response && ex.response.data.data
+  if (ex.response && ex.response.data) {
+    return ex.response.data.data
       ? ex.response.data.data.message
       : ex.response.data.message;
-  return message;
+  }
+  return ex;
 }
 
 export default {

@@ -22,6 +22,12 @@ function validate(data, schema) {
 
 function validateField(name, value, schema) {
   const obj = { [name]: value };
+
+  // validate only the elements that have a schema
+  if (!schema[name]) {
+    return null;
+  }
+
   const fieldSchema = Joi.object({ [name]: schema[name] });
   const { error } = fieldSchema.validate(obj);
 

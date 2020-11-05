@@ -1,14 +1,69 @@
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import {
+  Alert,
+  Button,
+  Col,
+  Container,
+  Form,
+  Image,
+  Row,
+} from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 
+import Dropzone from "react-dropzone";
+import Joi from "joi-browser";
 import PageTitle from "../../common/PageTitle";
 import apiService from "../../../services/api/apiService";
+import formService from "../../../services/formService";
 
 // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform#maps_places_autocomplete_addressform-javascript
 // https://www.npmjs.com/package/react-places-autocomplete
+// https://upmostly.com/tutorials/react-dropzone-file-uploads-react
+// https://react-dropzone.netlify.app/#!/Previews
+
+const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+
+const acceptedFileTypes =
+  "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
+
+//#region Helpers
+
+const schema = {
+  title: Joi.string().required().min(3).max(100).label("Title"),
+  description: Joi.string().required().min(3).max(500).label("Description"),
+  listing_category_id: Joi.number().required().min(1).max(2).label("Category"),
+  email: Joi.string()
+    .email({
+      minDomainSegments: 2,
+    })
+    .required()
+    .label("Email"),
+  phone: Joi.string().regex(phoneRegex).label("Phone"),
+  address: Joi.string().required().label("Address"),
+  price: Joi.number().required(),
+};
+//#endregion
 
 export default function ListingForm(props) {
+  const { currentUser } = props;
+  console.log(currentUser);
+
+  const initialState = {
+    title: "",
+    description: "",
+    listing_category_id: null,
+    address: "",
+    location: "", // coordinates: "latitude,longitude"
+    price: "",
+    email: currentUser.email,
+    phone: currentUser.phone,
+    errors: {},
+    isBusy: false,
+  };
+
+  const [state, setState] = useState(initialState);
+
   const [categories, setCategories] = useState([]);
+  const [imageSrc, setImageSrc] = useState();
 
   async function getCategories() {
     const response = await apiService.categories.all();
@@ -19,6 +74,40 @@ export default function ListingForm(props) {
   useEffect(() => {
     getCategories();
   }, []);
+
+  const handleDrop = (acceptedFiles) => {
+    console.log(acceptedFiles);
+    const file = acceptedFiles[0];
+    const reader = new FileReader();
+    reader.addEventListener(
+      "load",
+      () => {
+        console.log(reader.result);
+        setImageSrc(reader.result);
+      },
+      false
+    );
+    reader.readAsDataURL(file);
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    console.log(name, value);
+
+    const fieldError = formService.validateField(name, value, schema);
+
+    const newState = {
+      ...state,
+      [name]: value,
+      errors: { ...state.errors, [name]: fieldError },
+    };
+    setState(newState);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(state);
+  };
 
   return (
     <>
@@ -38,7 +127,7 @@ export default function ListingForm(props) {
           </Row> */}
           <Row className="justify-content-md-center">
             <Col lg={10} md={10} sm={12}>
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <div className="add-listing-form form-submit">
                   <div className="tr-single-box">
                     <div className="tr-single-header">
@@ -49,20 +138,53 @@ export default function ListingForm(props) {
 
                     <div className="tr-single-body">
                       <Form.Group>
-                        <label>Title*</label>
-                        <Form.Control type="text" placeholder="Title" />
+                        <label>
+                          Title <span className="text-danger">*</span>
+                        </label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Title"
+                          name="title"
+                          value={state.title}
+                          onChange={handleChange}
+                        />
+                        <Alert
+                          variant="danger"
+                          show={
+                            state.errors.title
+                              ? state.errors.title.length > 0
+                              : false
+                          }>
+                          {state.errors.title}
+                        </Alert>
                       </Form.Group>
 
                       <Form.Group>
-                        <label>Category</label>
+                        <label>
+                          Category <span className="text-danger">*</span>
+                        </label>
                         <select
                           id="list-category"
-                          className="form-control select2-container--default">
+                          className="form-control select2-container--default"
+                          name="listing_category_id"
+                          value={state.listing_category_id}
+                          onChange={handleChange}>
                           <option value="">&nbsp;</option>
                           {categories.map((category) => (
-                            <option value={category.id}>{category.name}</option>
+                            <option key={category.id} value={category.id}>
+                              {category.name}
+                            </option>
                           ))}
                         </select>
+                        <Alert
+                          variant="danger"
+                          show={
+                            state.errors.listing_category_id
+                              ? state.errors.listing_category_id.length > 0
+                              : false
+                          }>
+                          {state.errors.listing_category_id}
+                        </Alert>
                       </Form.Group>
 
                       {/* <div className="form-group">
@@ -75,12 +197,26 @@ export default function ListingForm(props) {
                     </div> */}
 
                       <Form.Group>
-                        <label>Description</label>
+                        <label>
+                          Description <span className="text-danger">*</span>
+                        </label>
                         <Form.Control
                           as="textarea"
                           className="form-control"
-                          placeholder="Listing Description"></Form.Control>
+                          placeholder="Listing Description"
+                          name="description"
+                          value={state.description}
+                          onChange={handleChange}></Form.Control>
                       </Form.Group>
+                      <Alert
+                        variant="danger"
+                        show={
+                          state.errors.description
+                            ? state.errors.description.length > 0
+                            : false
+                        }>
+                        {state.errors.description}
+                      </Alert>
                     </div>
                   </div>
 
@@ -94,40 +230,97 @@ export default function ListingForm(props) {
                     <div className="tr-single-body">
                       <Row>
                         <Col lg={4} md={6}>
-                          <Form
-                            action="/file-upload"
-                            className="dropzone"
-                            id="single-logo">
-                            <i className="lni-upload"></i>
-                          </Form>
-                          <label className="smart-text">
-                            Maximum file size: 2 MB.
-                          </label>
+                          <Dropzone
+                            multiple={false}
+                            maxSize={2000000} // 2MB
+                            onDrop={handleDrop}
+                            accept={acceptedFileTypes}>
+                            {({ getRootProps, getInputProps, isDragActive }) =>
+                              imageSrc !== null &&
+                              imageSrc !== "" &&
+                              imageSrc !== undefined ? (
+                                <div className="text-center">
+                                  <Image
+                                    src={imageSrc}
+                                    fluid
+                                    rounded
+                                    thumbnail
+                                  />
+                                  <Form.Label className="text-danger">
+                                    Delete me
+                                  </Form.Label>
+                                </div>
+                              ) : (
+                                // </div>
+                                <>
+                                  <div
+                                    className="dropzone dz-clickable text-center"
+                                    {...getRootProps()}>
+                                    {}
+                                    <i className="lni-upload"></i>
+                                    <input {...getInputProps()} />
+                                    {isDragActive
+                                      ? "Drop it like it's hot!"
+                                      : "Click me or drag a file to upload!"}
+                                  </div>
+                                  <label className="smart-text">
+                                    Maximum file size: 2 MB.
+                                  </label>
+                                </>
+                              )
+                            }
+                          </Dropzone>
                         </Col>
 
-                        <Col lg={4} md={6}>
-                          <Form
-                            action="/file-upload"
-                            className="dropzone"
-                            id="featured-image">
-                            <i className="lni-upload"></i>
-                          </Form>
+                        {/* <Col lg={4} md={6}>
+                          <Dropzone
+                            onDrop={handleDrop}
+                            accept={acceptedFileTypes}>
+                            {({
+                              getRootProps,
+                              getInputProps,
+                              isDragActive,
+                            }) => (
+                              <div
+                                className="dropzone dz-clickable"
+                                {...getRootProps()}>
+                                <i className="lni-upload"></i>
+                                <input {...getInputProps()} />
+                                {isDragActive
+                                  ? "Drop it like it's hot!"
+                                  : "Click me or drag a file to upload!"}
+                              </div>
+                            )}
+                          </Dropzone>
                           <label className="smart-text">
                             Maximum file size: 2 MB.
                           </label>
                         </Col>
 
                         <Col lg={4} md={12}>
-                          <form
-                            action="/file-upload"
-                            className="dropzone"
-                            id="gallery">
-                            <i className="lni-upload"></i>
-                          </form>
+                          <Dropzone
+                            onDrop={handleDrop}
+                            accept={acceptedFileTypes}>
+                            {({
+                              getRootProps,
+                              getInputProps,
+                              isDragActive,
+                            }) => (
+                              <div
+                                className="dropzone dz-clickable"
+                                {...getRootProps()}>
+                                <i className="lni-upload"></i>
+                                <input {...getInputProps()} />
+                                {isDragActive
+                                  ? "Drop it like it's hot!"
+                                  : "Click me or drag a file to upload!"}
+                              </div>
+                            )}
+                          </Dropzone>
                           <label className="smart-text">
                             Maximum file size: 2 MB.
                           </label>
-                        </Col>
+                        </Col> */}
                       </Row>
                     </div>
                   </div>
@@ -147,7 +340,19 @@ export default function ListingForm(props) {
                             <Form.Control
                               type="text"
                               placeholder="Start typing the address or location"
+                              name="address"
+                              value={state.address}
+                              onChange={handleChange}
                             />
+                            <Alert
+                              variant="danger"
+                              show={
+                                state.errors.address
+                                  ? state.errors.address.length > 0
+                                  : false
+                              }>
+                              {state.errors.address}
+                            </Alert>
                           </Form.Group>
                         </Col>
                       </Row>
@@ -165,11 +370,25 @@ export default function ListingForm(props) {
                       <Row>
                         <Col lg={6} md={6}>
                           <Form.Group>
-                            <label>Email</label>
+                            <label>
+                              Email <span className="text-danger">*</span>
+                            </label>
                             <Form.Control
                               type="email"
                               placeholder="business@gmail.com"
+                              name="email"
+                              value={state.email}
+                              onChange={handleChange}
                             />
+                            <Alert
+                              variant="danger"
+                              show={
+                                state.errors.email
+                                  ? state.errors.email.length > 0
+                                  : false
+                              }>
+                              {state.errors.email}
+                            </Alert>
                           </Form.Group>
                         </Col>
 
@@ -179,7 +398,19 @@ export default function ListingForm(props) {
                             <Form.Control
                               type="text"
                               placeholder="91 245 254 8745"
+                              name="phone"
+                              value={state.phone}
+                              onChange={handleChange}
                             />
+                            <Alert
+                              variant="danger"
+                              show={
+                                state.errors.phone
+                                  ? state.errors.phone.length > 0
+                                  : false
+                              }>
+                              {state.errors.phone}
+                            </Alert>
                           </Form.Group>
                         </Col>
 
@@ -222,14 +453,36 @@ export default function ListingForm(props) {
                     <div className="tr-single-body">
                       <Row>
                         <Col lg={4} md={6}>
-                          <label>Price ($) *</label>
-                          <Form.Control type="text" placeholder="e.g: 750" />
+                          <Form.Group>
+                            <label>
+                              Price ($) <span className="text-danger">*</span>
+                            </label>
+                            <Form.Control
+                              type="text"
+                              placeholder="e.g: 750"
+                              name="price"
+                              value={state.price}
+                              onChange={handleChange}
+                            />
+                            <Alert
+                              variant="danger"
+                              show={
+                                state.errors.price
+                                  ? state.errors.price.length > 0
+                                  : false
+                              }>
+                              {state.errors.price}
+                            </Alert>
+                          </Form.Group>
                         </Col>
                       </Row>
                     </div>
                   </div>
 
-                  <Button className="btn-theme full-width" type="submit">
+                  <Button
+                    variant="primary"
+                    className="btn-theme full-width"
+                    type="submit">
                     Submit & Preview
                   </Button>
                 </div>

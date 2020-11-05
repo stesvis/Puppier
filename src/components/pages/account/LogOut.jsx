@@ -10,11 +10,12 @@ export default function LogOut() {
   const logOut = async () => {
     try {
       await authApiService.logOut();
-      window.location = Routes.home;
     } catch (ex) {
-      if (ex.response) {
-        toast.error(logService.extractErrorMessage(ex));
-      }
+      // if (ex.response) {
+      //   toast.error(logService.extractErrorMessage(ex));
+      // }
+    } finally {
+      window.location = Routes.home;
     }
   };
 

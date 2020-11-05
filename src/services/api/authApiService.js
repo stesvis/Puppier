@@ -20,13 +20,23 @@ async function logIn(username, password) {
 }
 
 async function logOut() {
-  const url = `${process.env.REACT_APP_API_BASE_URL}/logout`;
-  const response = await httpService.post(url);
+  try {
+    const url = `${process.env.REACT_APP_API_BASE_URL}/logout`;
+    const response = await httpService.post(url);
 
-  localStorageService.removeToken();
-  localStorageService.removeCurrentUser();
+    localStorageService.removeToken();
+    localStorageService.removeCurrentUser();
 
-  return response;
+    return response;
+  } catch (ex) {
+    if (ex.response && ex.response.status === 401) {
+      // for some reason the token didn't work, so it should be logged out anyway
+      localStorageService.removeToken();
+      localStorageService.removeCurrentUser();
+
+      throw ex;
+    }
+  }
 }
 
 //#region Private methods

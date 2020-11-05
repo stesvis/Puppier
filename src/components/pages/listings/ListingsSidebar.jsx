@@ -41,7 +41,7 @@ export default function ListingsSidebar(props) {
     }
   }, [props]);
 
-  const handleOnChange = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
 
@@ -70,7 +70,7 @@ export default function ListingsSidebar(props) {
               name="keywords"
               // defaultValue={props.keywords}
               value={state.keywords}
-              onChange={handleOnChange}
+              onChange={handleChange}
               placeholder="Keyword(s)..."
               icon="ti-search"
             />
@@ -82,7 +82,7 @@ export default function ListingsSidebar(props) {
               name="location"
               // defaultValue={props.location}
               value={state.location}
-              onChange={handleOnChange}
+              onChange={handleChange}
               placeholder="Where..."
               icon="ti-target"
             />
@@ -93,7 +93,7 @@ export default function ListingsSidebar(props) {
               <select
                 // defaultValue={props.categoryId}
                 value={state.categoryId}
-                onChange={handleOnChange}
+                onChange={handleChange}
                 className="form-control select2-container--default"
                 id="categoryId"
                 name="categoryId"

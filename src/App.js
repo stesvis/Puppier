@@ -116,7 +116,7 @@ function App() {
               {/* Listings */}
               <Route exact path={Routes.listing_create}>
                 {currentUser ? (
-                  <ListingFormPage />
+                  <ListingFormPage currentUser={currentUser} />
                 ) : (
                   <Redirect
                     to={`${Routes.login}?return_url=${Routes.listing_create}`}

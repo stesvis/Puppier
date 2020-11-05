@@ -76,6 +76,20 @@ section {
   width: 100%;
 }
 
+/* Buttons */
+.yellow-skin .pricing-bottom .btn-pricing:hover,
+.yellow-skin .btn.btn-theme:hover,
+.yellow-skin .btn-theme-2:hover,
+.yellow-skin .btn-outline-theme:hover,
+.yellow-skin .btn.search-btn-outline:hover,
+.yellow-skin .single-widgets.widget_tags ul li a:hover,
+.yellow-skin .pagination > .active > a:hover,
+.yellow-skin .pagination > .active > span:hover,
+.yellow-skin .pagination > li > a:hover {
+  background-color: #ffb02a;
+  background: #ffb02a;
+}
+
 @media screen and (max-width: 600px) {
   .w-100 {
     max-height: 200px;

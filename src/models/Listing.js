@@ -12,6 +12,8 @@ export class Listing {
     this.price = "";
     this.address = "";
     this.location = "";
+    this.email = "";
+    this.phone = "";
     this.user = new User();
     this.category = new Category();
     this.tags = [];

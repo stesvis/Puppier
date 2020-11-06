@@ -7,6 +7,10 @@ import {
   Image,
   Row,
 } from "react-bootstrap";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 import React, { useEffect, useState } from "react";
 
 import Dropzone from "react-dropzone";
@@ -14,6 +18,8 @@ import Joi from "joi-browser";
 import PageTitle from "../../common/PageTitle";
 import apiService from "../../../services/api/apiService";
 import formService from "../../../services/formService";
+import logService from "../../../services/logService";
+import { toast } from "react-toastify";
 
 // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform#maps_places_autocomplete_addressform-javascript
 // https://www.npmjs.com/package/react-places-autocomplete
@@ -45,12 +51,11 @@ const schema = {
 
 export default function ListingForm(props) {
   const { currentUser } = props;
-  console.log(currentUser);
 
   const initialState = {
     title: "",
     description: "",
-    listing_category_id: null,
+    listing_category_id: 0,
     address: "",
     location: "", // coordinates: "latitude,longitude"
     price: "",
@@ -91,8 +96,8 @@ export default function ListingForm(props) {
   };
 
   const handleChange = (event) => {
+    // console.log("Event", event);
     const { name, value } = event.target;
-    console.log(name, value);
 
     const fieldError = formService.validateField(name, value, schema);
 
@@ -103,6 +108,37 @@ export default function ListingForm(props) {
     };
     setState(newState);
   };
+
+  //#region Address autocomplete
+  const handleAddressChange = (address) => {
+    updateAddressState(address);
+  };
+
+  const handleAddressSelect = async (address) => {
+    try {
+      const result = await geocodeByAddress(address);
+      console.log(result);
+      const coordinates = await getLatLng(result[0]);
+      const location = `${coordinates.lat},${coordinates.lng}`;
+      console.log(location);
+      updateAddressState(address, location);
+    } catch (error) {
+      toast.error(logService.extractErrorMessage(error));
+    }
+  };
+
+  const updateAddressState = (address, location = "") => {
+    const fieldError = formService.validateField("address", address, schema);
+
+    const newState = {
+      ...state,
+      address: address,
+      location: location,
+      errors: { ...state.errors, address: fieldError },
+    };
+    setState(newState);
+  };
+  //#endregion
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -127,7 +163,7 @@ export default function ListingForm(props) {
           </Row> */}
           <Row className="justify-content-md-center">
             <Col lg={10} md={10} sm={12}>
-              <Form onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit} autoComplete="off">
                 <div className="add-listing-form form-submit">
                   <div className="tr-single-box">
                     <div className="tr-single-header">
@@ -325,7 +361,9 @@ export default function ListingForm(props) {
                     </div>
                   </div>
 
-                  <div className="tr-single-box">
+                  <div
+                    className="tr-single-box"
+                    style={{ overflow: "inherit" }}>
                     <div className="tr-single-header">
                       <h4>
                         <i className="ti-headphone"></i> Location information
@@ -336,14 +374,52 @@ export default function ListingForm(props) {
                       <Row>
                         <Col lg={12} md={12}>
                           <Form.Group>
-                            <label>Address</label>
-                            <Form.Control
-                              type="text"
-                              placeholder="Start typing the address or location"
-                              name="address"
+                            <label>
+                              Address <span className="text-danger">*</span>
+                            </label>
+                            <PlacesAutocomplete
                               value={state.address}
-                              onChange={handleChange}
-                            />
+                              onChange={handleAddressChange}
+                              onSelect={handleAddressSelect}>
+                              {({
+                                getInputProps,
+                                suggestions,
+                                getSuggestionItemProps,
+                                loading,
+                              }) => (
+                                <>
+                                  <Form.Control
+                                    name="address"
+                                    {...getInputProps({
+                                      placeholder: "Search Places ...",
+                                      className: "location-search-input",
+                                    })}
+                                  />
+                                  {suggestions.length > 0 && (
+                                    <div className="autocomplete-dropdown-container">
+                                      {loading && <div>Loading...</div>}
+                                      {suggestions.map((suggestion) => {
+                                        const className = suggestion.active
+                                          ? "suggestion-item--active"
+                                          : "suggestion-item";
+                                        return (
+                                          <div
+                                            {...getSuggestionItemProps(
+                                              suggestion,
+                                              { className }
+                                            )}
+                                            key={suggestion.placeId}>
+                                            <span>
+                                              {suggestion.description}
+                                            </span>
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  )}
+                                </>
+                              )}
+                            </PlacesAutocomplete>
                             <Alert
                               variant="danger"
                               show={

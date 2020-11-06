@@ -17,6 +17,7 @@
     "react-helmet": "^6.1.0",
     "react-image-lightbox": "^5.1.1",
     "react-multi-carousel": "^2.5.5",
+    "react-places-autocomplete": "^7.3.0",
     "react-router-dom": "^5.2.0",
     "react-script-hook": "^1.1.1",
     "react-scripts": "^3.4.4",

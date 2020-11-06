@@ -1,9 +1,15 @@
 import { Button, Col, Form, FormGroup, Row } from "react-bootstrap";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 
 import InputWithIcon from "../../common/InputWithIcon";
 import React from "react";
 import { Routes } from "../../../services/api/routes";
 import { Select2Wrapper } from "../../common/Select2Wrapper";
+import logService from "../../../services/logService";
+import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
@@ -11,10 +17,31 @@ import { useState } from "react";
 export default function HomeSearchForm(props) {
   const history = useHistory();
   const [categories, setCategories] = useState([]);
+  const [location, setLocation] = useState("");
 
   useEffect(() => {
     setCategories(props.categories);
   }, [props]);
+
+  //#region Address autocomplete
+  const handleAddressChange = (address) => {
+    setLocation(address);
+  };
+
+  const handleAddressSelect = async (address) => {
+    try {
+      const result = await geocodeByAddress(address);
+      console.log(result);
+      const coordinates = await getLatLng(result[0]);
+      const location = `${coordinates.lat},${coordinates.lng}`;
+      console.log(location);
+      setLocation(address);
+    } catch (error) {
+      toast.error(logService.extractErrorMessage(error));
+    }
+  };
+
+  //#endregion
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,7 +59,9 @@ export default function HomeSearchForm(props) {
 
   return (
     // <!-- ---------- Search Form -->
-    <div className="full-search-2 italian-search hero-search-radius">
+    <div
+      className="full-search-2 italian-search hero-search-radius"
+      style={{ overflow: "inherit" }}>
       <div className="hero-search-content">
         <Form onSubmit={handleSubmit}>
           <Row>
@@ -50,13 +79,54 @@ export default function HomeSearchForm(props) {
 
             <Col lg={3} md={3} sm={12} className="small-padd">
               <FormGroup>
-                <InputWithIcon
+                <PlacesAutocomplete
+                  value={location}
+                  onChange={handleAddressChange}
+                  onSelect={handleAddressSelect}>
+                  {({
+                    getInputProps,
+                    suggestions,
+                    getSuggestionItemProps,
+                    loading,
+                  }) => (
+                    <>
+                      <InputWithIcon
+                        name="location"
+                        {...getInputProps({
+                          placeholder: "Location...",
+                          className: "location-search-input b-r",
+                        })}
+                        icon="ti-target"
+                      />
+                      {suggestions.length > 0 && (
+                        <div className="autocomplete-dropdown-container">
+                          {loading && <div>Loading...</div>}
+                          {suggestions.map((suggestion) => {
+                            const className = suggestion.active
+                              ? "suggestion-item--active"
+                              : "suggestion-item";
+                            return (
+                              <div
+                                {...getSuggestionItemProps(suggestion, {
+                                  className,
+                                })}
+                                key={suggestion.placeId}>
+                                <span>{suggestion.description}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </>
+                  )}
+                </PlacesAutocomplete>
+                {/* <InputWithIcon
                   type="text"
                   name="location"
                   className="b-r"
                   placeholder="Location..."
                   icon="ti-target"
-                />
+                /> */}
               </FormGroup>
             </Col>
 

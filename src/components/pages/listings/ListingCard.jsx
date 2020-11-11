@@ -3,6 +3,7 @@ import React from "react";
 
 export default function ListingCard(props) {
   const { listing } = props;
+  console.log(listing);
 
   const reviews =
     listing.user.reviews.length > 0 ? (
@@ -32,8 +33,7 @@ export default function ListingCard(props) {
                 listing: listing,
               },
             }}
-            className="overlay-cate"
-          >
+            className="overlay-cate">
             <img
               src={listing.photos[0].public_url}
               className="img-responsive"
@@ -52,14 +52,13 @@ export default function ListingCard(props) {
                   state: {
                     listing: listing,
                   },
-                }}
-              >
+                }}>
                 {listing.title}
               </Link>
               <span className="veryfied-author"></span>
             </h4>
             <span className="font-10 font-italic bg-info-light">
-              {listing.address}
+              {`${listing.address.geolocation.city.short_name}, ${listing.address.geolocation.region.short_name}`}
             </span>
           </div>
         </div>
@@ -71,8 +70,7 @@ export default function ListingCard(props) {
                   listing.category.name.toLowerCase() === "dog"
                     ? "fas fa-dog"
                     : "fas fa-cat"
-                }
-              ></i>
+                }></i>
               {listing.category.name}
             </Link>
             <span className="more-cat">+{listing.user.listings_count}</span>

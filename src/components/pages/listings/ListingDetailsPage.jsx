@@ -14,14 +14,14 @@ export default function ListingDetails(props) {
   // const { listing } = props.location.state;
   const [listing, setListing] = useState(new Listing());
 
+  // Fetch single listing by id
+  async function getListing(id) {
+    const response = await listingsApiService.get(id);
+    setListing(response.data.data);
+  }
+
   useEffect(() => {
     loadingContext.onStartedLoading();
-
-    // Fetch single listing by id
-    async function getListing(id) {
-      const response = await listingsApiService.get(id);
-      setListing(response.data.data);
-    }
 
     getListing(id);
 

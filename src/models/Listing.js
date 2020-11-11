@@ -1,3 +1,4 @@
+import { Address } from "./Address";
 import { Category } from "./Category";
 import { ListingComment } from "./ListingComment";
 import { ListingPhoto } from "./ListingPhoto";
@@ -9,9 +10,8 @@ export class Listing {
     this.photos = [new ListingPhoto()];
     this.title = "";
     this.description = "";
-    this.price = "";
-    this.address = "";
-    this.location = "";
+    this.price = 0;
+    this.address = new Address();
     this.email = "";
     this.phone = "";
     this.user = new User();

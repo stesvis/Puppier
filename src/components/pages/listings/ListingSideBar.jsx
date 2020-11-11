@@ -27,9 +27,8 @@ export default function ListingSideBar(props) {
         <ListingInfoBox
           listing={listing}
           title="Listing Info"
-          icon="ti-direction"
-        >
-          <IconBox icon="lni-map-marker" text={listing.address} />
+          icon="ti-direction">
+          <IconBox icon="lni-map-marker" text={listing.address.address} />
           <IconBox icon="lni-phone-handset" text={listing.user.phone} />
           <IconBox icon="lni-envelope" text={listing.user.email} />
         </ListingInfoBox>

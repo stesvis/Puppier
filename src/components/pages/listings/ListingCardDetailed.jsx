@@ -49,7 +49,9 @@ export default function ListingCardDetailed(props) {
         <div className="property_meta">
           <div className="list-fx-features">
             <div className="listing-card-info-icon">
-              <span className="inc-fleat inc-add">{listing.address}</span>
+              <span className="inc-fleat inc-add">
+                {`${listing.address.geolocation.city.short_name}, ${listing.address.geolocation.region.short_name}`}
+              </span>
             </div>
             <div className="listing-card-info-icon">
               <span className="inc-fleat inc-call">{listing.user.phone}</span>
@@ -66,8 +68,7 @@ export default function ListingCardDetailed(props) {
                 listing.category.name.toLowerCase() === "dog"
                   ? "fas fa-dog"
                   : "fas fa-cat"
-              }
-            ></i>
+              }></i>
             {listing.category.name}
           </Link>
           <span className="more-cat">+{listing.user.listings_count}</span>
